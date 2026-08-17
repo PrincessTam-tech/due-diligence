@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entity Dossier — Japan Business Structure Training</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEAE0;
+    --paper-dark:#E2DECD;
+    --ink:#1B2129;
+    --ink-soft:#565D6B;
+    --ink-faint:#8A8B7E;
+    --hanko:#B23A2E;
+    --hanko-dark:#8A2B21;
+    --gold:#B8902E;
+    --jade:#4C7A6B;
+    --line:#C9C2AE;
+    --card:#F7F4EA;
+    --shadow: 0 1px 0 rgba(27,33,41,0.06);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 500px at 15% -10%, rgba(178,58,46,0.05), transparent 60%),
+      var(--paper);
+    background-image:
+      radial-gradient(1200px 500px at 15% -10%, rgba(178,58,46,0.05), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(27,33,41,0.015) 0px, rgba(27,33,41,0.015) 1px, transparent 1px, transparent 3px),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Zen Kaku Gothic New', -apple-system, sans-serif;
+    min-height:100vh;
+    padding:28px 16px 60px;
+  }
+  .doc{
+    max-width:880px;
+    margin:0 auto;
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--card);
+    padding:34px 32px 30px;
+  }
+  .doc::before,.doc::after,
+  .doc .corner-tl,.doc .corner-br{
+    content:"";
+    position:absolute;
+    width:20px;height:20px;
+    border-color:var(--ink);
+    border-style:solid;
+    opacity:0.55;
+  }
+  .doc::before{ top:-1px;left:-1px; border-width:2px 0 0 2px; }
+  .doc::after{ top:-1px;right:-1px; border-width:2px 2px 0 0; }
+  .corner-bl{ position:absolute; bottom:-1px;left:-1px; width:20px;height:20px; border:2px solid var(--ink); border-width:0 0 2px 2px; opacity:0.55; }
+  .corner-br{ position:absolute; bottom:-1px;right:-1px; width:20px;height:20px; border:2px solid var(--ink); border-width:0 2px 2px 0; opacity:0.55; }
+
+  header{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:20px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:18px;
+    margin-bottom:22px;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:6px;
+  }
+  h1{
+    font-family:'Shippori Mincho',serif;
+    font-weight:800;
+    font-size:30px;
+    line-height:1.15;
+    margin:0 0 6px;
+    letter-spacing:.01em;
+  }
+  h1 .jp{ color:var(--hanko); }
+  .sub{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    max-width:52ch;
+    line-height:1.5;
+  }
+  .stamp{
+    width:74px;height:74px;
+    flex:0 0 auto;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.08));
+  }
+
+  nav.tabs{
+    display:flex;
+    gap:6px;
+    margin-bottom:22px;
+    border-bottom:1px solid var(--line);
+  }
+  nav.tabs button{
+    font-family:'Zen Kaku Gothic New',sans-serif;
+    font-weight:700;
+    font-size:14px;
+    background:transparent;
+    border:1px solid var(--line);
+    border-bottom:none;
+    color:var(--ink-soft);
+    padding:10px 16px 9px;
+    cursor:pointer;
+    border-radius:6px 6px 0 0;
+    position:relative;
+    top:1px;
+    transition:.15s;
+  }
+  nav.tabs button .jp-tag{
+    font-family:'Shippori Mincho',serif;
+    color:var(--hanko);
+    margin-right:6px;
+  }
+  nav.tabs button.active{
+    background:var(--card);
+    color:var(--ink);
+    border-color:var(--line);
+    border-bottom:1px solid var(--card);
+  }
+  nav.tabs button:not(.active):hover{ color:var(--ink); }
+
+  .panel{ display:none; }
+  .panel.active{ display:block; animation:fade .25s ease; }
+  @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+  .hud{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    align-items:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-bottom:16px;
+  }
+  .hud b{ color:var(--ink); }
+  .hud .pill{
+    border:1px solid var(--line);
+    background:var(--paper);
+    padding:4px 10px;
+    border-radius:20px;
+  }
+  .btn{
+    font-family:'Zen Kaku Gothic New',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    border:1px solid var(--ink);
+    background:var(--ink);
+    color:var(--paper);
+    padding:8px 14px;
+    border-radius:5px;
+    cursor:pointer;
+    transition:.15s;
+  }
+  .btn:hover{ background:var(--hanko); border-color:var(--hanko); }
+  .btn.ghost{ background:transparent; color:var(--ink); }
+  .btn.ghost:hover{ background:var(--paper-dark); color:var(--ink); border-color:var(--ink); }
+  .btn:disabled{ opacity:.4; cursor:default; background:var(--ink-faint); border-color:var(--ink-faint); }
+
+  /* ---- MATCH ---- */
+  .match-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .match-col{ display:flex; flex-direction:column; gap:8px; }
+  .match-card{
+    border:1px solid var(--line);
+    background:var(--paper);
+    padding:11px 13px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:13.5px;
+    text-align:left;
+    transition:.12s;
+    position:relative;
+    line-height:1.35;
+  }
+  .match-card .k{ font-family:'Shippori Mincho',serif; font-size:16px; display:block; }
+  .match-card .r{ color:var(--ink-soft); font-size:11.5px; }
+  .match-card:hover:not(.matched):not(.selected){ border-color:var(--ink); }
+  .match-card.selected{ border-color:var(--hanko); background:#fff; box-shadow:0 0 0 2px rgba(178,58,46,0.15); }
+  .match-card.matched{ opacity:.35; cursor:default; text-decoration:line-through; }
+  .match-card.wrong{ animation:shake .3s; border-color:var(--hanko); }
+  @keyframes shake{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-4px);} 75%{transform:translateX(4px);} }
+
+  /* ---- QUIZ ---- */
+  .quiz-card{
+    border:1px solid var(--line);
+    background:var(--paper);
+    border-radius:8px;
+    padding:26px 24px;
+    text-align:center;
+  }
+  .quiz-prompt-label{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:10px;}
+  .quiz-prompt{ font-family:'Shippori Mincho',serif; font-size:30px; margin-bottom:4px; }
+  .quiz-prompt-sub{ color:var(--ink-soft); font-size:14px; margin-bottom:22px; }
+  .quiz-options{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .opt{
+    border:1px solid var(--line);
+    background:#fff;
+    padding:13px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    transition:.12s;
+  }
+  .opt:hover{ border-color:var(--ink); }
+  .opt.correct{ border-color:var(--jade); background:#EAF2EE; color:#295144; }
+  .opt.incorrect{ border-color:var(--hanko); background:#F7E9E7; color:var(--hanko-dark); }
+  .timerbar{ height:5px; background:var(--paper-dark); border-radius:4px; overflow:hidden; margin-bottom:16px; }
+  .timerbar > div{ height:100%; background:var(--hanko); transition:width .1s linear; }
+  .quiz-note{ margin-top:18px; font-size:12.5px; color:var(--ink-soft); text-align:left; background:var(--paper-dark); border-left:3px solid var(--gold); padding:10px 12px; border-radius:4px; display:none; }
+
+  /* ---- FLASHCARDS ---- */
+  .flash-wrap{ display:flex; flex-direction:column; align-items:center; }
+  .flash-progress{ width:100%; height:5px; background:var(--paper-dark); border-radius:4px; margin-bottom:20px; overflow:hidden;}
+  .flash-progress > div{ height:100%; background:var(--gold); transition:width .2s; }
+  .flashcard{
+    width:100%; max-width:460px; height:250px;
+    perspective:1200px;
+    cursor:pointer;
+  }
+  .flashcard-inner{
+    position:relative; width:100%; height:100%;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  }
+  .flashcard.flipped .flashcard-inner{ transform:rotateY(180deg); }
+  .flash-face{
+    position:absolute; inset:0;
+    backface-visibility:hidden;
+    border:1px solid var(--line);
+    border-radius:10px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:20px;
+    text-align:center;
+    background:#fff;
+  }
+  .flash-front{ background:var(--paper); }
+  .flash-back{ transform:rotateY(180deg); background:#fff; }
+  .flash-face .tag{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:10px;}
+  .flash-face .big{ font-family:'Shippori Mincho',serif; font-size:26px; margin-bottom:6px; }
+  .flash-face .med{ font-size:15px; color:var(--ink-soft); margin-bottom:4px; }
+  .flash-face .note{ font-size:12.5px; color:var(--ink-soft); margin-top:10px; line-height:1.5; }
+  .flash-controls{ display:flex; gap:10px; margin-top:20px; }
+  .flash-controls .btn.know{ background:var(--jade); border-color:var(--jade); }
+  .flash-controls .btn.know:hover{ background:#3c6255; }
+  .flash-controls .btn.review{ background:var(--hanko); border-color:var(--hanko); }
+
+  /* ---- ELIGIBILITY ---- */
+  .elig-instr{
+    font-size:14px; line-height:1.5; color:var(--ink-soft);
+    background:var(--paper-dark); border-left:3px solid var(--hanko);
+    padding:12px 14px; border-radius:4px; margin-bottom:18px;
+  }
+  .elig-instr b{ color:var(--ink); }
+  .elig-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+  .elig-card{
+    border:1px solid var(--line);
+    background:#fff;
+    padding:13px 14px;
+    border-radius:7px;
+    cursor:pointer;
+    transition:.15s;
+  }
+  .elig-card .k{ font-family:'Shippori Mincho',serif; font-size:19px; display:block; }
+  .elig-card .e{ font-weight:700; font-size:12.5px; display:none; margin-top:4px; }
+  .elig-card.elig-correct .e{ display:block; }
+  .elig-card .r{ font-size:11.5px; color:var(--ink-soft); margin-top:2px; display:block; }
+  .elig-card:hover:not(.elig-locked){ border-color:var(--ink); }
+  .elig-card.elig-correct{
+    background:#EAF2EE; border-color:var(--jade); cursor:default;
+  }
+  .elig-card.elig-correct .e, .elig-card.elig-correct .k{ color:#295144; }
+  .elig-card.elig-wrong{
+    background:#F7E9E7; border-color:var(--hanko); animation:shake .3s;
+  }
+  .elig-card.elig-wrong .e, .elig-card.elig-wrong .k{ color:var(--hanko-dark); }
+  .elig-why{
+    font-size:11.5px; color:#295144; margin-top:6px; line-height:1.4; display:none;
+  }
+  .elig-card.elig-correct .elig-why{ display:block; }
+  .elig-summary{
+    margin-top:18px; padding:16px; border:1px solid var(--gold); border-radius:8px;
+    background:#FBF6E9; display:none;
+  }
+  .elig-summary h3{ font-family:'Shippori Mincho',serif; margin:0 0 8px; font-size:17px; }
+  .elig-summary ul{ margin:6px 0 0; padding-left:18px; font-size:13px; line-height:1.6; }
+
+  /* ---- UBO LOGIC ---- */
+  .ubo-toggle{ display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap; }
+  .ubo-toggle button{
+    font-family:'Zen Kaku Gothic New',sans-serif; font-weight:700; font-size:13px;
+    border:1px solid var(--line); background:var(--paper); color:var(--ink-soft);
+    padding:9px 14px; border-radius:20px; cursor:pointer; transition:.15s;
+  }
+  .ubo-toggle button .jp{ font-family:'Shippori Mincho',serif; color:var(--hanko); margin-right:5px;}
+  .ubo-toggle button.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .ubo-tree-head{ margin-bottom:16px; }
+  .ubo-tree-head .en{ font-weight:700; font-size:15px; }
+  .ubo-tree-head .jp{ font-family:'Shippori Mincho',serif; color:var(--hanko); font-size:13.5px; }
+  .ubo-flow{ display:flex; align-items:stretch; gap:0; flex-wrap:wrap; margin-bottom:8px; }
+  .ubo-step{
+    display:none;
+    border:1px solid var(--line); background:var(--paper);
+    border-radius:8px; padding:16px 16px; width:230px; flex:0 0 230px;
+    position:relative;
+  }
+  .ubo-step.visible{ display:block; }
+  .ubo-step .qnum{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--ink-faint); letter-spacing:.1em; margin-bottom:8px; }
+  .ubo-step .qtext{ font-size:13px; line-height:1.45; margin-bottom:12px; min-height:66px; }
+  .ubo-step .ubtns{ display:flex; gap:8px; }
+  .ubo-step .ubtns button{
+    flex:1; font-weight:700; font-size:12.5px; padding:7px 0; border-radius:5px; cursor:pointer;
+    border:1px solid var(--line); background:#fff;
+  }
+  .ubo-step .ubtns .yes:hover{ background:#EAF2EE; border-color:var(--jade); }
+  .ubo-step .ubtns .no:hover{ background:var(--paper-dark); border-color:var(--ink); }
+  .ubo-step.resolved{ opacity:.55; }
+  .ubo-step .badge{
+    position:absolute; top:-9px; right:10px; font-family:'JetBrains Mono',monospace; font-size:10px;
+    background:var(--ink); color:var(--paper); padding:2px 8px; border-radius:10px; display:none;
+  }
+  .ubo-step.resolved .badge{ display:inline-block; }
+  .ubo-arrow{
+    display:none; align-items:center; justify-content:center; width:34px; flex:0 0 34px;
+    color:var(--ink-faint); font-size:18px;
+  }
+  .ubo-arrow.visible{ display:flex; }
+  .ubo-result{
+    display:none; border:1px solid var(--gold); background:#FBF6E9; border-radius:8px;
+    padding:16px; width:250px; flex:0 0 250px; font-size:13.5px; line-height:1.5;
+  }
+  .ubo-result.visible{ display:block; }
+  .ubo-result .tag{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--gold); letter-spacing:.1em; margin-bottom:8px; }
+  .ubo-reset{ margin-top:10px; }
+
+  .scn-list{ display:flex; flex-direction:column; gap:14px; margin-top:22px; }
+  .scn-card{ border:1px solid var(--line); border-radius:8px; padding:16px 18px; background:var(--paper); }
+  .scn-card .scn-title{ font-weight:700; font-size:14px; margin-bottom:4px; }
+  .scn-card .scn-q{ font-size:13px; color:var(--ink-soft); margin-bottom:10px; }
+  .ownership-path{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:10px 0; }
+  .op-box{
+    border:1px solid var(--line); background:#fff; border-radius:6px; padding:8px 12px;
+    font-size:12.5px; font-weight:700; text-align:center; min-width:90px;
+  }
+  .op-box.customer{ border-color:var(--ink); }
+  .op-box.person{ border-color:var(--gold); background:#FBF6E9; }
+  .op-link{ display:flex; flex-direction:column; align-items:center; font-size:11px; color:var(--ink-soft); }
+  .op-link .pct{ font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--hanko); font-size:12px; }
+  .op-link .via{ font-size:10px; }
+  .scn-toggle{
+    font-family:'Zen Kaku Gothic New',sans-serif; font-size:12.5px; font-weight:700;
+    border:1px solid var(--ink); background:transparent; color:var(--ink); padding:6px 12px;
+    border-radius:5px; cursor:pointer;
+  }
+  .scn-reason{ display:none; margin-top:10px; font-size:12.5px; color:var(--ink-soft); background:#fff; border-left:3px solid var(--jade); padding:9px 11px; border-radius:4px; line-height:1.5; }
+  .scn-reason.visible{ display:block; }
+
+  footer.note{
+    margin-top:26px; padding-top:14px; border-top:1px solid var(--line);
+    font-size:11.5px; color:var(--ink-faint); font-family:'JetBrains Mono',monospace;
+  }
+  @media (max-width:600px){
+    .match-grid{ grid-template-columns:1fr; }
+    .quiz-options{ grid-template-columns:1fr; }
+    h1{ font-size:24px; }
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+  <div class="corner-bl"></div><div class="corner-br"></div>
+  <header>
+    <div>
+      <div class="eyebrow">KYC ONBOARDING · FORM RECOGNITION DRILL</div>
+      <h1>Entity Dossier <span class="jp">登記</span></h1>
+      <div class="sub">Learn to spot Japan's 11 business structures on sight — in English, rōmaji or 漢字 — before you ever open the shareholder register.</div>
+    </div>
+    <svg class="stamp" viewBox="0 0 100 100">
+      <defs>
+        <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/></filter>
+      </defs>
+      <g filter="url(#rough)">
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#B23A2E" stroke-width="4"/>
+        <circle cx="50" cy="50" r="33" fill="none" stroke="#B23A2E" stroke-width="1.5"/>
+        <text x="50" y="45" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="17" fill="#B23A2E" font-weight="700">合格</text>
+        <text x="50" y="63" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#B23A2E" letter-spacing="1">KYC · JP</text>
+      </g>
+    </svg>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="match"><span class="jp-tag">合</span>Match</button>
+    <button class="tab-btn" data-tab="quiz"><span class="jp-tag">検</span>Quiz</button>
+    <button class="tab-btn" data-tab="flash"><span class="jp-tag">帳</span>Flashcards</button>
+    <button class="tab-btn" data-tab="elig"><span class="jp-tag">適</span>Eligibility</button>
+    <button class="tab-btn" data-tab="ubo"><span class="jp-tag">実</span>UBO Logic</button>
+  </nav>
+
+  <!-- MATCH -->
+  <section class="panel active" id="panel-match">
+    <div class="hud">
+      <span class="pill">Pairs <b id="m-pairs">0</b>/11</span>
+      <span class="pill">Moves <b id="m-moves">0</b></span>
+      <span class="pill">Time <b id="m-time">00:00</b></span>
+      <button class="btn ghost" id="m-reset" style="margin-left:auto;">Reshuffle</button>
+    </div>
+    <div class="match-grid">
+      <div class="match-col" id="m-col-en"></div>
+      <div class="match-col" id="m-col-jp"></div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="panel" id="panel-quiz">
+    <div class="hud">
+      <span class="pill">Score <b id="q-score">0</b></span>
+      <span class="pill">Streak <b id="q-streak">0</b></span>
+      <span class="pill">Lives <b id="q-lives">♥♥♥</b></span>
+      <span class="pill">Q <b id="q-count">0</b>/11</span>
+    </div>
+    <div class="timerbar"><div id="q-timerfill" style="width:100%"></div></div>
+    <div class="quiz-card" id="q-card">
+      <div class="quiz-prompt-label" id="q-label">IDENTIFY THIS ENTITY</div>
+      <div class="quiz-prompt" id="q-prompt">—</div>
+      <div class="quiz-prompt-sub" id="q-promptsub"></div>
+      <div class="quiz-options" id="q-options"></div>
+      <div class="quiz-note" id="q-note"></div>
+    </div>
+  </section>
+
+  <!-- FLASH -->
+  <section class="panel" id="panel-flash">
+    <div class="hud">
+      <span class="pill">Card <b id="f-idx">1</b>/11</span>
+      <span class="pill">Known <b id="f-known">0</b></span>
+      <span class="pill">To review <b id="f-review">0</b></span>
+      <button class="btn ghost" id="f-audio" style="margin-left:auto;">🔊 Pronounce</button>
+    </div>
+    <div class="flash-progress"><div id="f-progress" style="width:9%"></div></div>
+    <div class="flash-wrap">
+      <div class="flashcard" id="flashcard">
+        <div class="flashcard-inner">
+          <div class="flash-face flash-front">
+            <div class="tag">English term</div>
+            <div class="big" id="f-front-big">—</div>
+            <div class="med">Tap to reveal the Japanese form</div>
+          </div>
+          <div class="flash-face flash-back">
+            <div class="tag" id="f-back-tag">—</div>
+            <div class="big" id="f-back-kanji">—</div>
+            <div class="med" id="f-back-romaji">—</div>
+            <div class="note" id="f-back-note"></div>
+          </div>
+        </div>
+      </div>
+      <div class="flash-controls">
+        <button class="btn review" id="f-review-btn">↺ Review again</button>
+        <button class="btn ghost" id="f-shuffle">Shuffle deck</button>
+        <button class="btn know" id="f-know-btn">✓ I know this</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ELIGIBILITY -->
+  <section class="panel" id="panel-elig">
+    <div class="hud">
+      <span class="pill">Found <b id="e-found">0</b>/4</span>
+      <span class="pill">Mistakes <b id="e-mistakes">0</b></span>
+      <button class="btn ghost" id="e-reset" style="margin-left:auto;">Reset</button>
+    </div>
+    <div class="elig-instr">Read the <b>kanji and rōmaji only</b> — no English labels. Tap every business type Wise <b>cannot onboard</b> under current policy for Japan. There are <b>4</b> to find among the 11. Get it right and the card reveals its English name as your reward.</div>
+    <div class="elig-grid" id="e-grid"></div>
+    <div class="elig-summary" id="e-summary">
+      <h3>All 4 found — nice work 合格</h3>
+      <p style="font-size:13px;color:var(--ink-soft);margin:0 0 6px;">Restricted for onboarding in Japan:</p>
+      <ul id="e-summary-restricted"></ul>
+      <p style="font-size:13px;color:var(--ink-soft);margin:12px 0 0;">Everything else on the board — Sole Trader, KK, YK, GK, GMK, GSK, Branch Office — remains onboardable, subject to standard due diligence.</p>
+    </div>
+  </section>
+
+  <!-- UBO LOGIC -->
+  <section class="panel" id="panel-ubo">
+    <div class="ubo-toggle">
+      <button class="active" data-tree="majority"><span class="jp">資本多数決法人</span>Majority-voting (K.K. / Y.K.)</button>
+      <button data-tree="nonmajority"><span class="jp">資本多数決以外</span>Non-majority-voting (G.K. / GMK / GSK / Branch)</button>
+    </div>
+    <div class="ubo-tree-head">
+      <div class="en" id="ubo-head-en">Majority Voting-Based Companies</div>
+      <div class="jp" id="ubo-head-jp">株式会社 (K.K.) & 有限会社 (Y.K.)</div>
+    </div>
+    <div class="ubo-flow" id="ubo-flow"></div>
+    <button class="btn ghost ubo-reset" id="ubo-reset">↺ Restart this path</button>
+
+    <div class="ubo-tree-head" style="margin-top:26px;">
+      <div class="en">Ownership Structures — Majority Voting-Based Companies</div>
+      <div class="jp">株式会社 (K.K.) & 有限会社 (Y.K.) のみ — worked examples for the 50% / 25% thresholds above</div>
+    </div>
+    <div class="scn-list" id="scn-list"></div>
+  </section>
+
+  <footer class="note">Created by Tam</footer>
+</div>
+
+<script>
+const ENTITIES = [
+  {id:'st', en:'Sole Trader', abbr:'ST', kanji:'個人事業主', romaji:'Kojin Jigyō', abbrJp:'KJ',
+    note:'No separate legal personality — the owner is personally liable. The individual themself is the UBO.'},
+  {id:'trust', en:'Trusts', abbr:'', kanji:'信託会社', romaji:'Shintaku-gaisha', abbrJp:'',
+    note:'The trustee holds legal title. Identify the settlor, trustee and beneficiaries as UBOs.'},
+  {id:'kk', en:'For-Profit Incorporation', abbr:'INC', kanji:'株式会社', romaji:'Kabushiki-Kaisha', abbrJp:'KK',
+    note:"Japan's standard joint-stock company. Trace ownership through the shareholder register."},
+  {id:'zaidan', en:'Foundations', abbr:'', kanji:'財団法人', romaji:'Zaidan Hōjin', abbrJp:'',
+    note:'An asset-based entity with no shareholders. Identify the founder and the governing council.'},
+  {id:'yk', en:'Limited Company', abbr:'LC', kanji:'有限会社', romaji:'Yūgen-Kaisha', abbrJp:'YK',
+    note:'Legacy form — no new YK has been formed since 2006. Existing ones are grandfathered; treat like a closely-held KK.'},
+  {id:'charity', en:'Charities', abbr:'', kanji:'慈善団体', romaji:'Jizen Dantai', abbrJp:'',
+    note:'Usually structured as a Zaidan or Shadan hōjin. Check the governing board for control.'},
+  {id:'gk', en:'Limited Liability Company', abbr:'LLC', kanji:'合同会社', romaji:'Gōdō-Kaisha', abbrJp:'GK',
+    note:"Japan's LLC equivalent. Members hold equity directly — there are no share certificates."},
+  {id:'npo', en:'Non-Profit Organisation', abbr:'NPO', kanji:'特定非営利活動法人 / NPO法人', romaji:'Tokutei Hi-eiri Katsudō Hōjin', abbrJp:'',
+    note:'A certified non-profit corporate form, governed by a board rather than owned by shareholders.'},
+  {id:'gmk', en:'General Partnership', abbr:'GP', kanji:'合名会社', romaji:'Gōmei-Kaisha', abbrJp:'GMK',
+    note:'All partners carry unlimited liability. Each partner is a direct UBO.'},
+  {id:'gsk', en:'Limited Partnership', abbr:'LP', kanji:'合資会社', romaji:'Gōshi-Kaisha', abbrJp:'GSK',
+    note:'A mix of unlimited and limited partners — identify which partners carry unlimited liability.'},
+  {id:'shiten', en:'Branch Office', abbr:'', kanji:'支店', romaji:'Shiten', abbrJp:'',
+    note:'Not a separate legal entity. The UBO traces back to the foreign parent company.'}
+];
+
+function speak(text){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ja-JP'; u.rate = 0.85;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+function speakPhrase(text){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US'; u.rate = 1; u.pitch = 1.05;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+/* ---------------- TABS ---------------- */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ---------------- MATCH GAME ---------------- */
+let mState = {};
+function initMatch(){
+  const enShuffled = shuffle(ENTITIES);
+  const jpShuffled = shuffle(ENTITIES);
+  mState = { pairs:0, moves:0, selEn:null, selJp:null, matched:new Set(), start:Date.now(), timer:null };
+  const colEn = document.getElementById('m-col-en');
+  const colJp = document.getElementById('m-col-jp');
+  colEn.innerHTML=''; colJp.innerHTML='';
+  enShuffled.forEach(e=>{
+    const d = document.createElement('div');
+    d.className='match-card'; d.dataset.id=e.id; d.dataset.side='en';
+    d.innerHTML = `<span class="k" style="font-family:'Zen Kaku Gothic New',sans-serif;font-weight:700;">${e.en}</span><span class="r">${e.abbr?e.abbr:''}</span>`;
+    colEn.appendChild(d);
+  });
+  jpShuffled.forEach(e=>{
+    const d = document.createElement('div');
+    d.className='match-card'; d.dataset.id=e.id; d.dataset.side='jp';
+    d.innerHTML = `<span class="k">${e.kanji}</span><span class="r">${e.romaji}${e.abbrJp?' ('+e.abbrJp+')':''}</span>`;
+    colJp.appendChild(d);
+  });
+  document.getElementById('m-pairs').textContent='0';
+  document.getElementById('m-moves').textContent='0';
+  clearInterval(mState.timer);
+  mState.timer = setInterval(()=>{
+    const s = Math.floor((Date.now()-mState.start)/1000);
+    const mm = String(Math.floor(s/60)).padStart(2,'0');
+    const ss = String(s%60).padStart(2,'0');
+    document.getElementById('m-time').textContent = mm+':'+ss;
+  },500);
+}
+document.querySelectorAll('.match-col').forEach(col=>{
+  col.addEventListener('click', e=>{
+    const card = e.target.closest('.match-card');
+    if(!card || card.classList.contains('matched') || card.classList.contains('selected')) return;
+    const side = card.dataset.side;
+    if(side==='en'){
+      if(mState.selEn) mState.selEn.classList.remove('selected');
+      mState.selEn = card; card.classList.add('selected');
+    } else {
+      if(mState.selJp) mState.selJp.classList.remove('selected');
+      mState.selJp = card; card.classList.add('selected');
+    }
+    if(mState.selEn && mState.selJp){
+      mState.moves++;
+      document.getElementById('m-moves').textContent = mState.moves;
+      const a=mState.selEn, b=mState.selJp;
+      if(a.dataset.id === b.dataset.id){
+        a.classList.add('matched'); b.classList.add('matched');
+        a.classList.remove('selected'); b.classList.remove('selected');
+        mState.pairs++;
+        document.getElementById('m-pairs').textContent = mState.pairs;
+        const ent = ENTITIES.find(x=>x.id===a.dataset.id);
+        speak(ent.kanji);
+        mState.selEn=null; mState.selJp=null;
+        if(mState.pairs===11){ clearInterval(mState.timer); }
+      } else {
+        a.classList.add('wrong'); b.classList.add('wrong');
+        setTimeout(()=>{
+          a.classList.remove('selected','wrong'); b.classList.remove('selected','wrong');
+          mState.selEn=null; mState.selJp=null;
+        },420);
+      }
+    }
+  });
+});
+document.getElementById('m-reset').addEventListener('click', initMatch);
+initMatch();
+
+/* ---------------- QUIZ ---------------- */
+let qState = {};
+const QUIZ_TIME = 15000;
+function initQuiz(){
+  qState = { pool: shuffle(ENTITIES), idx:0, score:0, streak:0, lives:3, timerId:null, deadline:0, locked:false };
+  document.getElementById('q-score').textContent='0';
+  document.getElementById('q-streak').textContent='0';
+  document.getElementById('q-lives').textContent='♥♥♥';
+  nextQuizQuestion();
+}
+function nextQuizQuestion(){
+  clearInterval(qState.timerId);
+  document.getElementById('q-note').style.display='none';
+  if(qState.idx >= qState.pool.length || qState.lives<=0){
+    endQuiz(); return;
+  }
+  qState.locked=false;
+  const ent = qState.pool[qState.idx];
+  document.getElementById('q-count').textContent = qState.idx+1;
+  const askJp = Math.random() < 0.5;
+  document.getElementById('q-card').dataset.entId = ent.id;
+  document.getElementById('q-card').dataset.mode = askJp ? 'jp' : 'en';
+  if(askJp){
+    document.getElementById('q-label').textContent = 'WHICH ENTITY IS THIS?';
+    document.getElementById('q-prompt').textContent = ent.kanji;
+    document.getElementById('q-promptsub').textContent = ent.romaji + (ent.abbrJp?' ('+ent.abbrJp+')':'');
+  } else {
+    document.getElementById('q-label').textContent = 'PICK THE JAPANESE FORM';
+    document.getElementById('q-prompt').textContent = ent.en;
+    document.getElementById('q-promptsub').textContent = ent.abbr ? '('+ent.abbr+')' : '';
+  }
+  const distractors = shuffle(ENTITIES.filter(e=>e.id!==ent.id)).slice(0,3);
+  const options = shuffle([ent, ...distractors]);
+  const optWrap = document.getElementById('q-options');
+  optWrap.innerHTML='';
+  options.forEach(o=>{
+    const btn = document.createElement('button');
+    btn.className='opt';
+    btn.textContent = askJp ? o.en : (o.kanji + '  ' + o.romaji);
+    btn.dataset.id = o.id;
+    optWrap.appendChild(btn);
+  });
+  startQuizTimer();
+}
+function startQuizTimer(){
+  qState.deadline = Date.now() + QUIZ_TIME;
+  const fill = document.getElementById('q-timerfill');
+  fill.style.width='100%';
+  qState.timerId = setInterval(()=>{
+    const remain = qState.deadline - Date.now();
+    const pct = Math.max(0, remain/QUIZ_TIME*100);
+    fill.style.width = pct+'%';
+    if(remain<=0){ clearInterval(qState.timerId); handleQuizAnswer(null); }
+  }, 80);
+}
+document.getElementById('q-options').addEventListener('click', e=>{
+  const btn = e.target.closest('.opt');
+  if(!btn || qState.locked) return;
+  handleQuizAnswer(btn.dataset.id, btn);
+});
+function handleQuizAnswer(chosenId, btnEl){
+  if(qState.locked) return;
+  qState.locked = true;
+  clearInterval(qState.timerId);
+  const ent = ENTITIES.find(x=>x.id===document.getElementById('q-card').dataset.entId);
+  document.querySelectorAll('.opt').forEach(o=>{
+    if(o.dataset.id===ent.id) o.classList.add('correct');
+    else if(o.dataset.id===chosenId) o.classList.add('incorrect');
+  });
+  if(chosenId===ent.id){
+    qState.streak++; qState.score += 10 + qState.streak*2;
+    speak(ent.kanji);
+  } else {
+    qState.streak = 0; qState.lives--;
+    document.getElementById('q-lives').textContent = '♥'.repeat(Math.max(0,qState.lives)) + '♡'.repeat(3-Math.max(0,qState.lives));
+  }
+  document.getElementById('q-score').textContent = qState.score;
+  document.getElementById('q-streak').textContent = qState.streak;
+  const noteEl = document.getElementById('q-note');
+  noteEl.textContent = ent.en+' — '+ent.note;
+  noteEl.style.display='block';
+  qState.idx++;
+  setTimeout(nextQuizQuestion, 1800);
+}
+function endQuiz(){
+  document.getElementById('q-label').textContent = qState.lives<=0 ? 'OUT OF LIVES' : 'DOSSIER COMPLETE';
+  document.getElementById('q-prompt').textContent = qState.score+' PTS';
+  document.getElementById('q-promptsub').textContent = 'Final streak best: '+qState.streak;
+  document.getElementById('q-options').innerHTML = '<button class="btn" id="q-restart" style="grid-column:1/-1;">Restart quiz</button>';
+  document.getElementById('q-note').style.display='none';
+  document.getElementById('q-timerfill').style.width='0%';
+  document.getElementById('q-restart').addEventListener('click', initQuiz);
+}
+initQuiz();
+
+/* ---------------- FLASHCARDS ---------------- */
+let fState = {};
+function initFlash(){
+  fState = { deck: shuffle(ENTITIES), idx:0, known:0, review:0, flipped:false };
+  renderFlash();
+}
+function renderFlash(){
+  const ent = fState.deck[fState.idx];
+  document.getElementById('flashcard').classList.remove('flipped');
+  fState.flipped=false;
+  document.getElementById('f-idx').textContent = fState.idx+1;
+  document.getElementById('f-known').textContent = fState.known;
+  document.getElementById('f-review').textContent = fState.review;
+  document.getElementById('f-progress').style.width = Math.round(((fState.idx+1)/fState.deck.length)*100)+'%';
+  document.getElementById('f-front-big').textContent = ent.en;
+  document.getElementById('f-back-tag').textContent = ent.abbrJp ? ent.abbrJp : (ent.abbr||'JAPANESE FORM');
+  document.getElementById('f-back-kanji').textContent = ent.kanji;
+  document.getElementById('f-back-romaji').textContent = ent.romaji;
+  document.getElementById('f-back-note').textContent = ent.note;
+}
+document.getElementById('flashcard').addEventListener('click', ()=>{
+  fState.flipped = !fState.flipped;
+  document.getElementById('flashcard').classList.toggle('flipped', fState.flipped);
+});
+document.getElementById('f-audio').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  speak(fState.deck[fState.idx].kanji);
+});
+function advanceFlash(){
+  if(fState.idx < fState.deck.length-1){ fState.idx++; renderFlash(); }
+  else {
+    document.getElementById('f-front-big').textContent = 'Deck complete';
+    document.getElementById('f-back-note').textContent = '';
+    document.getElementById('flashcard').classList.remove('flipped');
+  }
+}
+document.getElementById('f-know-btn').addEventListener('click', (e)=>{ e.stopPropagation(); fState.known++; advanceFlash(); });
+document.getElementById('f-review-btn').addEventListener('click', (e)=>{ e.stopPropagation(); fState.review++; advanceFlash(); });
+document.getElementById('f-shuffle').addEventListener('click', (e)=>{ e.stopPropagation(); initFlash(); });
+initFlash();
+
+/* ---------------- ELIGIBILITY GAME ---------------- */
+const RESTRICTED = {
+  trust:   'Beneficial ownership sits with a trustee, not a registered proprietor — no clear UBO chain to evidence. ⚑ confirm exact policy clause',
+  zaidan:  'Asset-based entity with no shareholders or members — there is no ownership chain to trace. ⚑ confirm exact policy clause',
+  charity: 'Governed by a board rather than owned — the shareholding-based KYC model does not apply. ⚑ confirm exact policy clause',
+  npo:     'Certified non-profit form with board governance, not shareholding — same UBO gap as above. ⚑ confirm exact policy clause'
+};
+let eState = {};
+function initElig(){
+  eState = { found:new Set(), mistakes:0, locked:false };
+  document.getElementById('e-found').textContent='0';
+  document.getElementById('e-mistakes').textContent='0';
+  document.getElementById('e-summary').style.display='none';
+  document.getElementById('e-summary-restricted').innerHTML='';
+  const grid = document.getElementById('e-grid');
+  grid.innerHTML='';
+  shuffle(ENTITIES).forEach(ent=>{
+    const d = document.createElement('div');
+    d.className='elig-card';
+    d.dataset.id = ent.id;
+    d.innerHTML = `<span class="k">${ent.kanji}</span>
+                    <span class="r">${ent.romaji}${ent.abbrJp?' ('+ent.abbrJp+')':''}</span>
+                    <span class="e">${ent.en}${ent.abbr?' ('+ent.abbr+')':''}</span>
+                    <div class="elig-why"></div>`;
+    grid.appendChild(d);
+  });
+}
+document.getElementById('e-grid').addEventListener('click', e=>{
+  const card = e.target.closest('.elig-card');
+  if(!card || card.classList.contains('elig-locked')) return;
+  const id = card.dataset.id;
+  if(RESTRICTED[id]){
+    card.classList.add('elig-correct','elig-locked');
+    card.querySelector('.elig-why').textContent = RESTRICTED[id];
+    speakPhrase('Great job!');
+    eState.found.add(id);
+    document.getElementById('e-found').textContent = eState.found.size;
+    if(eState.found.size === 4){
+      document.querySelectorAll('.elig-card:not(.elig-correct)').forEach(c=>c.classList.add('elig-locked'));
+      const list = document.getElementById('e-summary-restricted');
+      Object.keys(RESTRICTED).forEach(rid=>{
+        const ent = ENTITIES.find(x=>x.id===rid);
+        const li = document.createElement('li');
+        li.innerHTML = `<b>${ent.en}</b> (${ent.kanji}) — ${RESTRICTED[rid]}`;
+        list.appendChild(li);
+      });
+      document.getElementById('e-summary').style.display='block';
+    }
+  } else {
+    card.classList.add('elig-wrong');
+    speakPhrase('Pay attention!');
+    eState.mistakes++;
+    document.getElementById('e-mistakes').textContent = eState.mistakes;
+    setTimeout(()=>card.classList.remove('elig-wrong'), 500);
+  }
+});
+document.getElementById('e-reset').addEventListener('click', initElig);
+initElig();
+
+/* ---------------- UBO LOGIC ---------------- */
+const UBO_TREES = {
+  majority: {
+    headEn: 'Majority Voting-Based Companies',
+    headJp: '株式会社 (K.K.) & 有限会社 (Y.K.)',
+    steps: [
+      { q:'Does any individual, directly or indirectly, hold 50% or more of the total voting rights of the company?',
+        yes:'UBO = that individual.', yesTag:'≥50% voting rights' },
+      { q:'Does any individual, directly or indirectly, hold 25% or more of the total voting rights of the company?',
+        yes:'UBO = that individual.', yesTag:'≥25% voting rights' },
+      { q:'Is any individual deemed to have a controlling influence over the business — through investment, lending, business transaction, or other means?',
+        yes:'UBO = that individual.', yesTag:'controlling influence' }
+    ],
+    fallback:'UBO = the representative of the company. No individual met the voting-rights or controlling-influence thresholds above.'
+  },
+  nonmajority: {
+    headEn: 'Non-Majority Voting-Based Companies',
+    headJp: '合同会社 (G.K.), 合名会社 (GMK), 合資会社 (GSK) & foreign branch offices',
+    steps: [
+      { q:'Does any individual hold the right to receive more than 25% of distributions from the total business revenue or assets — OR have great influence over the company through investment, lending, business transactions, or other means?',
+        yes:'UBO = that individual.', yesTag:'>25% distribution or great influence' }
+    ],
+    fallback:'UBO = the representative of the company. No individual met the distribution-right or influence threshold above.'
+  }
+};
+let uState = { tree:'majority', stepIdx:0, done:false };
+
+// Explicit renderer for the UBO decision path
+function renderUbo(){
+  const tree = UBO_TREES[uState.tree];
+  document.getElementById('ubo-head-en').textContent = tree.headEn;
+  document.getElementById('ubo-head-jp').textContent = tree.headJp;
+  const flow = document.getElementById('ubo-flow');
+  flow.innerHTML = '';
+
+  for(let i=0; i<tree.steps.length; i++){
+    if(i>0){
+      const arrow = document.createElement('div');
+      arrow.className = 'ubo-arrow visible';
+      arrow.textContent = '→';
+      flow.appendChild(arrow);
+    }
+    const step = tree.steps[i];
+    const card = document.createElement('div');
+    const resolved = i < uState.stepIdx || (i === uState.stepIdx && uState.done);
+    card.className = 'ubo-step visible' + (resolved && i < uState.stepIdx ? ' resolved' : '');
+    card.innerHTML = `
+      <div class="badge">NO →</div>
+      <div class="qnum">CHECK ${i+1}</div>
+      <div class="qtext">${step.q}</div>
+      <div class="ubtns">
+        <button class="yes" data-i="${i}">Yes</button>
+        <button class="no" data-i="${i}">No</button>
+      </div>`;
+    flow.appendChild(card);
+    if(i > uState.stepIdx || (i === uState.stepIdx && uState.done)) break;
+  }
+
+  if(uState.done){
+    const arrow = document.createElement('div');
+    arrow.className = 'ubo-arrow visible';
+    arrow.textContent = '→';
+    flow.appendChild(arrow);
+    const result = document.createElement('div');
+    result.className = 'ubo-result visible';
+    if(uState.stepIdx < tree.steps.length){
+      const step = tree.steps[uState.stepIdx];
+      result.innerHTML = `<div class="tag">RESULT · ${step.yesTag.toUpperCase()}</div>${step.yes}`;
+    } else {
+      result.innerHTML = `<div class="tag">RESULT · FALLBACK</div>${tree.fallback}`;
+    }
+    flow.appendChild(result);
+  }
+}
+document.getElementById('ubo-flow').addEventListener('click', e=>{
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  const tree = UBO_TREES[uState.tree];
+  const i = parseInt(btn.dataset.i, 10);
+  if(btn.classList.contains('yes')){
+    uState.stepIdx = i; uState.done = true;
+  } else {
+    if(i === tree.steps.length - 1){ uState.stepIdx = tree.steps.length; uState.done = true; }
+    else { uState.stepIdx = i + 1; }
+  }
+  renderUbo();
+});
+document.getElementById('ubo-reset').addEventListener('click', ()=>{
+  uState.stepIdx = 0; uState.done = false; renderUbo();
+});
+document.querySelectorAll('.ubo-toggle button').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('.ubo-toggle button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    uState = { tree:b.dataset.tree, stepIdx:0, done:false };
+    renderUbo();
+  });
+});
+renderUbo();
+
+/* ---- Ownership scenarios (majority-voting companies) ---- */
+const SCENARIOS = [
+  { title:'Scenario 1 — Direct majority owner',
+    q:'Is there any individual who holds 50% or more ownership of the Business Customer?',
+    path:[
+      {box:'Business Customer', cls:'customer'},
+      {pct:'≥50%', via:'direct'},
+      {box:'Person A', cls:'person'}
+    ],
+    reason:'Simplest case: an individual owns 50% or more directly. The chain stops here — Person A is the UBO outright and no indirect-ownership tracing is needed.'
+  },
+  { title:'Scenario 2 — Indirect ownership crosses 25%',
+    q:'Is there any individual who holds 25% or more ownership of the Business Customer?',
+    path:[
+      {box:'Business Customer', cls:'customer'},
+      {pct:'28%', via:'indirect, via Company A'},
+      {box:'Person A', cls:'person'}
+    ],
+    reason:'No individual reaches 50% directly, so the check drops to the 25% threshold. Person A\'s indirect stake — traced up through Company A — comes to 28% of the Business Customer, which clears 25%. Person A is the UBO.'
+  },
+  { title:'Scenario 3 — Direct stake plus one controlled company',
+    q:'Is there any individual who holds 25% or more ownership of the Business Customer?',
+    path:[
+      {box:'Business Customer', cls:'customer'},
+      {pct:'20% direct + 20% via Co. A', via:'= 40% total'},
+      {box:'Person A', cls:'person'}
+    ],
+    reason:'Person A owns 20% of the Business Customer directly, plus 20% held through Company A. Because Person A owns more than 50% of Company A, they are Company A\'s UBO — so Company A\'s entire 20% stake is attributed to Person A. Direct + attributed indirect = 40% total, well past 25%.'
+  },
+  { title:'Scenario 4 — Two controlled companies',
+    q:'Is there any individual who holds 25% or more ownership of the Business Customer?',
+    path:[
+      {box:'Business Customer', cls:'customer'},
+      {pct:'20% via Co. A + 20% via Co. B', via:'= 40% total'},
+      {box:'Person A', cls:'person'}
+    ],
+    reason:'Person A holds no direct stake, but owns more than 50% of both Company A and Company B — making Person A the UBO of each. Their 20% and 20% stakes in the Business Customer are therefore both fully attributed to Person A, totalling 40%, past the 25% threshold.'
+  }
+];
+function renderScenarios(){
+  const wrap = document.getElementById('scn-list');
+  wrap.innerHTML = '';
+  SCENARIOS.forEach((s, idx)=>{
+    const card = document.createElement('div');
+    card.className = 'scn-card';
+    const pathHtml = s.path.map(p=>{
+      if(p.box) return `<div class="op-box ${p.cls}">${p.box}</div>`;
+      return `<div class="op-link"><span class="pct">${p.pct}</span><span class="via">${p.via}</span>→</div>`;
+    }).join('');
+    card.innerHTML = `
+      <div class="scn-title">${s.title}</div>
+      <div class="scn-q">${s.q}</div>
+      <div class="ownership-path">${pathHtml}</div>
+      <button class="scn-toggle" data-idx="${idx}">Reveal reasoning</button>
+      <div class="scn-reason" id="scn-reason-${idx}">${s.reason}</div>
+    `;
+    wrap.appendChild(card);
+  });
+}
+document.getElementById('scn-list').addEventListener('click', e=>{
+  const btn = e.target.closest('.scn-toggle');
+  if(!btn) return;
+  const el = document.getElementById('scn-reason-'+btn.dataset.idx);
+  const show = !el.classList.contains('visible');
+  el.classList.toggle('visible', show);
+  btn.textContent = show ? 'Hide reasoning' : 'Reveal reasoning';
+});
+renderScenarios();
+</script>
+</body>
+</html>
