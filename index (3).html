@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Due Diligence — Australia (Business)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEAE0; --paper-dark:#E2DECD; --ink:#1B2129; --ink-soft:#565D6B; --ink-faint:#8A8B7E;
+    --stamp:#B23A2E; --stamp-dark:#8A2B21; --gold:#B8902E; --jade:#4C7A6B; --line:#C9C2AE; --card:#F7F4EA;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'Zen Kaku Gothic New',-apple-system,sans-serif; min-height:100vh; padding:28px 16px 60px; }
+  .doc{ max-width:880px; margin:0 auto; position:relative; border:1px solid var(--line); background:var(--card); padding:34px 32px 30px; }
+  .corner-tl,.corner-tr,.corner-bl,.corner-br{ position:absolute; width:20px;height:20px; border:2px solid var(--ink); opacity:.55; }
+  .corner-tl{ top:-1px;left:-1px; border-width:2px 0 0 2px; }
+  .corner-tr{ top:-1px;right:-1px; border-width:2px 2px 0 0; }
+  .corner-bl{ bottom:-1px;left:-1px; border-width:0 0 2px 2px; }
+  .corner-br{ bottom:-1px;right:-1px; border-width:0 2px 2px 0; }
+  header{ display:flex; align-items:flex-start; justify-content:space-between; gap:20px; border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:22px; }
+  .eyebrow{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:6px; }
+  h1{ font-family:'Shippori Mincho',serif; font-weight:800; font-size:30px; margin:0 0 6px; }
+  h1 .au{ color:var(--stamp); }
+  .sub{ font-size:13.5px; color:var(--ink-soft); max-width:54ch; line-height:1.5; }
+  .stamp{ width:74px; height:74px; flex:0 0 auto; }
+
+  nav.tabs{ display:flex; gap:6px; margin-bottom:22px; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  nav.tabs button{
+    font-family:'Zen Kaku Gothic New',sans-serif; font-weight:700; font-size:14px; background:transparent;
+    border:1px solid var(--line); border-bottom:none; color:var(--ink-soft); padding:10px 16px 9px;
+    cursor:pointer; border-radius:6px 6px 0 0; position:relative; top:1px; transition:.15s;
+  }
+  nav.tabs button.active{ background:var(--card); color:var(--ink); border-color:var(--line); border-bottom:1px solid var(--card); }
+  nav.tabs button:not(.active):hover{ color:var(--ink); }
+  .panel{ display:none; }
+  .panel.active{ display:block; animation:fade .25s ease; }
+  @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+  .hud{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--ink-soft); margin-bottom:16px; }
+  .hud .pill{ border:1px solid var(--line); background:var(--paper); padding:4px 10px; border-radius:20px; }
+  .btn{ font-family:'Zen Kaku Gothic New',sans-serif; font-weight:700; font-size:13px; border:1px solid var(--ink); background:var(--ink); color:var(--paper); padding:9px 16px; border-radius:5px; cursor:pointer; }
+  .btn:hover{ background:var(--stamp); border-color:var(--stamp); }
+  .btn.ghost{ background:transparent; color:var(--ink); }
+  .btn.ghost:hover{ background:var(--paper-dark); }
+  .btn:disabled{ opacity:.4; cursor:default; }
+
+  /* ---- ELIGIBILITY ---- */
+  .elig-instr{ font-size:14px; line-height:1.5; color:var(--ink-soft); background:var(--paper-dark); border-left:3px solid var(--stamp); padding:12px 14px; border-radius:4px; margin-bottom:18px; }
+  .elig-instr b{ color:var(--ink); }
+  .elig-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+  .elig-card{ border:1px solid var(--line); background:#fff; padding:14px 15px; border-radius:7px; cursor:pointer; transition:.15s; }
+  .elig-card .name{ font-weight:700; font-size:14px; }
+  .elig-card .abbr{ font-size:11.5px; color:var(--ink-soft); margin-top:2px; }
+  .elig-card:hover:not(.elig-locked){ border-color:var(--ink); }
+  .elig-card.elig-correct{ background:#EAF2EE; border-color:var(--jade); cursor:default; }
+  .elig-card.elig-correct .name{ color:#295144; }
+  .elig-card.elig-wrong{ background:#F7E9E7; border-color:var(--stamp); animation:shake .3s; }
+  .elig-card.elig-wrong .name{ color:var(--stamp-dark); }
+  @keyframes shake{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-4px);} 75%{transform:translateX(4px);} }
+  .elig-why{ font-size:11.5px; color:#295144; margin-top:6px; line-height:1.4; display:none; }
+  .elig-card.elig-correct .elig-why{ display:block; }
+  .elig-summary{ margin-top:18px; padding:16px; border:1px solid var(--gold); border-radius:8px; background:#FBF6E9; display:none; }
+  .elig-summary h3{ font-family:'Shippori Mincho',serif; margin:0 0 8px; font-size:17px; }
+  .elig-summary ul{ margin:6px 0 0; padding-left:18px; font-size:13px; line-height:1.6; }
+  .callout{ margin-top:22px; border:1px solid var(--line); border-left:3px solid var(--gold); background:var(--paper); border-radius:6px; padding:14px 16px; }
+  .callout .tag{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+  .callout .ttl{ font-weight:700; font-size:14px; margin-bottom:6px; }
+  .callout p{ font-size:13px; color:var(--ink-soft); line-height:1.55; margin:0 0 8px; }
+  .callout p:last-child{ margin-bottom:0; }
+
+  /* ---- TRUE/FALSE ---- */
+  .tf-progress{ height:5px; background:var(--paper-dark); border-radius:4px; overflow:hidden; margin-bottom:18px; }
+  .tf-progress > div{ height:100%; background:var(--gold); transition:width .2s; }
+  .tf-card{ border:1px solid var(--line); background:var(--paper); border-radius:9px; padding:22px 22px 20px; }
+  .tf-qnum{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-faint); letter-spacing:.1em; margin-bottom:10px; }
+  .tf-statement{ font-size:16px; line-height:1.5; margin-bottom:20px; }
+  .tf-choices{ display:flex; gap:12px; margin-bottom:6px; }
+  .tf-choices button{
+    flex:1; font-family:'Zen Kaku Gothic New',sans-serif; font-weight:800; font-size:15px;
+    padding:13px 0; border-radius:7px; border:1px solid var(--line); background:#fff; cursor:pointer; transition:.12s;
+  }
+  .tf-choices button:hover:not(:disabled){ border-color:var(--ink); }
+  .tf-choices button:disabled{ cursor:default; }
+  .tf-choices button.pick-correct{ background:#EAF2EE; border-color:var(--jade); color:#295144; }
+  .tf-choices button.pick-incorrect{ background:#F7E9E7; border-color:var(--stamp); color:var(--stamp-dark); }
+  .tf-explain{ display:none; margin-top:16px; font-size:13px; line-height:1.6; color:var(--ink-soft); background:#fff; border-left:3px solid var(--gold); padding:12px 14px; border-radius:4px; }
+  .tf-explain.visible{ display:block; }
+  .tf-explain b{ color:var(--ink); }
+  .tf-explain a{ color:var(--stamp-dark); }
+  .tf-footer{ display:flex; justify-content:space-between; align-items:center; margin-top:18px; }
+  .tf-done{ text-align:center; padding:30px 10px; }
+  .tf-done .score{ font-family:'Shippori Mincho',serif; font-size:34px; margin-bottom:6px; }
+
+  /* ---- NUMBERS (ACN / ABN / ARBN) ---- */
+  .num-instr{ font-size:14px; line-height:1.5; color:var(--ink-soft); background:var(--paper-dark); border-left:3px solid var(--stamp); padding:12px 14px; border-radius:4px; margin-bottom:20px; }
+  .num-instr b{ color:var(--ink); }
+  .ball-row{ display:flex; gap:22px; justify-content:center; flex-wrap:wrap; margin-bottom:26px; }
+  .ball{
+    width:158px; min-height:158px; border-radius:50%; border:2px solid var(--line); background:var(--paper-dark);
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:18px 12px 14px;
+    text-align:center; cursor:pointer; transition:.15s;
+  }
+  .ball:hover{ border-color:var(--ink); }
+  .ball.hover-target{ border-color:var(--gold); background:#FBF6E9; }
+  .ball.wrong-flash{ animation:shake .3s; border-color:var(--stamp); }
+  .ball .acr{ font-family:'Shippori Mincho',serif; font-weight:800; font-size:22px; color:var(--ink); }
+  .ball .tags{ margin-top:8px; display:flex; flex-direction:column; gap:4px; width:100%; }
+  .ball .tag-chip{ font-size:9.5px; background:#fff; border:1px solid var(--jade); color:#295144; padding:2px 6px; border-radius:10px; line-height:1.35; }
+  .chip-pool{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; padding:18px; border:1px dashed var(--line); border-radius:8px; background:var(--paper); min-height:52px; }
+  .chip{ border:1px solid var(--line); background:#fff; padding:8px 13px; border-radius:20px; font-size:12.5px; font-weight:600; cursor:pointer; transition:.12s; }
+  .chip:hover{ border-color:var(--ink); }
+  .chip.selected{ border-color:var(--gold); background:#FBF6E9; box-shadow:0 0 0 2px rgba(184,144,46,0.15); }
+  .num-summary{ margin-top:20px; padding:16px; border:1px solid var(--gold); border-radius:8px; background:#FBF6E9; display:none; text-align:center; }
+  .num-summary h3{ font-family:'Shippori Mincho',serif; margin:0 0 4px; font-size:17px; }
+  .num-summary p{ font-size:13px; color:var(--ink-soft); margin:4px 0 0; }
+
+  /* ---- UBO DOCUMENTS — SCALE & BASKETS ---- */
+  .ubod-instr{ font-size:14px; line-height:1.5; color:var(--ink-soft); background:var(--paper-dark); border-left:3px solid var(--stamp); padding:12px 14px; border-radius:4px; margin-bottom:22px; }
+  .ubod-instr b{ color:var(--ink); }
+  .scale-wrap{ display:flex; flex-direction:column; align-items:center; margin-bottom:8px; }
+  .scale-pivot{ width:14px; height:14px; background:var(--ink); clip-path:polygon(50% 0,0 100%,100% 100%); margin-bottom:0; }
+  .scale-stand{ width:2px; height:22px; background:var(--ink-faint); }
+  .scale-beam{ width:100%; max-width:560px; height:2px; background:var(--ink); position:relative; margin-bottom:0; }
+  .scale-chains{ width:100%; max-width:560px; display:flex; justify-content:space-between; }
+  .scale-chain{ width:1px; height:26px; background:var(--ink-faint); }
+  .basket-row{ display:flex; gap:18px; justify-content:space-between; max-width:560px; margin:0 auto 22px; flex-wrap:wrap; }
+  .basket{
+    flex:1 1 260px; min-height:180px; border:1px solid var(--line); border-radius:0 0 14px 14px; background:var(--paper-dark);
+    padding:0 14px 14px; cursor:pointer; transition:.15s; position:relative; border-top:none;
+  }
+  .basket::before{ content:""; display:block; height:6px; margin:0 -14px 10px; border-radius:2px 2px 0 0; }
+  .basket.accepted{ border-color:var(--jade); }
+  .basket.accepted::before{ background:var(--jade); }
+  .basket.rejected{ border-color:var(--stamp); }
+  .basket.rejected::before{ background:var(--stamp); }
+  .basket:hover{ background:var(--paper); }
+  .basket.wrong-flash{ animation:shake .3s; }
+  .basket-head{ display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+  .basket-seal{ width:34px; height:34px; flex:0 0 auto; }
+  .basket-head .lbl{ font-family:'Shippori Mincho',serif; font-weight:800; font-size:15px; }
+  .basket.accepted .lbl{ color:#295144; }
+  .basket.rejected .lbl{ color:var(--stamp-dark); }
+  .basket .leaves{ display:flex; flex-direction:column; gap:5px; }
+  .basket .leaf-chip{ font-size:10.5px; background:#fff; border:1px solid var(--line); padding:4px 8px; border-radius:5px; line-height:1.35; }
+  .basket.accepted .leaf-chip{ border-color:var(--jade); color:#295144; }
+  .basket.rejected .leaf-chip{ border-color:var(--stamp); color:var(--stamp-dark); }
+  .doc-pool{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; padding:18px; border:1px dashed var(--line); border-radius:8px; background:var(--paper); min-height:52px; }
+  .doc-chip{ border:1px solid var(--line); background:#fff; padding:8px 13px; border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; transition:.12s; max-width:260px; line-height:1.4; }
+  .doc-chip:hover{ border-color:var(--ink); }
+  .doc-chip.selected{ border-color:var(--gold); background:#FBF6E9; box-shadow:0 0 0 2px rgba(184,144,46,0.15); }
+  .ubod-summary{ margin-top:20px; padding:16px; border:1px solid var(--gold); border-radius:8px; background:#FBF6E9; display:none; text-align:center; }
+  .ubod-summary h3{ font-family:'Shippori Mincho',serif; margin:0 0 4px; font-size:17px; }
+  .ubod-summary p{ font-size:13px; color:var(--ink-soft); margin:4px 0 0; }
+
+  /* ---- WHEN TO ASK — FLIP CARDS + SELECT ALL ---- */
+  .wa-instr{ font-size:14px; line-height:1.5; color:var(--ink-soft); background:var(--paper-dark); border-left:3px solid var(--stamp); padding:12px 14px; border-radius:4px; margin-bottom:20px; }
+  .wa-instr b{ color:var(--ink); }
+  .wa-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:18px; }
+  .wa-tile{ display:flex; flex-direction:column; gap:8px; }
+  .wa-card{ height:190px; perspective:1100px; cursor:pointer; }
+  .wa-card-inner{ position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .5s cubic-bezier(.4,.2,.2,1); border-radius:10px; }
+  .wa-card.flipped .wa-card-inner{ transform:rotateY(180deg); }
+  .wa-face{ position:absolute; inset:0; backface-visibility:hidden; border:1px solid var(--line); border-radius:10px; padding:16px; display:flex; flex-direction:column; justify-content:center; background:#fff; transition:box-shadow .15s; }
+  .wa-front{ background:var(--paper); }
+  .wa-back{ transform:rotateY(180deg); background:#fff; text-align:left; overflow-y:auto; }
+  .wa-tag{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--ink-faint); letter-spacing:.1em; text-transform:uppercase; margin-bottom:8px; }
+  .wa-big{ font-family:'Shippori Mincho',serif; font-size:16px; line-height:1.35; }
+  .wa-back ul{ margin:0; padding-left:16px; font-size:12px; line-height:1.55; color:var(--ink-soft); }
+  .wa-select{ font-family:'Zen Kaku Gothic New',sans-serif; font-weight:700; font-size:12px; border:1px solid var(--line); background:#fff; color:var(--ink-soft); padding:8px 10px; border-radius:6px; cursor:pointer; transition:.12s; }
+  .wa-select:hover{ border-color:var(--ink); }
+  .wa-select.selected{ background:var(--paper-dark); border-color:var(--ink); color:var(--ink); }
+  .wa-select:disabled{ cursor:default; opacity:.7; }
+  .wa-tile.correct .wa-card{ box-shadow:0 0 0 2px var(--jade); border-radius:10px; }
+  .wa-tile.wrong .wa-card{ box-shadow:0 0 0 2px var(--stamp); border-radius:10px; }
+  .wa-verdict{ font-size:11px; line-height:1.4; padding:6px 8px; border-radius:4px; display:none; }
+  .wa-tile.checked .wa-verdict{ display:block; }
+  .wa-tile.correct .wa-verdict{ background:#EAF2EE; color:#295144; border-left:3px solid var(--jade); }
+  .wa-tile.wrong .wa-verdict{ background:#F7E9E7; color:var(--stamp-dark); border-left:3px solid var(--stamp); }
+  .wa-result{ margin-top:6px; padding:14px 16px; border:1px solid var(--gold); border-radius:8px; background:#FBF6E9; display:none; font-size:13.5px; text-align:center; font-weight:700; }
+
+  /* ---- OPERATION NESTING DOLL ---- */
+  .nd-doll-wrap{ position:relative; width:380px; height:380px; max-width:100%; margin:0 auto 26px; }
+  .doll-ring{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:50%;
+    border:2px solid var(--line); background:var(--paper-dark); transition:.3s;
+  }
+  .doll-ring .r-label{
+    position:absolute; top:14px; left:50%; transform:translateX(-50%); width:78%; text-align:center;
+    font-family:'Shippori Mincho',serif; font-weight:800; font-size:11.5px; line-height:1.3; color:var(--ink);
+  }
+  .doll-ring.active{ border-color:var(--gold); box-shadow:0 0 0 3px rgba(184,144,46,0.18); cursor:pointer; animation:dollpulse 1.8s infinite; }
+  .doll-ring.core{ background:#FBF6E9; border-color:var(--jade); }
+  .doll-ring.core .r-label{ color:#295144; }
+  @keyframes dollpulse{ 0%,100%{ box-shadow:0 0 0 3px rgba(184,144,46,0.18); } 50%{ box-shadow:0 0 0 8px rgba(184,144,46,0.04); } }
+
+  .nd-panel{ border:1px solid var(--line); background:var(--paper); border-radius:9px; padding:20px 22px; }
+  .nd-eyebrow{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:4px; }
+  .nd-title{ font-family:'Shippori Mincho',serif; font-weight:800; font-size:19px; margin-bottom:2px; }
+  .nd-subtitle{ font-size:12.5px; color:var(--ink-soft); margin-bottom:14px; }
+  .nd-read{ font-size:13px; color:var(--ink-soft); line-height:1.55; background:#fff; border-left:3px solid var(--stamp); padding:10px 12px; border-radius:4px; margin-bottom:14px; }
+  table.nd-discovery{ width:100%; border-collapse:collapse; font-size:12.5px; margin-bottom:12px; }
+  table.nd-discovery td{ padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  table.nd-discovery td:first-child{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-faint); width:38%; }
+  table.nd-discovery tr.flagrow td{ color:var(--stamp-dark); font-weight:700; }
+  .nd-flag-note{ font-size:11.5px; color:var(--stamp-dark); background:#F7E9E7; border-left:3px solid var(--stamp); padding:8px 10px; border-radius:4px; margin-bottom:14px; }
+  .nd-question{ font-size:13.5px; font-weight:700; margin-bottom:10px; }
+  .nd-reveal-btn{ font-family:'Zen Kaku Gothic New',sans-serif; font-size:12.5px; font-weight:700; border:1px solid var(--ink); background:transparent; color:var(--ink); padding:7px 13px; border-radius:5px; cursor:pointer; }
+  .nd-answer{ display:none; margin-top:12px; font-size:13px; line-height:1.6; color:var(--ink-soft); background:#fff; border-left:3px solid var(--jade); padding:10px 12px; border-radius:4px; }
+  .nd-answer.visible{ display:block; }
+  .nd-next-wrap{ margin-top:16px; display:none; }
+  .nd-next-wrap.visible{ display:block; }
+
+  .nd-final{ margin-top:26px; }
+  .nd-flow{ display:flex; flex-direction:column; align-items:center; gap:0; margin:18px 0; }
+  .nd-flow-box{ border:1px solid var(--line); background:#fff; border-radius:8px; padding:12px 18px; text-align:center; width:100%; max-width:440px; }
+  .nd-flow-box .fb-name{ font-weight:800; font-size:14px; }
+  .nd-flow-box .fb-note{ font-size:11.5px; color:var(--ink-soft); margin-top:2px; }
+  .nd-flow-box.core{ border-color:var(--jade); background:#EAF2EE; }
+  .nd-flow-arrow{ font-size:18px; color:var(--ink-faint); margin:2px 0; }
+
+  footer.note{ margin-top:26px; padding-top:14px; border-top:1px solid var(--line); font-size:11.5px; color:var(--ink-faint); font-family:'JetBrains Mono',monospace; }
+  @media (max-width:600px){ .elig-grid{ grid-template-columns:1fr; } h1{ font-size:24px; } .tf-choices{ flex-direction:column; } .ball{ width:130px; min-height:130px; } .basket-row{ flex-direction:column; } .wa-grid{ grid-template-columns:1fr; } .nd-doll-wrap{ width:300px; height:300px; } }
+</style>
+</head>
+<body>
+<div class="doc">
+  <div class="corner-tl"></div><div class="corner-tr"></div><div class="corner-bl"></div><div class="corner-br"></div>
+  <header>
+    <div>
+      <div class="eyebrow">KYC ONBOARDING · AUSTRALIA · BUSINESS</div>
+      <h1>Due Diligence <span class="au">AU</span></h1>
+      <div class="sub">Business onboarding eligibility, policy true/false drills, and ACN / ABN / ARBN recognition — Australia Business Team.</div>
+    </div>
+    <svg class="stamp" viewBox="0 0 100 100">
+      <defs><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/></filter></defs>
+      <g filter="url(#rough)">
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#B23A2E" stroke-width="4"/>
+        <circle cx="50" cy="50" r="33" fill="none" stroke="#B23A2E" stroke-width="1.5"/>
+        <text x="50" y="47" text-anchor="middle" font-family="Zen Kaku Gothic New, sans-serif" font-size="13" fill="#B23A2E" font-weight="900">PASS</text>
+        <text x="50" y="63" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#B23A2E" letter-spacing="1">KYC · AU</text>
+      </g>
+    </svg>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="elig">Eligibility</button>
+    <button class="tab-btn" data-tab="tf">True / False</button>
+    <button class="tab-btn" data-tab="num">ACN · ABN · ARBN</button>
+    <button class="tab-btn" data-tab="ubod">UBO Documents</button>
+    <button class="tab-btn" data-tab="wa">When to Ask</button>
+    <button class="tab-btn" data-tab="nd">Nesting Doll</button>
+  </nav>
+
+  <!-- ELIGIBILITY -->
+  <section class="panel active" id="panel-elig">
+    <div class="hud">
+      <span class="pill">Found <b id="e-found">0</b>/4</span>
+      <span class="pill">Mistakes <b id="e-mistakes">0</b></span>
+      <button class="btn ghost" id="e-reset" style="margin-left:auto;">Reset</button>
+    </div>
+    <div class="elig-instr">Tap every business type Wise <b>cannot onboard</b> for Australia Business under current policy. There are <b>4</b> to find among the 13.</div>
+    <div class="elig-grid" id="e-grid"></div>
+    <div class="elig-summary" id="e-summary">
+      <h3>All 4 found — nice work</h3>
+      <p style="font-size:13px;color:var(--ink-soft);margin:0 0 6px;">Unsupported entity types in Australia (Business):</p>
+      <ul id="e-summary-restricted"></ul>
+      <p style="font-size:13px;color:var(--ink-soft);margin:12px 0 0;">Everything else on the board — Sole Trader, Partnership, Private Company, Public Company, Association &amp; Branch, Charity/NPO, Trust (general), Co-operative, and Government Entities — is onboardable by default, subject to the notes below.</p>
+    </div>
+    <div class="callout">
+      <div class="tag">Watch for this — general "Trust" vs specific unsupported trust structures</div>
+      <div class="ttl">Trust ≠ Superannuation Fund</div>
+      <p>"Trust" as a general legal type is onboardable. But Superannuation Funds, SMSFs, government-managed super funds, and other regulated trusts (e.g. approved deposit funds) are all specific trust structures that fall outside our supported scope — even though "Trust" itself sits on the supported list.</p>
+    </div>
+    <div class="callout">
+      <div class="tag">Charity / NPO — registration required</div>
+      <div class="ttl">ACNC registration is the gate</div>
+      <p>We only onboard charities registered with the ACNC. Deregistered or unregistered charities cannot be onboarded — this is an AUP violation under section 1.2.3.d.1: "Unregistered charities are not supported from any regions." If an Association receives donations, it must also be registered with ACNC.</p>
+    </div>
+    <div class="callout">
+      <div class="tag">Legal type correction</div>
+      <div class="ttl">Public Company Limited by Guarantee</div>
+      <p>Not a valid "Association" legal type during onboarding. If the entity is a Public Company Limited by Guarantee, change the entity type on the profile to Public Limited instead.</p>
+    </div>
+  </section>
+
+  <!-- TRUE/FALSE -->
+  <section class="panel" id="panel-tf">
+    <div class="hud">
+      <span class="pill">Q <b id="tf-idx">1</b>/10</span>
+      <span class="pill">Score <b id="tf-score">0</b></span>
+      <button class="btn ghost" id="tf-reset" style="margin-left:auto;">Restart</button>
+    </div>
+    <div class="tf-progress"><div id="tf-progressfill" style="width:10%"></div></div>
+    <div id="tf-body"></div>
+  </section>
+
+  <!-- NUMBERS -->
+  <section class="panel" id="panel-num">
+    <div class="hud">
+      <span class="pill">Sorted <b id="n-sorted">0</b>/9</span>
+      <span class="pill">Mistakes <b id="n-mistakes">0</b></span>
+      <button class="btn ghost" id="n-reset" style="margin-left:auto;">Reset</button>
+    </div>
+    <div class="num-instr">Tap a word below to select it, then tap the correct ball to tag it there. Each ball takes <b>3</b> tags: its full name, its digit count, and who it applies to. Wrong tag = "Pay attention!"</div>
+    <div class="ball-row" id="n-balls"></div>
+    <div class="chip-pool" id="n-pool"></div>
+    <div class="num-summary" id="n-summary">
+      <h3>All 9 tagged — nice work</h3>
+      <p>ACN: Australian Company Number, 9 digits, Australian registered public/private companies only.</p>
+      <p>ABN: Australian Business Number, 11 digits, Australian registered businesses (all types).</p>
+      <p>ARBN: Australian Registered Body Number, 9 digits, foreign businesses operating in Australia only.</p>
+    </div>
+  </section>
+
+  <!-- UBO DOCUMENTS -->
+  <section class="panel" id="panel-ubod">
+    <div class="hud">
+      <span class="pill">Sorted <b id="d-sorted">0</b>/20</span>
+      <span class="pill">Mistakes <b id="d-mistakes">0</b></span>
+      <button class="btn ghost" id="d-reset" style="margin-left:auto;">Reset</button>
+    </div>
+    <div class="ubod-instr">Tap a document below, then tap the basket it belongs on the scale — <b>Accepted</b> or <b>Not Accepted</b>. Wrong basket and the scale won't budge: <i>"Pay attention, you're in Australia."</i></div>
+
+    <div class="scale-wrap">
+      <div class="scale-stand"></div>
+      <div class="scale-pivot"></div>
+      <div class="scale-beam"></div>
+      <div class="scale-chains"><div class="scale-chain"></div><div class="scale-chain"></div></div>
+    </div>
+    <div class="basket-row" id="d-baskets">
+      <div class="basket accepted" data-id="accepted">
+        <div class="basket-head">
+          <svg class="basket-seal" viewBox="0 0 100 100">
+            <defs><filter id="roughA"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/></filter></defs>
+            <g filter="url(#roughA)">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#4C7A6B" stroke-width="5"/>
+              <text x="50" y="60" text-anchor="middle" font-family="Zen Kaku Gothic New, sans-serif" font-size="34" fill="#4C7A6B" font-weight="900">✓</text>
+            </g>
+          </svg>
+          <span class="lbl">Accepted</span>
+        </div>
+        <div class="leaves"></div>
+      </div>
+      <div class="basket rejected" data-id="rejected">
+        <div class="basket-head">
+          <svg class="basket-seal" viewBox="0 0 100 100">
+            <defs><filter id="roughB"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/></filter></defs>
+            <g filter="url(#roughB)">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#B23A2E" stroke-width="5"/>
+              <text x="50" y="60" text-anchor="middle" font-family="Zen Kaku Gothic New, sans-serif" font-size="34" fill="#B23A2E" font-weight="900">✕</text>
+            </g>
+          </svg>
+          <span class="lbl">Not Accepted</span>
+        </div>
+        <div class="leaves"></div>
+      </div>
+    </div>
+    <div class="doc-pool" id="d-pool"></div>
+    <div class="ubod-summary" id="d-summary">
+      <h3>All 20 sorted — nice work</h3>
+      <p>The scale balances when every document lands on the correct side. Review the baskets above for the full breakdown.</p>
+    </div>
+  </section>
+
+  <!-- WHEN TO ASK -->
+  <section class="panel" id="panel-wa">
+    <div class="wa-instr">Flip each card to review the detail, then <b>select every card describing a scenario where we DON'T ask for a UBO document</b>. Pay attention — check your answers when ready.</div>
+    <div class="wa-grid" id="wa-grid"></div>
+    <div style="display:flex; gap:10px; margin-bottom:10px;">
+      <button class="btn" id="wa-check">Check my answers</button>
+      <button class="btn ghost" id="wa-reset">Reset</button>
+    </div>
+    <div class="wa-result" id="wa-result"></div>
+  </section>
+
+  <!-- OPERATION NESTING DOLL -->
+  <section class="panel" id="panel-nd">
+    <div class="wa-instr">Operation Nesting Doll — peel back one corporate layer at a time until you reach the real humans at the core. Each layer will pulse when it's ready to open.</div>
+    <div style="text-align:right; margin-bottom:14px;">
+      <button class="btn ghost" id="nd-reset">Restart Operation</button>
+    </div>
+    <div class="nd-doll-wrap" id="nd-doll"></div>
+    <div class="nd-panel" id="nd-panel"></div>
+    <div class="nd-final" id="nd-final" style="display:none;"></div>
+  </section>
+
+  <footer class="note">Created by Tam</footer>
+</div>
+
+<script>
+let cachedVoice = null;
+function pickVoice(){
+  if(!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  if(!voices.length) return null;
+  // Prefer a confident, clear Australian voice; fall back gracefully.
+  const rules = [
+    v => /en-AU/i.test(v.lang) && /male/i.test(v.name),
+    v => /en-AU/i.test(v.lang) && /(Neural|Natural|Wavenet|Premium)/i.test(v.name),
+    v => /en-AU/i.test(v.lang),
+    v => /en-GB/i.test(v.lang) && /male/i.test(v.name),
+    v => /en-US/i.test(v.lang) && /male/i.test(v.name),
+    v => /^en/i.test(v.lang)
+  ];
+  for(const test of rules){
+    const match = voices.find(test);
+    if(match) return match;
+  }
+  return voices[0];
+}
+if('speechSynthesis' in window){
+  cachedVoice = pickVoice();
+  window.speechSynthesis.onvoiceschanged = ()=>{ cachedVoice = pickVoice(); };
+}
+function speakPhrase(text){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    const voice = cachedVoice || pickVoice();
+    if(voice){ u.voice = voice; u.lang = voice.lang; } else { u.lang = 'en-AU'; }
+    u.rate = 1; u.pitch = 0.92;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ---------------- ELIGIBILITY ---------------- */
+const ENTITIES = [
+  {id:'sole', name:'Sole Trader', abbr:''},
+  {id:'partnership', name:'Partnership', abbr:''},
+  {id:'pty', name:'Private Company', abbr:'PTY LTD'},
+  {id:'ltd', name:'Public Company', abbr:'LTD'},
+  {id:'assoc', name:'Association & Branch', abbr:'incl. other Incorporated / Unincorporated Entity'},
+  {id:'charity', name:'Charity / NPO', abbr:''},
+  {id:'trust', name:'Trust', abbr:'general legal type'},
+  {id:'coop', name:'Co-operative', abbr:''},
+  {id:'gov', name:'Government Entity', abbr:''},
+  {id:'sf', name:'Superannuation Fund / SMSF', abbr:'incl. Self-Managed Super Fund Trust'},
+  {id:'govsf', name:'Government-Managed Superannuation Fund', abbr:''},
+  {id:'ort', name:'Other Regulated Trust', abbr:'e.g. approved deposit fund'},
+  {id:'mis', name:'Managed Investment Scheme', abbr:'MIS'}
+];
+const RESTRICTED = {
+  sf:    'We do not onboard Superannuation Funds (SF) or Self-Managed Superannuation Fund Trusts (SMSF), even if registered in Australia.',
+  govsf: 'Government-managed superannuation funds sit outside our supported entity types. ⚑ confirm exact policy clause',
+  ort:   'Other regulated trusts — such as approved deposit funds or other superannuation funds — fall outside our supported entity types. ⚑ confirm exact policy clause',
+  mis:   'Managed Investment Schemes are regulated collective investment vehicles under ASIC and fall outside our onboarding scope — see ASIC guidance on Managed investment schemes. ⚑ confirm exact policy clause'
+};
+let eState = {};
+function initElig(){
+  eState = { found:new Set(), mistakes:0 };
+  document.getElementById('e-found').textContent='0';
+  document.getElementById('e-mistakes').textContent='0';
+  document.getElementById('e-summary').style.display='none';
+  document.getElementById('e-summary-restricted').innerHTML='';
+  const grid = document.getElementById('e-grid');
+  grid.innerHTML='';
+  shuffle(ENTITIES).forEach(ent=>{
+    const d = document.createElement('div');
+    d.className='elig-card';
+    d.dataset.id = ent.id;
+    d.innerHTML = `<span class="name">${ent.name}</span>${ent.abbr ? `<div class="abbr">${ent.abbr}</div>` : ''}<div class="elig-why"></div>`;
+    grid.appendChild(d);
+  });
+}
+document.getElementById('e-grid').addEventListener('click', e=>{
+  const card = e.target.closest('.elig-card');
+  if(!card || card.classList.contains('elig-locked')) return;
+  const id = card.dataset.id;
+  if(RESTRICTED[id]){
+    card.classList.add('elig-correct','elig-locked');
+    card.querySelector('.elig-why').textContent = RESTRICTED[id];
+    speakPhrase('Great job!');
+    eState.found.add(id);
+    document.getElementById('e-found').textContent = eState.found.size;
+    if(eState.found.size === 4){
+      document.querySelectorAll('.elig-card:not(.elig-correct)').forEach(c=>c.classList.add('elig-locked'));
+      const list = document.getElementById('e-summary-restricted');
+      Object.keys(RESTRICTED).forEach(rid=>{
+        const ent = ENTITIES.find(x=>x.id===rid);
+        const li = document.createElement('li');
+        li.innerHTML = `<b>${ent.name}</b> — ${RESTRICTED[rid]}`;
+        list.appendChild(li);
+      });
+      document.getElementById('e-summary').style.display='block';
+    }
+  } else {
+    card.classList.add('elig-wrong');
+    speakPhrase('Pay attention!');
+    eState.mistakes++;
+    document.getElementById('e-mistakes').textContent = eState.mistakes;
+    setTimeout(()=>card.classList.remove('elig-wrong'), 500);
+  }
+});
+document.getElementById('e-reset').addEventListener('click', initElig);
+initElig();
+
+/* ---------------- TRUE / FALSE ---------------- */
+const TF = [
+  { s:"Australian Charitable Trusts don't belong to the Australia Business (TS) Team.", a:true,
+    e:"Charitable trusts don't belong to the Australia Business Team — they belong to Offshore." },
+  { s:"We don't onboard charities registered with the ACNC.", a:false,
+    e:"We only onboard charities registered with the ACNC." },
+  { s:"An Association must not be registered even if it receives donations.", a:false,
+    e:"If an Association receives donations, it has to be registered with the ACNC." },
+  { s:"Specifically for Australia, we can onboard unregistered charities.", a:false,
+    e:"If a charity is deregistered in the charities registry, we cannot onboard them. Operating an unregistered charity is against our Acceptable Use Policy — AUP section 1.2.3.d.1: 'Unregistered charities are not supported from any regions.'" },
+  { s:"If a TS business category is chemicals, charity, or government services, escalate the case to EDD.", a:false,
+    e:"Only these TS business categories should be escalated to EDD: chemicals, holding companies, or government services." },
+  { s:"We allow onboarding a Public Company Limited by Guarantee under the Association legal type during onboarding.", a:false,
+    e:"If the entity type is Public Company Limited by Guarantee, change the entity type on the profile to Public Limited." },
+  { s:"We do not need a UBO document for Public Companies in Australia if they're listed.", a:true,
+    e:"If listed on the ASX Company Directory, we don't need a UBO document — their shareholder information is public." },
+  { s:"In fact, we do not need any document at all for Public Companies, due to their structure.", a:false,
+    e:"A Constitution document will always be required for Public Companies due to their structure." },
+  { s:"TS Analysts can onboard all trusts as long as they're registered in Australia.", a:false,
+    e:"We do not onboard Superannuation Funds (SF) or Self-Managed Superannuation Fund Trusts (SMSF), even if registered in Australia." },
+  { s:"An Australian ABN allows Sole Traders to operate more than one business, and Wise follows this ABN standard.", a:false,
+    e:"While a Sole Trader can legally operate more than one enterprise under one ABN, we can't support that format internally." }
+];
+let tfState = {};
+function initTF(){
+  tfState = { order: shuffle(TF.map((_,i)=>i)), idx:0, score:0, locked:false };
+  document.getElementById('tf-score').textContent='0';
+  renderTF();
+}
+function renderTF(){
+  document.getElementById('tf-idx').textContent = Math.min(tfState.idx+1, TF.length);
+  document.getElementById('tf-progressfill').style.width = Math.round(((tfState.idx)/TF.length)*100)+'%';
+  const body = document.getElementById('tf-body');
+  if(tfState.idx >= TF.length){
+    body.innerHTML = `<div class="tf-done"><div class="score">${tfState.score} / ${TF.length}</div><div style="color:var(--ink-soft);font-size:13.5px;">correct</div></div>`;
+    document.getElementById('tf-progressfill').style.width='100%';
+    return;
+  }
+  tfState.locked = false;
+  const q = TF[tfState.order[tfState.idx]];
+  body.innerHTML = `
+    <div class="tf-card">
+      <div class="tf-qnum">STATEMENT ${tfState.idx+1}</div>
+      <div class="tf-statement">${q.s}</div>
+      <div class="tf-choices">
+        <button data-v="true">TRUE</button>
+        <button data-v="false">FALSE</button>
+      </div>
+      <div class="tf-explain" id="tf-explain"><b>Explanation:</b> ${q.e}</div>
+      <div class="tf-footer">
+        <span></span>
+        <button class="btn" id="tf-next" style="display:none;">Next →</button>
+      </div>
+    </div>`;
+  document.querySelectorAll('.tf-choices button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      if(tfState.locked) return;
+      tfState.locked = true;
+      const chosen = b.dataset.v === 'true';
+      document.querySelectorAll('.tf-choices button').forEach(x=>{
+        const v = x.dataset.v === 'true';
+        if(v === q.a) x.classList.add('pick-correct');
+        else if(x === b) x.classList.add('pick-incorrect');
+        x.disabled = true;
+      });
+      if(chosen === q.a){ tfState.score++; speakPhrase('Great job!'); }
+      else { speakPhrase('Pay attention!'); }
+      document.getElementById('tf-score').textContent = tfState.score;
+      document.getElementById('tf-explain').classList.add('visible');
+      document.getElementById('tf-next').style.display='inline-block';
+    });
+  });
+  const nextBtn = document.getElementById('tf-next');
+  if(nextBtn) nextBtn.addEventListener('click', ()=>{ tfState.idx++; renderTF(); });
+}
+document.getElementById('tf-reset').addEventListener('click', initTF);
+initTF();
+
+/* ---------------- NUMBERS (ACN / ABN / ARBN) ---------------- */
+const BALLS = [
+  {id:'acn', label:'ACN'},
+  {id:'abn', label:'ABN'},
+  {id:'arbn', label:'ARBN'}
+];
+const CHIPS = [
+  {id:'c1', text:'Australian Company Number', accepts:['acn']},
+  {id:'c2', text:'Australian Business Number', accepts:['abn']},
+  {id:'c3', text:'Australian Registered Body Number', accepts:['arbn']},
+  {id:'c4', text:'9 digits', accepts:['acn','arbn']},
+  {id:'c5', text:'9 digits', accepts:['acn','arbn']},
+  {id:'c6', text:'11 digits', accepts:['abn']},
+  {id:'c7', text:'Australian registered public or private companies only', accepts:['acn']},
+  {id:'c8', text:'Australian registered businesses of all types', accepts:['abn']},
+  {id:'c9', text:'Foreign businesses operating in Australia only', accepts:['arbn']}
+];
+let nState = {};
+function initNum(){
+  nState = { placed:0, mistakes:0, selectedId:null, placedIds:new Set() };
+  document.getElementById('n-sorted').textContent='0';
+  document.getElementById('n-mistakes').textContent='0';
+  document.getElementById('n-summary').style.display='none';
+  const ballsWrap = document.getElementById('n-balls');
+  ballsWrap.innerHTML='';
+  BALLS.forEach(b=>{
+    const d = document.createElement('div');
+    d.className='ball';
+    d.dataset.id = b.id;
+    d.innerHTML = `<span class="acr">${b.label}</span><div class="tags"></div>`;
+    ballsWrap.appendChild(d);
+  });
+  const pool = document.getElementById('n-pool');
+  pool.innerHTML='';
+  shuffle(CHIPS).forEach(c=>{
+    const d = document.createElement('div');
+    d.className='chip';
+    d.dataset.id = c.id;
+    d.textContent = c.text;
+    pool.appendChild(d);
+  });
+}
+document.getElementById('n-pool').addEventListener('click', e=>{
+  const chip = e.target.closest('.chip');
+  if(!chip) return;
+  document.querySelectorAll('#n-pool .chip').forEach(c=>c.classList.remove('selected'));
+  if(nState.selectedId === chip.dataset.id){
+    nState.selectedId = null;
+  } else {
+    nState.selectedId = chip.dataset.id;
+    chip.classList.add('selected');
+  }
+});
+document.getElementById('n-balls').addEventListener('click', e=>{
+  const ball = e.target.closest('.ball');
+  if(!ball || !nState.selectedId) return;
+  const chip = CHIPS.find(c=>c.id===nState.selectedId);
+  const ballId = ball.dataset.id;
+  if(chip.accepts.includes(ballId)){
+    const chipEl = document.querySelector(`#n-pool .chip[data-id="${chip.id}"]`);
+    if(chipEl) chipEl.remove();
+    const tag = document.createElement('div');
+    tag.className='tag-chip';
+    tag.textContent = chip.text;
+    ball.querySelector('.tags').appendChild(tag);
+    nState.placedIds.add(chip.id);
+    nState.placed++;
+    document.getElementById('n-sorted').textContent = nState.placed;
+    speakPhrase('Great job!');
+    nState.selectedId = null;
+    if(nState.placed === CHIPS.length){
+      document.getElementById('n-summary').style.display='block';
+    }
+  } else {
+    ball.classList.add('wrong-flash');
+    speakPhrase('Pay attention!');
+    nState.mistakes++;
+    document.getElementById('n-mistakes').textContent = nState.mistakes;
+    setTimeout(()=>ball.classList.remove('wrong-flash'), 400);
+  }
+});
+document.getElementById('n-reset').addEventListener('click', initNum);
+initNum();
+
+/* ---------------- UBO DOCUMENTS — SCALE & BASKETS ---------------- */
+const UBO_DOCS = [
+  {id:'d1', text:'CreditorWatch Document (automatically or manually pulled extract)', accepts:'accepted'},
+  {id:'d2', text:'ASIC Company Extract (paid official registry extract)', accepts:'accepted'},
+  {id:'d3', text:'ASIC Company Statement', accepts:'accepted'},
+  {id:'d4', text:'ASIC Forms Manager', accepts:'accepted'},
+  {id:'d5', text:'Company Profile Document', accepts:'accepted'},
+  {id:'d6', text:'Company extract from an ASIC-approved information broker', accepts:'accepted'},
+  {id:'d7', text:'Share Transfer Forms or Share Certificates (incl. Register of Allocated Shares)', accepts:'accepted'},
+  {id:'d8', text:'Partnership Agreement / Deed', accepts:'accepted'},
+  {id:'d9', text:'Constitution Document', accepts:'accepted'},
+  {id:'d10', text:'Top 20 Shareholders List — non-charitable unlisted Public Limited Company', accepts:'accepted'},
+  {id:'d11', text:'Document uploaded with the wrong file purpose (not Business Certificate/Directors/UBOs)', accepts:'rejected'},
+  {id:'d12', text:'Unofficial company extract not from ASIC, CreditorWatch, or an ASIC-approved broker', accepts:'rejected'},
+  {id:'d13', text:'Unsigned Constitution with no ratifying meeting minutes', accepts:'rejected'},
+  {id:'d14', text:"Replaceable Rules claim with no signed director's declaration", accepts:'rejected'},
+  {id:'d15', text:'Constitution exemption claim with no required signed declaration', accepts:'rejected'},
+  {id:'d16', text:'LESH UBO document more than 3 months old during BRC', accepts:'rejected'},
+  {id:'d17', text:'ASIC statement more than 3 months old when a current document is required during BRC', accepts:'rejected'},
+  {id:'d18', text:'Top 20 Shareholders list for any entity other than a non-charitable unlisted Public Limited Company', accepts:'rejected'},
+  {id:'d19', text:'Document that does not identify beneficial owners or the ownership/control structure', accepts:'rejected'},
+  {id:'d20', text:"Minor's direct shareholding with no supporting guardian or trust documentation", accepts:'rejected'}
+];
+let dState = {};
+function initUbod(){
+  dState = { sorted:0, mistakes:0, selectedId:null };
+  document.getElementById('d-sorted').textContent='0';
+  document.getElementById('d-mistakes').textContent='0';
+  document.getElementById('d-summary').style.display='none';
+  document.querySelectorAll('#d-baskets .leaves').forEach(l=>l.innerHTML='');
+  const pool = document.getElementById('d-pool');
+  pool.innerHTML='';
+  shuffle(UBO_DOCS).forEach(doc=>{
+    const d = document.createElement('div');
+    d.className='doc-chip';
+    d.dataset.id = doc.id;
+    d.textContent = doc.text;
+    pool.appendChild(d);
+  });
+}
+document.getElementById('d-pool').addEventListener('click', e=>{
+  const chip = e.target.closest('.doc-chip');
+  if(!chip) return;
+  document.querySelectorAll('#d-pool .doc-chip').forEach(c=>c.classList.remove('selected'));
+  if(dState.selectedId === chip.dataset.id){
+    dState.selectedId = null;
+  } else {
+    dState.selectedId = chip.dataset.id;
+    chip.classList.add('selected');
+  }
+});
+document.getElementById('d-baskets').addEventListener('click', e=>{
+  const basket = e.target.closest('.basket');
+  if(!basket || !dState.selectedId) return;
+  const doc = UBO_DOCS.find(x=>x.id===dState.selectedId);
+  const basketId = basket.dataset.id;
+  if(doc.accepts === basketId){
+    const chipEl = document.querySelector(`#d-pool .doc-chip[data-id="${doc.id}"]`);
+    if(chipEl) chipEl.remove();
+    const leaf = document.createElement('div');
+    leaf.className='leaf-chip';
+    leaf.textContent = doc.text;
+    basket.querySelector('.leaves').appendChild(leaf);
+    dState.sorted++;
+    document.getElementById('d-sorted').textContent = dState.sorted;
+    speakPhrase('Great job!');
+    dState.selectedId = null;
+    if(dState.sorted === UBO_DOCS.length){
+      document.getElementById('d-summary').style.display='block';
+    }
+  } else {
+    basket.classList.add('wrong-flash');
+    speakPhrase("Pay attention, you're in Australia.");
+    dState.mistakes++;
+    document.getElementById('d-mistakes').textContent = dState.mistakes;
+    setTimeout(()=>basket.classList.remove('wrong-flash'), 400);
+  }
+});
+document.getElementById('d-reset').addEventListener('click', initUbod);
+initUbod();
+
+/* ---------------- WHEN TO ASK — FLIP CARDS + SELECT ALL ---------------- */
+const WA_ITEMS = [
+  { id:'w1', front:'Triggered Traffic Lights & Entitlements',
+    back:['BUSINESS_SHAREHOLDERS_CHECK traffic light is 🔴 red.','AU_BUSINESS_ULTIMATE_BENEFICIAL_OWNER_LIST_HIGH_RISK entitlement is triggered.'],
+    dontAsk:false },
+  { id:'w2', front:'Standard Company Onboarding',
+    back:['For all private (Pty Ltd) and public limited companies.','A CreditorWatch extract or ASIC statement/extract is required.'],
+    dontAsk:false },
+  { id:'w3', front:'Registry Outages & Missing Extracts',
+    back:['When the automated CreditorWatch extract is missing or unavailable due to ASIC maintenance/outages.','Request an ASIC statement or UBO document directly from the customer.'],
+    dontAsk:false },
+  { id:'w4', front:'Business Refresh Cycle — Standard Trigger',
+    back:['When performing a BRC for private or public limited companies — unless an ASIC statement issued within the last 3 months is already on file.','For Legal Entity Shareholders (LESHs), if the LESH UBO document on file is older than 3 months.'],
+    dontAsk:false },
+  { id:'w5', front:'Non-Ordinary (Non-ORD) Shares Present',
+    back:['When non-ORD shares are present on the profile.','A Constitution document (or declaration, if exempt) is needed to determine beneficial ownership.'],
+    dontAsk:false },
+  { id:'w6', front:'Corporate Trustees',
+    back:['If a trustee holding 25% or more of the business is a company.','A UBO document for that corporate trustee is required.'],
+    dontAsk:false },
+  { id:'w7', front:'Preferential Shareholder',
+    back:['If a trustee holding 25% or more of another business is an individual with less voting power.','The trustee is a natural person here, not a company — no UBO document is required for this scenario.'],
+    dontAsk:true },
+  { id:'w8', front:'Business Refresh Cycle — Statement Already Current',
+    back:['When performing a BRC for private or public limited companies.','An ASIC statement issued within the last 3 months is already on file — no new UBO document is required.'],
+    dontAsk:true }
+];
+let waState = {};
+function initWa(){
+  waState = { selected:new Set(), checked:false };
+  const grid = document.getElementById('wa-grid');
+  grid.innerHTML='';
+  WA_ITEMS.forEach(item=>{
+    const tile = document.createElement('div');
+    tile.className='wa-tile';
+    tile.dataset.id = item.id;
+    tile.innerHTML = `
+      <div class="wa-card">
+        <div class="wa-card-inner">
+          <div class="wa-face wa-front"><div class="wa-tag">Tap to reveal</div><div class="wa-big">${item.front}</div></div>
+          <div class="wa-face wa-back"><ul>${item.back.map(b=>'<li>'+b+'</li>').join('')}</ul></div>
+        </div>
+      </div>
+      <button class="wa-select" data-id="${item.id}">Select: we DON'T ask here</button>
+      <div class="wa-verdict"></div>`;
+    grid.appendChild(tile);
+  });
+  document.getElementById('wa-check').disabled = false;
+  document.getElementById('wa-result').style.display='none';
+}
+document.getElementById('wa-grid').addEventListener('click', e=>{
+  const selectBtn = e.target.closest('.wa-select');
+  if(selectBtn){
+    if(waState.checked) return;
+    const id = selectBtn.dataset.id;
+    if(waState.selected.has(id)){ waState.selected.delete(id); selectBtn.classList.remove('selected'); }
+    else { waState.selected.add(id); selectBtn.classList.add('selected'); }
+    return;
+  }
+  const card = e.target.closest('.wa-card');
+  if(card){ card.classList.toggle('flipped'); }
+});
+document.getElementById('wa-check').addEventListener('click', ()=>{
+  if(waState.checked) return;
+  waState.checked = true;
+  let allGood = true;
+  document.querySelectorAll('.wa-tile').forEach(tile=>{
+    const id = tile.dataset.id;
+    const item = WA_ITEMS.find(x=>x.id===id);
+    const isSel = waState.selected.has(id);
+    const verdict = tile.querySelector('.wa-verdict');
+    const selectBtn = tile.querySelector('.wa-select');
+    tile.classList.add('checked');
+    selectBtn.disabled = true;
+    if(item.dontAsk && isSel){
+      tile.classList.add('correct');
+      verdict.textContent = "Correct — we don't ask for a UBO document here.";
+    } else if(item.dontAsk && !isSel){
+      tile.classList.add('wrong'); allGood = false;
+      verdict.textContent = "Missed — this is actually an instance where we don't ask.";
+    } else if(!item.dontAsk && isSel){
+      tile.classList.add('wrong'); allGood = false;
+      verdict.textContent = 'Not quite — we do ask for a UBO document in this scenario.';
+    } else {
+      tile.classList.add('correct');
+      verdict.textContent = "Correct to leave unselected — we do ask for a UBO document here.";
+    }
+  });
+  const result = document.getElementById('wa-result');
+  result.style.display = 'block';
+  result.textContent = allGood ? 'All correct — nice work.' : 'Some misses — review the flagged cards above.';
+  speakPhrase(allGood ? 'Great job!' : 'Pay attention!');
+});
+document.getElementById('wa-reset').addEventListener('click', initWa);
+initWa();
+
+/* ---------------- OPERATION NESTING DOLL ---------------- */
+const ND_SIZES = [380, 300, 220, 150, 90];
+const ND_STEPS = [
+  { title:'Holdfast Properties Pty Ltd', subtitle:'The public face trying to onboard',
+    read:"The tool fetches a case for you to assess and start the onboarding process. A new corporate entity wants to onboard to send a high-value payment. The legal entity name on the onboarding application is Holdfast Properties Pty Ltd. You pull the ASIC Company Extract.",
+    discovery:[
+      {label:'Director listed', value:'Alpha Management Services Pty Ltd (a company)'},
+      {label:'Shareholder listed', value:'10,000 Ordinary Shares — held by Holdfast Properties Pty Ltd'},
+      {label:'Beneficially Held?', value:'NO', flag:true}
+    ],
+    question:"We have a corporate director and a shareholder who says they don't actually own the shares beneficially. Can we clear this customer for onboarding right now? What is our next move?",
+    answer:"No! 'Beneficially Held: NO' means this company is just a placeholder — a corporate trustee acting for a trust. The automated tool cannot auto-resolve this. We must pause the onboarding and request more information to get the Certified Trust Deed." },
+  { title:'The Holdfast Investment Trust', subtitle:'The core asset trust behind Holdfast Properties',
+    read:"You trigger a 'Need more info' request through vHub. The customer uploads a 60-page legal document — the Trust Deed for The Holdfast Investment Trust. You flip to the schedule at the back to unmask the real owners.",
+    discovery:[
+      {label:'Settlor', value:'Brendan Vance (Accountant) — paid a $10 settlement sum'},
+      {label:'Corporate Trustee', value:'Holdfast Properties Pty Ltd'},
+      {label:'Appointor (the boss)', value:'Beta Nominees Pty Ltd'},
+      {label:'Primary Beneficiary', value:'Beta Nominees Pty Ltd', flag:true}
+    ],
+    question:"The Appointor who can fire the trustee, and the Beneficiary who gets the money, are the exact same entity: Beta Nominees Pty Ltd. Have we found our natural persons yet? What do we do now?",
+    answer:"We're still trapped in corporate layers! 'Beta Nominees Pty Ltd' is another company, not a real human. We need to pause our review of this trust deed and pull a brand new ASIC extract for Beta Nominees Pty Ltd to see who controls it." },
+  { title:'Beta Nominees Pty Ltd', subtitle:"The crossed-wire — where control and ownership split",
+    read:"You pull the ASIC extract for Beta Nominees Pty Ltd. This is where the cobweb splits into a 'crossed-wire' of control and ownership.",
+    discovery:[
+      {label:'Director seat', value:'Sarah Jenkins — a living human'},
+      {label:'Shareholder seat', value:'100% owned by Omega Wealth Management Pty Ltd'},
+      {label:'Beneficially Held?', value:'NO', flag:true}
+    ],
+    question:"We finally found a human, Sarah Jenkins, sitting in the Director's chair. But the owner of the shares is another company, Omega Wealth, and it says 'NO' to being the beneficial owner. What does this tell us, and what are our parallel next steps?",
+    answer:"This means control and ownership are split. Sarah Jenkins has direct legal control over this layer as the natural director. But the economic ownership is held on behalf of a completely different second trust, because Omega Wealth holds the shares non-beneficially. We 'Need more info' again and demand the Trust Deed for this second trust!" },
+  { title:'The Jenkins Family Discretionary Trust', subtitle:'The second trust hiding behind Omega Wealth',
+    read:"The Account Holder replies that their lawyers are getting annoyed and want a fast onboarding — but you stand your ground for regulatory compliance. They finally upload a second document: the Trust Deed for The Jenkins Family Discretionary Trust.",
+    discovery:[
+      {label:'Corporate Trustee', value:'Omega Wealth Management Pty Ltd'},
+      {label:'Appointor / Guardian', value:'Sarah Jenkins and her business partner, Mark Jenkins'},
+      {label:'Beneficiaries', value:'Sarah Jenkins, Mark Jenkins, and their immediate family'}
+    ],
+    question:null, answer:null },
+  { title:'Sarah & Mark Jenkins', subtitle:'Ultimate natural persons — rock bottom of the doll', core:true,
+    read:"We have finally hit rock bottom. These are real, living humans who can sign contracts and profit from the funds.",
+    discovery:[
+      {label:'Role', value:'Ultimate Beneficiaries & Appointors of the entire structure'}
+    ],
+    question:null, answer:null }
+];
+let ndState = {};
+function initNd(){
+  ndState = { stage:0, revealed:false, showFinal:false };
+  document.getElementById('nd-final').style.display='none';
+  renderNd();
+}
+function renderNd(){
+  // doll rings
+  const doll = document.getElementById('nd-doll');
+  doll.innerHTML = '';
+  const visibleCount = ndState.showFinal ? ND_STEPS.length : ndState.stage + 1;
+  for(let i=0;i<visibleCount;i++){
+    const ring = document.createElement('div');
+    ring.className = 'doll-ring' + (ND_STEPS[i].core ? ' core' : '');
+    if(!ndState.showFinal && i === ndState.stage) ring.classList.add('active');
+    ring.style.width = ND_SIZES[i]+'px';
+    ring.style.height = ND_SIZES[i]+'px';
+    ring.style.zIndex = i+1;
+    ring.innerHTML = `<div class="r-label">${ND_STEPS[i].title}</div>`;
+    doll.appendChild(ring);
+  }
+
+  // panel
+  const panel = document.getElementById('nd-panel');
+  if(ndState.showFinal){
+    panel.style.display = 'none';
+  } else {
+    panel.style.display = 'block';
+    const step = ND_STEPS[ndState.stage];
+    const discoveryRows = step.discovery.map(d=>`<tr class="${d.flag?'flagrow':''}"><td>${d.label}</td><td>${d.value}</td></tr>`).join('');
+    const flagNote = step.discovery.some(d=>d.flag) ? `<div class="nd-flag-note">🚩 "Beneficially Held: NO" — this entity is a placeholder holding on behalf of someone else. Hard stop, keep digging.</div>` : '';
+    let qaHtml = '';
+    if(step.question){
+      qaHtml = `
+        <div class="nd-question">💬 ${step.question}</div>
+        <button class="nd-reveal-btn" id="nd-reveal">Reveal the analyst's answer</button>
+        <div class="nd-answer" id="nd-answer">${step.answer}</div>
+        <div class="nd-next-wrap" id="nd-next-wrap">
+          <button class="btn" id="nd-next">Open the next layer →</button>
+        </div>`;
+    } else {
+      const isLast = step.core;
+      qaHtml = `<div class="nd-next-wrap visible"><button class="btn" id="nd-next">${isLast ? 'See the Full Picture →' : 'Open the next layer →'}</button></div>`;
+    }
+    panel.innerHTML = `
+      <div class="nd-eyebrow">LAYER ${ndState.stage+1} OF ${ND_STEPS.length}</div>
+      <div class="nd-title">${step.title}</div>
+      <div class="nd-subtitle">${step.subtitle}</div>
+      <div class="nd-read">${step.read}</div>
+      <table class="nd-discovery">${discoveryRows}</table>
+      ${flagNote}
+      ${qaHtml}`;
+    const revealBtn = document.getElementById('nd-reveal');
+    if(revealBtn){
+      revealBtn.addEventListener('click', ()=>{
+        document.getElementById('nd-answer').classList.add('visible');
+        document.getElementById('nd-next-wrap').classList.add('visible');
+        revealBtn.disabled = true;
+        speakPhrase('Great job!');
+      });
+    }
+    const nextBtn = document.getElementById('nd-next');
+    if(nextBtn){
+      nextBtn.addEventListener('click', ()=>{
+        speakPhrase('Great job!');
+        if(step.core){
+          ndState.showFinal = true;
+          renderNd();
+          renderNdFinal();
+        } else {
+          ndState.stage++;
+          renderNd();
+        }
+      });
+    }
+  }
+}
+function renderNdFinal(){
+  const final = document.getElementById('nd-final');
+  final.style.display = 'block';
+  final.innerHTML = `
+    <div class="nd-eyebrow">FINAL ANALYSIS — CONNECTING THE WEB</div>
+    <div class="nd-title" style="margin-bottom:14px;">Let's trace the cobweb backwards</div>
+    <div class="nd-flow">
+      <div class="nd-flow-box core"><div class="fb-name">Sarah &amp; Mark Jenkins</div><div class="fb-note">Ultimate Natural Beneficiaries &amp; Appointors</div></div>
+      <div class="nd-flow-arrow">↓ owns shares non-beneficially via Omega Wealth</div>
+      <div class="nd-flow-box"><div class="fb-name">The Jenkins Family Discretionary Trust</div><div class="fb-note">Controls the layer below</div></div>
+      <div class="nd-flow-arrow">↓ acts as Appointor &amp; Beneficiary; Director seat: Sarah</div>
+      <div class="nd-flow-box"><div class="fb-name">Beta Nominees Pty Ltd</div><div class="fb-note">The crossed-wire company</div></div>
+      <div class="nd-flow-arrow">↓ Appointor &amp; Primary Beneficiary</div>
+      <div class="nd-flow-box"><div class="fb-name">The Holdfast Investment Trust</div><div class="fb-note">The core asset trust</div></div>
+      <div class="nd-flow-arrow">↓ Corporate Trustee</div>
+      <div class="nd-flow-box"><div class="fb-name">Holdfast Properties Pty Ltd</div><div class="fb-note">The public face trying to onboard on our platform</div></div>
+    </div>
+    <div class="callout">
+      <div class="tag">Core compliance takeaway 1</div>
+      <div class="ttl">Never stop at an entity name</div>
+      <p>In an online payments environment, a corporate name is just a shield. We must dig until we find the living, breathing humans who can sign contracts or profit from the funds.</p>
+    </div>
+    <div class="callout">
+      <div class="tag">Core compliance takeaway 2</div>
+      <div class="ttl">Follow the "NO"</div>
+      <p>Anytime ASIC says Beneficially Held: NO, it is a hard roadblock. It means the company on the screen is a ghost holding shares for an unmentioned trust.</p>
+    </div>
+    <div class="callout">
+      <div class="tag">Core compliance takeaway 3</div>
+      <div class="ttl">The Appointor is king</div>
+      <p>In Australian structures, directors can be swapped out easily. The Appointor holds the true ultimate control because they can destroy or replace the corporate trustee at any moment.</p>
+    </div>`;
+}
+document.getElementById('nd-reset').addEventListener('click', initNd);
+initNd();
+</script>
+</body>
+</html>
