@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Due Diligence — Australia (Trust)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEAE0; --paper-dark:#E2DECD; --ink:#1B2129; --ink-soft:#565D6B; --ink-faint:#8A8B7E;
+    --stamp:#B23A2E; --stamp-dark:#8A2B21; --gold:#B8902E; --jade:#4C7A6B; --line:#C9C2AE; --card:#F7F4EA;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'Zen Kaku Gothic New',-apple-system,sans-serif; min-height:100vh; padding:28px 16px 60px; }
+  .doc{ max-width:880px; margin:0 auto; position:relative; border:1px solid var(--line); background:var(--card); padding:34px 32px 30px; }
+  .corner-tl,.corner-tr,.corner-bl,.corner-br{ position:absolute; width:20px;height:20px; border:2px solid var(--ink); opacity:.55; }
+  .corner-tl{ top:-1px;left:-1px; border-width:2px 0 0 2px; }
+  .corner-tr{ top:-1px;right:-1px; border-width:2px 2px 0 0; }
+  .corner-bl{ bottom:-1px;left:-1px; border-width:0 0 2px 2px; }
+  .corner-br{ bottom:-1px;right:-1px; border-width:0 2px 2px 0; }
+  header{ display:flex; align-items:flex-start; justify-content:space-between; gap:20px; border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:22px; }
+  .eyebrow{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:6px; }
+  h1{ font-family:'Shippori Mincho',serif; font-weight:800; font-size:30px; margin:0 0 6px; }
+  h1 .au{ color:var(--stamp); }
+  .sub{ font-size:13.5px; color:var(--ink-soft); max-width:54ch; line-height:1.5; }
+  .stamp{ width:74px; height:74px; flex:0 0 auto; }
+
+  nav.tabs{ display:flex; gap:6px; margin-bottom:22px; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  nav.tabs button{
+    font-family:'Zen Kaku Gothic New',sans-serif; font-weight:700; font-size:14px; background:transparent;
+    border:1px solid var(--line); border-bottom:none; color:var(--ink-soft); padding:10px 16px 9px;
+    cursor:pointer; border-radius:6px 6px 0 0; position:relative; top:1px; transition:.15s;
+  }
+  nav.tabs button.active{ background:var(--card); color:var(--ink); border-color:var(--line); border-bottom:1px solid var(--card); }
+  nav.tabs button:not(.active):hover{ color:var(--ink); }
+  .panel{ display:none; }
+  .panel.active{ display:block; animation:fade .25s ease; }
+  @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+  .hud{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--ink-soft); margin-bottom:16px; }
+  .hud .pill{ border:1px solid var(--line); background:var(--paper); padding:4px 10px; border-radius:20px; }
+  .btn{ font-family:'Zen Kaku Gothic New',sans-serif; font-weight:700; font-size:13px; border:1px solid var(--ink); background:var(--ink); color:var(--paper); padding:9px 16px; border-radius:5px; cursor:pointer; }
+  .btn:hover{ background:var(--stamp); border-color:var(--stamp); }
+  .btn.ghost{ background:transparent; color:var(--ink); }
+  .btn.ghost:hover{ background:var(--paper-dark); }
+  .btn:disabled{ opacity:.4; cursor:default; }
+
+  /* ---- TRUE/FALSE ---- */
+  .tf-progress{ height:5px; background:var(--paper-dark); border-radius:4px; overflow:hidden; margin-bottom:18px; }
+  .tf-progress > div{ height:100%; background:var(--gold); transition:width .2s; }
+  .tf-card{ border:1px solid var(--line); background:var(--paper); border-radius:9px; padding:22px 22px 20px; }
+  .tf-qnum{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-faint); letter-spacing:.1em; margin-bottom:10px; }
+  .tf-statement{ font-size:16px; line-height:1.5; margin-bottom:20px; }
+  .tf-choices{ display:flex; gap:12px; margin-bottom:6px; }
+  .tf-choices button{
+    flex:1; font-family:'Zen Kaku Gothic New',sans-serif; font-weight:800; font-size:15px;
+    padding:13px 0; border-radius:7px; border:1px solid var(--line); background:#fff; cursor:pointer; transition:.12s;
+  }
+  .tf-choices button:hover:not(:disabled){ border-color:var(--ink); }
+  .tf-choices button:disabled{ cursor:default; }
+  .tf-choices button.pick-correct{ background:#EAF2EE; border-color:var(--jade); color:#295144; }
+  .tf-choices button.pick-incorrect{ background:#F7E9E7; border-color:var(--stamp); color:var(--stamp-dark); }
+  .tf-explain{ display:none; margin-top:16px; font-size:13px; line-height:1.6; color:var(--ink-soft); background:#fff; border-left:3px solid var(--gold); padding:12px 14px; border-radius:4px; }
+  .tf-explain.visible{ display:block; }
+  .tf-explain b{ color:var(--ink); }
+  .tf-footer{ display:flex; justify-content:space-between; align-items:center; margin-top:18px; }
+  .tf-done{ text-align:center; padding:30px 10px; }
+  .tf-done .score{ font-family:'Shippori Mincho',serif; font-size:34px; margin-bottom:6px; }
+
+  /* ---- ELIGIBILITY ---- */
+  .elig-instr{ font-size:14px; line-height:1.5; color:var(--ink-soft); background:var(--paper-dark); border-left:3px solid var(--stamp); padding:12px 14px; border-radius:4px; margin-bottom:18px; }
+  .elig-instr b{ color:var(--ink); }
+  .elig-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+  .elig-card{ border:1px solid var(--line); background:#fff; padding:14px 15px; border-radius:7px; cursor:pointer; transition:.15s; }
+  .elig-card .name{ font-weight:700; font-size:14px; }
+  .elig-card .abbr{ font-size:11.5px; color:var(--ink-soft); margin-top:2px; }
+  .elig-card:hover:not(.elig-locked){ border-color:var(--ink); }
+  .elig-card.elig-correct{ background:#EAF2EE; border-color:var(--jade); cursor:default; }
+  .elig-card.elig-correct .name{ color:#295144; }
+  .elig-card.elig-wrong{ background:#F7E9E7; border-color:var(--stamp); animation:shake .3s; }
+  .elig-card.elig-wrong .name{ color:var(--stamp-dark); }
+  @keyframes shake{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-4px);} 75%{transform:translateX(4px);} }
+  .elig-why{ font-size:11.5px; color:#295144; margin-top:6px; line-height:1.4; display:none; }
+  .elig-card.elig-correct .elig-why{ display:block; }
+  .elig-summary{ margin-top:18px; padding:16px; border:1px solid var(--gold); border-radius:8px; background:#FBF6E9; display:none; }
+  .elig-summary h3{ font-family:'Shippori Mincho',serif; margin:0 0 8px; font-size:17px; }
+  .elig-summary ul{ margin:6px 0 0; padding-left:18px; font-size:13px; line-height:1.6; }
+  .callout{ margin-top:22px; border:1px solid var(--line); border-left:3px solid var(--gold); background:var(--paper); border-radius:6px; padding:14px 16px; }
+  .callout .tag{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+  .callout .ttl{ font-weight:700; font-size:14px; margin-bottom:6px; }
+  .callout p{ font-size:13px; color:var(--ink-soft); line-height:1.55; margin:0 0 8px; }
+  .callout p:last-child{ margin-bottom:0; }
+
+  /* ---- TRUST PARTIES — PERSONAS ---- */
+  .persona-instr{ font-size:14px; line-height:1.5; color:var(--ink-soft); background:var(--paper-dark); border-left:3px solid var(--stamp); padding:12px 14px; border-radius:4px; margin-bottom:20px; }
+  .persona-instr b{ color:var(--ink); }
+  .persona-sections{ display:flex; flex-direction:column; gap:20px; }
+  .persona-section{ border:1px solid var(--line); border-radius:10px; padding:16px 18px; background:var(--paper); }
+  .persona-section-title{ font-family:'Shippori Mincho',serif; font-weight:800; font-size:15px; margin-bottom:14px; }
+  .persona-main{ margin-bottom:16px; display:flex; justify-content:center; }
+  .persona-children{ display:flex; gap:16px; flex-wrap:wrap; justify-content:center; padding-top:12px; border-top:1px dashed var(--line); }
+  .persona-card{ display:flex; flex-direction:column; align-items:center; text-align:center; width:160px; cursor:pointer; }
+  .persona-avatar{ width:64px; height:64px; border-radius:50%; background:#fff; border:2px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:28px; transition:.15s; margin-bottom:8px; }
+  .persona-card.main .persona-avatar{ width:84px; height:84px; font-size:36px; }
+  .persona-card:hover .persona-avatar{ border-color:var(--gold); box-shadow:0 0 0 3px rgba(184,144,46,0.15); }
+  .persona-card.speaking .persona-avatar{ border-color:var(--gold); animation:personaPulse 1s infinite; }
+  @keyframes personaPulse{ 0%,100%{box-shadow:0 0 0 3px rgba(184,144,46,0.18);} 50%{box-shadow:0 0 0 8px rgba(184,144,46,0.04);} }
+  .persona-name{ font-weight:700; font-size:12.5px; line-height:1.3; }
+  .persona-text{ display:none; font-size:11.5px; color:var(--ink-soft); line-height:1.5; margin-top:8px; background:#fff; border-left:3px solid var(--gold); padding:8px 9px; border-radius:4px; text-align:left; }
+  .persona-text.visible{ display:block; animation:fade .2s ease; }
+
+  /* ---- UBO DOCUMENTS — WORD SEARCH ---- */
+  .ws-instr{ font-size:14px; line-height:1.5; color:var(--ink-soft); background:var(--paper-dark); border-left:3px solid var(--stamp); padding:12px 14px; border-radius:4px; margin-bottom:18px; }
+  .ws-instr b{ color:var(--ink); }
+  .ws-wrap{ overflow-x:auto; margin-bottom:18px; }
+  .ws-grid{ display:grid; gap:2px; width:max-content; margin:0 auto; user-select:none; }
+  .ws-cell{
+    width:22px; height:22px; display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',monospace; font-weight:600; font-size:11px; color:var(--ink-soft);
+    background:#fff; border:1px solid var(--line); border-radius:3px; cursor:pointer; transition:.1s;
+  }
+  .ws-cell:hover{ border-color:var(--ink); color:var(--ink); }
+  .ws-cell.selecting{ background:#FBF6E9; border-color:var(--gold); color:var(--ink); }
+  .ws-cell.found{ background:#EAF2EE; border-color:var(--jade); color:#295144; cursor:default; }
+  .ws-cell.wrong{ background:#F7E9E7; border-color:var(--stamp); color:var(--stamp-dark); }
+  .ws-legend{ display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+  .ws-legend-item{ display:flex; align-items:center; gap:10px; font-size:13px; color:var(--ink-soft); padding:8px 12px; border:1px solid var(--line); border-radius:6px; background:#fff; }
+  .ws-legend-item .mark{ width:18px; height:18px; border-radius:50%; border:2px solid var(--line); flex:0 0 auto; display:flex; align-items:center; justify-content:center; font-size:11px; }
+  .ws-legend-item.done{ background:#EAF2EE; border-color:var(--jade); }
+  .ws-legend-item.done .mark{ background:var(--jade); border-color:var(--jade); color:#fff; }
+  .ws-legend-item.done span.lbl{ color:#295144; text-decoration:line-through; }
+  .ws-summary{ margin-top:16px; padding:16px; border:1px solid var(--gold); border-radius:8px; background:#FBF6E9; display:none; text-align:center; font-weight:700; }
+  @media (max-width:600px){ .ws-cell{ width:20px; height:20px; font-size:10.5px; } }
+
+  footer.note{ margin-top:26px; padding-top:14px; border-top:1px solid var(--line); font-size:11.5px; color:var(--ink-faint); font-family:'JetBrains Mono',monospace; }
+  @media (max-width:600px){ h1{ font-size:24px; } .tf-choices{ flex-direction:column; } .elig-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="doc">
+  <div class="corner-tl"></div><div class="corner-tr"></div><div class="corner-bl"></div><div class="corner-br"></div>
+  <header>
+    <div>
+      <div class="eyebrow">KYC ONBOARDING · AUSTRALIA · TRUST</div>
+      <h1>Due Diligence <span class="au">AU Trust</span></h1>
+      <div class="sub">Trust onboarding policy true/false drills — settlor, trustee, and beneficiary handling for the Australia Trust Team.</div>
+    </div>
+    <svg class="stamp" viewBox="0 0 100 100">
+      <defs><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/></filter></defs>
+      <g filter="url(#rough)">
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#B23A2E" stroke-width="4"/>
+        <circle cx="50" cy="50" r="33" fill="none" stroke="#B23A2E" stroke-width="1.5"/>
+        <text x="50" y="47" text-anchor="middle" font-family="Zen Kaku Gothic New, sans-serif" font-size="13" fill="#B23A2E" font-weight="900">PASS</text>
+        <text x="50" y="63" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#B23A2E" letter-spacing="1">KYC · AU-T</text>
+      </g>
+    </svg>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="elig">Eligibility</button>
+    <button class="tab-btn" data-tab="tf">True / False</button>
+    <button class="tab-btn" data-tab="parties">Trust Parties</button>
+    <button class="tab-btn" data-tab="ws">UBO Documents</button>
+  </nav>
+
+  <!-- ELIGIBILITY -->
+  <section class="panel active" id="panel-elig">
+    <div class="hud">
+      <span class="pill">Found <b id="e-found">0</b>/4</span>
+      <span class="pill">Mistakes <b id="e-mistakes">0</b></span>
+      <button class="btn ghost" id="e-reset" style="margin-left:auto;">Reset</button>
+    </div>
+    <div class="elig-instr">Tap every trust type Wise <b>cannot onboard</b> for Australia Trust under current policy. There are <b>4</b> to find among the 9.</div>
+    <div class="elig-grid" id="e-grid"></div>
+    <div class="elig-summary" id="e-summary">
+      <h3>All 4 found — nice work</h3>
+      <p style="font-size:13px;color:var(--ink-soft);margin:0 0 6px;">Restricted trust types (regardless of whether the trustee is an individual or a company):</p>
+      <ul id="e-summary-restricted"></ul>
+      <p style="font-size:13px;color:var(--ink-soft);margin:12px 0 0;">Everything else on the board — Discretionary Trading Trusts, Fixed Unit Trusts, Hybrid Trusts, Testamentary/Non-registered Trusts, and Charitable Trusts — is onboardable by default, subject to the notes below.</p>
+    </div>
+    <div class="callout">
+      <div class="tag">Trustee eligibility follows the trust type</div>
+      <div class="ttl">Not a standalone check</div>
+      <p>The eligibility of the trustee is tied to the type of trust they manage. We cannot onboard any trust — or trustee acting for it — that falls into a restricted category, regardless of whether that trustee is an individual or a company.</p>
+    </div>
+    <div class="callout">
+      <div class="tag">Trustee verification path</div>
+      <div class="ttl">Individual vs corporate trustee</div>
+      <p>Individual trustees follow sole trader verification requirements; corporate trustees follow limited company verification requirements. Either way, the underlying trust itself must still be a supported type.</p>
+    </div>
+    <div class="callout">
+      <div class="tag">Watch for this — supported, but not handled here</div>
+      <div class="ttl">Charitable Trusts escalate to Offshore</div>
+      <p>Charitable Trusts are an onboardable trust type — but they're escalated to the Offshore team rather than handled directly by TS analysts.</p>
+    </div>
+  </section>
+
+  <!-- TRUE/FALSE -->
+  <section class="panel" id="panel-tf">
+    <div class="hud">
+      <span class="pill">Q <b id="tf-idx">1</b>/12</span>
+      <span class="pill">Score <b id="tf-score">0</b></span>
+      <button class="btn ghost" id="tf-reset" style="margin-left:auto;">Restart</button>
+    </div>
+    <div class="tf-progress"><div id="tf-progressfill" style="width:8%"></div></div>
+    <div id="tf-body"></div>
+  </section>
+
+  <!-- TRUST PARTIES -->
+  <section class="panel" id="panel-parties">
+    <div class="persona-instr">Tap a persona to hear them introduce themselves — <b>every trust has these roles to identify and verify.</b></div>
+    <div class="persona-sections" id="persona-sections"></div>
+  </section>
+
+  <!-- UBO DOCUMENTS — WORD SEARCH -->
+  <section class="panel" id="panel-ws">
+    <div class="ws-instr">Find all <b>6</b> accepted primary UBO document types hidden in the grid. Tap the first letter, then the last letter, to select a word — it can run in any direction, including backwards and diagonally.</div>
+    <div class="ws-legend" id="ws-legend"></div>
+    <div class="ws-wrap"><div class="ws-grid" id="ws-grid"></div></div>
+    <div style="text-align:center;">
+      <button class="btn ghost" id="ws-reset">New Puzzle</button>
+    </div>
+    <div class="ws-summary" id="ws-summary">All 6 found — nice work.</div>
+    <div class="callout">
+      <div class="tag">Important processing note</div>
+      <div class="ttl">Set the file purpose correctly</div>
+      <p>When categorizing these uploads in the system, you must ensure the file purpose is explicitly set to Business Certificate/Directors/UBOs. If this is not set correctly, the system will not register the requirement as fulfilled, even if the document is accepted.</p>
+    </div>
+  </section>
+
+  <footer class="note">Created by Tam</footer>
+</div>
+
+<script>
+let cachedVoice = null;
+function pickVoice(){
+  if(!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  if(!voices.length) return null;
+  const rules = [
+    v => /en-AU/i.test(v.lang) && /male/i.test(v.name),
+    v => /en-AU/i.test(v.lang) && /(Neural|Natural|Wavenet|Premium)/i.test(v.name),
+    v => /en-AU/i.test(v.lang),
+    v => /en-GB/i.test(v.lang) && /male/i.test(v.name),
+    v => /en-US/i.test(v.lang) && /male/i.test(v.name),
+    v => /^en/i.test(v.lang)
+  ];
+  for(const test of rules){
+    const match = voices.find(test);
+    if(match) return match;
+  }
+  return voices[0];
+}
+if('speechSynthesis' in window){
+  cachedVoice = pickVoice();
+  window.speechSynthesis.onvoiceschanged = ()=>{ cachedVoice = pickVoice(); };
+}
+function speakPhrase(text){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    const voice = cachedVoice || pickVoice();
+    if(voice){ u.voice = voice; u.lang = voice.lang; } else { u.lang = 'en-AU'; }
+    u.rate = 1; u.pitch = 0.92;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ---------------- ELIGIBILITY ---------------- */
+const ENTITIES = [
+  {id:'disc', name:'Discretionary Trading Trust', abbr:'Family Trust'},
+  {id:'fixed', name:'Fixed Unit Trust', abbr:''},
+  {id:'hybrid', name:'Hybrid Trust', abbr:''},
+  {id:'test', name:'Testamentary / Non-registered Trust', abbr:''},
+  {id:'charity', name:'Charitable Trust', abbr:'escalate to Offshore'},
+  {id:'sf', name:'Superannuation Fund / SMSF', abbr:''},
+  {id:'govsf', name:'Government-Managed Superannuation Fund', abbr:''},
+  {id:'ort', name:'Other Regulated Trust', abbr:'e.g. Approved Deposit Fund'},
+  {id:'mis', name:'Managed Investment Scheme', abbr:'MIS'}
+];
+const RESTRICTED = {
+  sf:    'We do not onboard Superannuation Funds (SF) or Self-Managed Superannuation Fund Trusts (SMSF), regardless of whether the trustee is an individual or a company.',
+  govsf: 'Government-managed superannuation funds fall outside our supported trust types, regardless of trustee structure.',
+  ort:   'Other regulated trusts — such as Approved Deposit Funds — sit outside our supported trust types under current policy.',
+  mis:   'Managed Investment Schemes are regulated collective investment vehicles under ASIC and fall outside our trust onboarding scope.'
+};
+let eState = {};
+function initElig(){
+  eState = { found:new Set(), mistakes:0 };
+  document.getElementById('e-found').textContent='0';
+  document.getElementById('e-mistakes').textContent='0';
+  document.getElementById('e-summary').style.display='none';
+  document.getElementById('e-summary-restricted').innerHTML='';
+  const grid = document.getElementById('e-grid');
+  grid.innerHTML='';
+  shuffle(ENTITIES).forEach(ent=>{
+    const d = document.createElement('div');
+    d.className='elig-card';
+    d.dataset.id = ent.id;
+    d.innerHTML = `<span class="name">${ent.name}</span>${ent.abbr ? `<div class="abbr">${ent.abbr}</div>` : ''}<div class="elig-why"></div>`;
+    grid.appendChild(d);
+  });
+}
+document.getElementById('e-grid').addEventListener('click', e=>{
+  const card = e.target.closest('.elig-card');
+  if(!card || card.classList.contains('elig-locked')) return;
+  const id = card.dataset.id;
+  if(RESTRICTED[id]){
+    card.classList.add('elig-correct','elig-locked');
+    card.querySelector('.elig-why').textContent = RESTRICTED[id];
+    speakPhrase('Great job!');
+    eState.found.add(id);
+    document.getElementById('e-found').textContent = eState.found.size;
+    if(eState.found.size === 4){
+      document.querySelectorAll('.elig-card:not(.elig-correct)').forEach(c=>c.classList.add('elig-locked'));
+      const list = document.getElementById('e-summary-restricted');
+      Object.keys(RESTRICTED).forEach(rid=>{
+        const ent = ENTITIES.find(x=>x.id===rid);
+        const li = document.createElement('li');
+        li.innerHTML = `<b>${ent.name}</b> — ${RESTRICTED[rid]}`;
+        list.appendChild(li);
+      });
+      document.getElementById('e-summary').style.display='block';
+    }
+  } else {
+    card.classList.add('elig-wrong');
+    speakPhrase('Pay attention!');
+    eState.mistakes++;
+    document.getElementById('e-mistakes').textContent = eState.mistakes;
+    setTimeout(()=>card.classList.remove('elig-wrong'), 500);
+  }
+});
+document.getElementById('e-reset').addEventListener('click', initElig);
+initElig();
+
+/* ---------------- TRUE / FALSE ---------------- */
+const TF = [
+  { s:"When reviewing a Trust, it is normal to see and leave the registered business name as 'Everly Trustedone Pty' as long as you verify the Trust.", a:false,
+    e:"The registered business name must be in the name of the Trust." },
+  { s:"Always verify both the trustee and the trust to complete the verification process.", a:true,
+    e:"We need to verify both the trustee and the trust to complete the verification process." },
+  { s:"When reviewing a Trust, if the customer has added the trustee name to open the account, it is ok.", a:false,
+    e:"Always change the Company Type to Trust." },
+  { s:"If there is a Legal Entity Shareholder (LESH), only add the legal name to the LESH field.", a:false,
+    e:"For the LESH field: a registered address is also required." },
+  { s:"Your focus must be on the Trust — you don't have to review the Trustee business.", a:false,
+    e:"Review the business profile of a trustee just how you review any other business." },
+  { s:"Use the Trust's address when registering the Trustee company or individual's address.", a:false,
+    e:"When recording the Trust's address, use the corporate trustee's registered office address, or the individual trustee's address, instead." },
+  { s:"As far as you identify the Trustee company, you are not required to identify or verify their directors and UBOs — just the Trust.", a:false,
+    e:"Corporate Trustees follow the existing onboarding flow. Identification requirements still apply to their directors and UBOs." },
+  { s:"You may add a nominal settlor as a UBO at all times.", a:false,
+    e:"Nominal settlors should be added as Directors." },
+  { s:"A nominal settlor should be added as a UBO in the case of a corporate Trustee.", a:true,
+    e:"For Corporate Settlors — Nominal Settlors: add as LESH. Economic Settlors: add as LESH and request UBO documents; add the UBO(s) identified as Shareholder(s)." },
+  { s:"Add individual Trustees as a Shareholder.", a:true,
+    e:"Individual trustees: document the name of the trustee as a Shareholder." },
+  { s:"Corporate Trustees must be added as Legal Directors.", a:false,
+    e:"Corporate trustees: document the corporate trustee (company) as a Legal Entity Shareholder (LESH)." },
+  { s:"As a TS analyst, you can handle all charitable trusts from all the regions we support.", a:false,
+    e:"Charitable Trusts are escalated to Offshore." }
+];
+let tfState = {};
+function initTF(){
+  tfState = { order: shuffle(TF.map((_,i)=>i)), idx:0, score:0, locked:false };
+  document.getElementById('tf-score').textContent='0';
+  renderTF();
+}
+function renderTF(){
+  document.getElementById('tf-idx').textContent = Math.min(tfState.idx+1, TF.length);
+  document.getElementById('tf-progressfill').style.width = Math.round(((tfState.idx)/TF.length)*100)+'%';
+  const body = document.getElementById('tf-body');
+  if(tfState.idx >= TF.length){
+    body.innerHTML = `<div class="tf-done"><div class="score">${tfState.score} / ${TF.length}</div><div style="color:var(--ink-soft);font-size:13.5px;">correct</div></div>`;
+    document.getElementById('tf-progressfill').style.width='100%';
+    return;
+  }
+  tfState.locked = false;
+  const q = TF[tfState.order[tfState.idx]];
+  body.innerHTML = `
+    <div class="tf-card">
+      <div class="tf-qnum">STATEMENT ${tfState.idx+1}</div>
+      <div class="tf-statement">${q.s}</div>
+      <div class="tf-choices">
+        <button data-v="true">TRUE</button>
+        <button data-v="false">FALSE</button>
+      </div>
+      <div class="tf-explain" id="tf-explain"><b>Explanation:</b> ${q.e}</div>
+      <div class="tf-footer">
+        <span></span>
+        <button class="btn" id="tf-next" style="display:none;">Next →</button>
+      </div>
+    </div>`;
+  document.querySelectorAll('.tf-choices button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      if(tfState.locked) return;
+      tfState.locked = true;
+      const chosen = b.dataset.v === 'true';
+      document.querySelectorAll('.tf-choices button').forEach(x=>{
+        const v = x.dataset.v === 'true';
+        if(v === q.a) x.classList.add('pick-correct');
+        else if(x === b) x.classList.add('pick-incorrect');
+        x.disabled = true;
+      });
+      if(chosen === q.a){ tfState.score++; speakPhrase('Great job!'); }
+      else { speakPhrase('Pay attention!'); }
+      document.getElementById('tf-score').textContent = tfState.score;
+      document.getElementById('tf-explain').classList.add('visible');
+      document.getElementById('tf-next').style.display='inline-block';
+    });
+  });
+  const nextBtn = document.getElementById('tf-next');
+  if(nextBtn) nextBtn.addEventListener('click', ()=>{ tfState.idx++; renderTF(); });
+}
+document.getElementById('tf-reset').addEventListener('click', initTF);
+initTF();
+
+/* ---------------- TRUST PARTIES — PERSONAS ---------------- */
+function speakPersona(introText, detailText, onEnd){
+  try{
+    if(!('speechSynthesis' in window)){ if(onEnd) onEnd(); return; }
+    window.speechSynthesis.cancel();
+    const u1 = new SpeechSynthesisUtterance(introText);
+    const u2 = new SpeechSynthesisUtterance(detailText);
+    [u1,u2].forEach(u=>{
+      const voice = cachedVoice || pickVoice();
+      if(voice){ u.voice = voice; u.lang = voice.lang; } else { u.lang = 'en-AU'; }
+      u.rate = 1; u.pitch = 0.92;
+    });
+    u2.onend = ()=>{ if(onEnd) onEnd(); };
+    u2.onerror = ()=>{ if(onEnd) onEnd(); };
+    window.speechSynthesis.speak(u1);
+    window.speechSynthesis.speak(u2);
+  }catch(e){ if(onEnd) onEnd(); }
+}
+const PARTY_FAMILIES = [
+  { title:'The Trustee', icon:'🛡️',
+    main:{ name:'The Trustee', spoken:"I'm the Trustee.", icon:'🛡️', text:'You must always verify me.' },
+    children:[
+      { name:'Individual Trustee', spoken:"I'm the Individual Trustee.", icon:'🧍', text:'Verify me following the sole trader verification requirements.' },
+      { name:'Corporate Trustee', spoken:"I'm the Corporate Trustee.", icon:'🏢', text:"Verify me as a limited company — that means identifying my UBOs and verifying my directors." }
+    ] },
+  { title:'The Appointor',
+    main:{ name:'The Appointor (Principal / Protector / Guardian)', spoken:"I'm the Appointor.", icon:'👑', text:"Because I hold the power to hire or remove the trustee, I'm considered a beneficial owner and must be verified." },
+    children:[] },
+  { title:'The Settlor',
+    main:null,
+    children:[
+      { name:'Nominal Settlor', spoken:"I'm the Nominal Settlor.", icon:'🌱', text:'General rule: add me as a Director. But in corporate trustee or corporate settlor scenarios, add me as a Legal Entity Shareholder — LESH — instead. Always check the entity type and trust structure before categorizing me.' },
+      { name:'Economic Settlor', spoken:"I'm the Economic Settlor.", icon:'💰', text:'Add me as a LESH, and request UBO documents.' }
+    ] },
+  { title:'The Beneficiaries',
+    main:{ name:'The Beneficiaries', spoken:"We're the Beneficiaries.", icon:'🤝', text:'You must identify us — the primary or specified beneficiaries — as the ultimate natural persons who profit from the funds.' },
+    children:[] }
+];
+function makePersonaCard(p, isMain){
+  const card = document.createElement('div');
+  card.className = 'persona-card' + (isMain ? ' main' : '');
+  card.innerHTML = `
+    <div class="persona-avatar">${p.icon}</div>
+    <div class="persona-name">${p.name}</div>
+    <div class="persona-text">${p.text}</div>`;
+  card.addEventListener('click', ()=>{
+    document.querySelectorAll('.persona-card.speaking').forEach(c=>c.classList.remove('speaking'));
+    card.classList.add('speaking');
+    card.querySelector('.persona-text').classList.add('visible');
+    speakPersona(p.spoken, p.text, ()=>{ card.classList.remove('speaking'); });
+  });
+  return card;
+}
+function initParties(){
+  const wrap = document.getElementById('persona-sections');
+  wrap.innerHTML = '';
+  PARTY_FAMILIES.forEach(fam=>{
+    const section = document.createElement('div');
+    section.className = 'persona-section';
+    const title = document.createElement('div');
+    title.className = 'persona-section-title';
+    title.textContent = fam.title;
+    section.appendChild(title);
+    if(fam.main){
+      const mainWrap = document.createElement('div');
+      mainWrap.className = 'persona-main';
+      mainWrap.appendChild(makePersonaCard(fam.main, true));
+      section.appendChild(mainWrap);
+    }
+    if(fam.children.length){
+      const childWrap = document.createElement('div');
+      childWrap.className = 'persona-children';
+      fam.children.forEach(c=> childWrap.appendChild(makePersonaCard(c, false)));
+      section.appendChild(childWrap);
+    }
+    wrap.appendChild(section);
+  });
+}
+initParties();
+
+/* ---------------- UBO DOCUMENTS — WORD SEARCH ---------------- */
+const WS_SIZE = 22;
+const WS_WORDS = [
+  { word:'ASICCOMPANYEXTRACT', label:'ASIC Company Extract / Statement' },
+  { word:'CREDITORWATCH', label:'CreditorWatch Document' },
+  { word:'CONSTITUTION', label:'Constitution Document' },
+  { word:'SHARECERTIFICATE', label:'Share Transfer Forms or Share Certificates' },
+  { word:'PARTNERSHIPDEED', label:'Partnership Agreement / Deed' },
+  { word:'COMPANYPROFILE', label:'Company Profile / Extract from ASIC-Approved Brokers' }
+];
+const WS_DIRS = [[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0],[-1,-1],[-1,1]];
+function wsTryPlace(grid, word){
+  for(let attempt=0; attempt<400; attempt++){
+    const dir = WS_DIRS[Math.floor(Math.random()*WS_DIRS.length)];
+    const len = word.length;
+    let rMin=0, rMax=WS_SIZE-1, cMin=0, cMax=WS_SIZE-1;
+    if(dir[0]===1) rMax = WS_SIZE-1-(len-1);
+    else if(dir[0]===-1) rMin = (len-1);
+    if(dir[1]===1) cMax = WS_SIZE-1-(len-1);
+    else if(dir[1]===-1) cMin = (len-1);
+    if(rMin>rMax || cMin>cMax) continue;
+    const r0 = rMin + Math.floor(Math.random()*(rMax-rMin+1));
+    const c0 = cMin + Math.floor(Math.random()*(cMax-cMin+1));
+    let ok = true;
+    const cells = [];
+    for(let i=0;i<len;i++){
+      const r = r0+dir[0]*i, c = c0+dir[1]*i;
+      if(grid[r][c] && grid[r][c] !== word[i]){ ok=false; break; }
+      cells.push([r,c]);
+    }
+    if(ok){
+      cells.forEach(([r,c],i)=>{ grid[r][c] = word[i]; });
+      return cells;
+    }
+  }
+  return null;
+}
+function wsGenerate(){
+  const grid = Array.from({length:WS_SIZE}, ()=>Array(WS_SIZE).fill(null));
+  WS_WORDS.slice().sort((a,b)=>b.word.length-a.word.length).forEach(w=>{
+    wsTryPlace(grid, w.word);
+  });
+  for(let r=0;r<WS_SIZE;r++) for(let c=0;c<WS_SIZE;c++){
+    if(!grid[r][c]) grid[r][c] = String.fromCharCode(65+Math.floor(Math.random()*26));
+  }
+  return grid;
+}
+let wsState = {};
+function initWs(){
+  wsState = { grid: wsGenerate(), found:new Set(), first:null };
+  const gridEl = document.getElementById('ws-grid');
+  gridEl.style.gridTemplateColumns = `repeat(${WS_SIZE}, 22px)`;
+  gridEl.innerHTML = '';
+  for(let r=0;r<WS_SIZE;r++){
+    for(let c=0;c<WS_SIZE;c++){
+      const cell = document.createElement('div');
+      cell.className = 'ws-cell';
+      cell.dataset.r = r; cell.dataset.c = c;
+      cell.textContent = wsState.grid[r][c];
+      gridEl.appendChild(cell);
+    }
+  }
+  const legend = document.getElementById('ws-legend');
+  legend.innerHTML = '';
+  WS_WORDS.forEach(w=>{
+    const item = document.createElement('div');
+    item.className = 'ws-legend-item';
+    item.dataset.word = w.word;
+    item.innerHTML = `<span class="mark"></span><span class="lbl">${w.label}</span>`;
+    legend.appendChild(item);
+  });
+  document.getElementById('ws-summary').style.display = 'none';
+}
+function wsCellEl(r,c){
+  return document.querySelector(`.ws-cell[data-r="${r}"][data-c="${c}"]`);
+}
+document.getElementById('ws-grid').addEventListener('click', e=>{
+  const cell = e.target.closest('.ws-cell');
+  if(!cell || cell.classList.contains('found')) return;
+  const r = parseInt(cell.dataset.r,10), c = parseInt(cell.dataset.c,10);
+  if(!wsState.first){
+    wsState.first = {r,c};
+    cell.classList.add('selecting');
+    return;
+  }
+  const {r:r0, c:c0} = wsState.first;
+  if(r0===r && c0===c){
+    cell.classList.remove('selecting');
+    wsState.first = null;
+    return;
+  }
+  const dr = r - r0, dc = c - c0;
+  const steps = Math.max(Math.abs(dr), Math.abs(dc));
+  const validLine = (dr===0 || dc===0 || Math.abs(dr)===Math.abs(dc));
+  document.querySelectorAll('.ws-cell.selecting').forEach(el=>el.classList.remove('selecting'));
+  wsState.first = null;
+  if(!validLine){ return; }
+  const stepR = dr===0 ? 0 : dr/Math.abs(dr);
+  const stepC = dc===0 ? 0 : dc/Math.abs(dc);
+  const pathCells = [];
+  let letters = '';
+  for(let i=0;i<=steps;i++){
+    const rr = r0+stepR*i, cc = c0+stepC*i;
+    pathCells.push([rr,cc]);
+    letters += wsState.grid[rr][cc];
+  }
+  const reversed = letters.split('').reverse().join('');
+  const match = WS_WORDS.find(w => !wsState.found.has(w.word) && (w.word===letters || w.word===reversed));
+  if(match){
+    pathCells.forEach(([rr,cc])=>{ wsCellEl(rr,cc).classList.add('found'); });
+    wsState.found.add(match.word);
+    const item = document.querySelector(`.ws-legend-item[data-word="${match.word}"]`);
+    item.classList.add('done');
+    item.querySelector('.mark').textContent = '✓';
+    speakPhrase('Great job!');
+    if(wsState.found.size === WS_WORDS.length){
+      document.getElementById('ws-summary').style.display = 'block';
+    }
+  } else {
+    pathCells.forEach(([rr,cc])=>{
+      const el = wsCellEl(rr,cc);
+      el.classList.add('wrong');
+      setTimeout(()=>el.classList.remove('wrong'), 400);
+    });
+    speakPhrase('Pay attention!');
+  }
+});
+document.getElementById('ws-reset').addEventListener('click', initWs);
+initWs();
+</script>
+</body>
+</html>
