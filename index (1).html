@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Zealand — Business Verification Training</title>
+<style>
+
+  :root{
+    --bg:#05070d; --panel:#0d1220; --line:#1f2a4d;
+    --ink:#e7ecfb; --ink-soft:#9aa6c9; --ink-faint:#57628c;
+    --cyan:#38bdf8; --green:#22c55e;
+    --mono:'Courier New',Consolas,Monaco,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    background:radial-gradient(circle at 20% 0%, #101a33 0%, var(--bg) 55%);
+    color:var(--ink); font-family:var(--sans); min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .site-shell{ max-width:1180px; margin:0 auto; padding:24px 20px 60px; }
+  .site-header{ text-align:center; margin-bottom:24px; }
+  .site-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:10px; }
+  .site-title{ font-size:30px; font-weight:800; letter-spacing:-.02em; }
+  .site-title span{ background:linear-gradient(90deg,#38bdf8,#22c55e,#f59e0b); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  nav.tabs{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:28px; }
+  .tab-btn{ font-family:var(--sans); font-weight:700; font-size:12.5px; padding:10px 18px; border-radius:20px; border:1px solid var(--line); background:var(--panel); color:var(--ink-soft); cursor:pointer; transition:.15s; }
+  .tab-btn:hover{ border-color:var(--cyan); color:var(--ink); }
+  .tab-btn.active{ border-color:var(--cyan); background:rgba(56,189,248,0.12); color:#fff; box-shadow:0 0 16px -4px rgba(56,189,248,0.5); }
+  .panel{ display:none; }
+  .panel.active{ display:block; }
+  .site-footer{ text-align:center; margin-top:40px; font-family:var(--mono); font-size:11px; color:var(--ink-soft); }
+
+
+#eo-app:root{
+    --bg:#0a0e1a; --panel:#0f1526; --panel-2:#12192e; --line:#232c47;
+    --ink:#e2e8f5; --ink-soft:#9aa6c4; --ink-faint:#5c6690;
+    --emerald:#22c55e; --emerald-dim:#1a7a3f;
+    --red:#ef4444; --red-dim:#7a2323;
+    --amber:#f59e0b; --amber-dim:#8a5c0c;
+    --cyan:#22d3ee;
+    --mono:"Courier New",Consolas,Monaco,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+#eo-app{ width:100%; max-width:1100px; }
+#eo-app .hidden{ display:none !important; }
+#eo-app .eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--cyan); }
+#eo-app .glow-btn{ cursor:pointer; border:none; font-family:var(--sans); font-weight:700; border-radius:10px; transition:transform .12s ease, box-shadow .12s ease, background .12s ease; }
+#eo-app .glow-btn:hover{ transform:translateY(-2px); }
+#eo-app .glow-btn:active{ transform:translateY(0); }
+#eo-app #eo-screen-start{ text-align:center; padding:60px 20px; }
+#eo-app #eo-screen-start h1{ font-size:38px; font-weight:800; background:linear-gradient(90deg,#22d3ee,#22c55e 50%,#f59e0b); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:10px; letter-spacing:-.02em; }
+#eo-app #eo-screen-start .subtitle{ color:var(--ink-soft); font-size:15px; margin-bottom:36px; }
+#eo-app .rules-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:760px; margin:0 auto 40px; }
+#eo-app .rule-card{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px 16px; text-align:left; }
+#eo-app .rule-card .rc-title{ font-weight:700; font-size:13.5px; margin-bottom:6px; }
+#eo-app .rule-card.onboard{ border-color:var(--emerald-dim); }
+#eo-app .rule-card.onboard .rc-title{ color:var(--emerald); }
+#eo-app .rule-card.dont{ border-color:var(--red-dim); }
+#eo-app .rule-card.dont .rc-title{ color:var(--red); }
+#eo-app .rule-card.escalate{ border-color:var(--amber-dim); }
+#eo-app .rule-card.escalate .rc-title{ color:var(--amber); }
+#eo-app .rule-card .rc-body{ font-size:12px; color:var(--ink-soft); line-height:1.5; }
+#eo-app #eo-start-btn{ font-size:17px; padding:16px 44px; background:linear-gradient(90deg,#22c55e,#22d3ee); color:#04150a; box-shadow:0 8px 30px -8px rgba(34,197,94,0.5); }
+#eo-app #eo-start-btn:hover{ box-shadow:0 10px 36px -6px rgba(34,197,94,0.65); }
+#eo-app .hud{ display:flex; align-items:center; gap:16px; margin-bottom:18px; flex-wrap:wrap; }
+#eo-app .hud-stat{ background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:9px 16px; font-family:var(--mono); font-size:13px; }
+#eo-app .hud-stat b{ color:var(--ink); font-size:16px; }
+#eo-app .hud-stat .hs-label{ color:var(--ink-faint); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:2px; }
+#eo-app #eo-combo-badge{ margin-left:auto; font-family:var(--mono); font-weight:800; font-size:20px; padding:9px 20px; border-radius:10px; background:var(--panel); border:1px solid var(--line); color:var(--ink-faint); transition:all .2s ease; }
+#eo-app #eo-combo-badge.hot{ color:#fff; background:linear-gradient(90deg,#f59e0b,#ef4444); border-color:transparent; box-shadow:0 0 22px -4px rgba(245,158,11,0.7); animation:eo-comboPulse .5s ease-in-out infinite; }
+@keyframes eo-comboPulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.06); } }
+#eo-app .progress-track{ height:6px; background:var(--panel); border-radius:4px; overflow:hidden; margin-bottom:22px; border:1px solid var(--line); }
+#eo-app .progress-fill{ height:100%; background:linear-gradient(90deg,#22d3ee,#22c55e); transition:width .25s ease; }
+#eo-app .main-layout{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:22px; }
+@media (max-width:760px){#eo-app .main-layout{ grid-template-columns:1fr; }
+#eo-app .rules-grid{ grid-template-columns:1fr; }}
+#eo-app .inbox-panel{ background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:26px 26px 22px; position:relative; overflow:hidden; }
+#eo-app .inbox-panel::before{ content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#22d3ee,#22c55e,#f59e0b); }
+#eo-app .inbox-label{ font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:14px; }
+#eo-app .card-timer-track{ height:5px; background:#1a2138; border-radius:4px; overflow:hidden; margin-bottom:20px; }
+#eo-app .card-timer-fill{ height:100%; background:var(--emerald); transition:width 1s linear, background-color .3s ease; }
+#eo-app .card-timer-track.warn .card-timer-fill{ background:var(--amber); }
+#eo-app .card-timer-track.danger .card-timer-fill{ background:var(--red); }
+#eo-app .company-name{ font-size:26px; font-weight:800; margin-bottom:6px; letter-spacing:-.01em; }
+#eo-app .entity-type-tag{ display:inline-block; font-family:var(--mono); font-size:11px; color:var(--cyan); border:1px solid #204a56; background:#0c2530; padding:4px 10px; border-radius:20px; margin-bottom:18px; }
+#eo-app .snapshot-label{ font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:6px; }
+#eo-app .snapshot-text{ font-size:14.5px; line-height:1.65; color:var(--ink-soft); min-height:92px; }
+#eo-app .action-panel{ display:flex; flex-direction:column; gap:14px; }
+#eo-app .action-btn{ flex:1; min-height:90px; border-radius:14px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; font-size:16px; border:2px solid; }
+#eo-app .action-btn .ab-sub{ font-family:var(--mono); font-size:10.5px; font-weight:400; opacity:.75; letter-spacing:.04em; }
+#eo-app .action-btn.onboard{ background:rgba(34,197,94,0.08); border-color:var(--emerald); color:var(--emerald); }
+#eo-app .action-btn.onboard:hover:not(:disabled){ background:rgba(34,197,94,0.18); box-shadow:0 0 26px -6px rgba(34,197,94,0.55); }
+#eo-app .action-btn.dont{ background:rgba(239,68,68,0.08); border-color:var(--red); color:var(--red); }
+#eo-app .action-btn.dont:hover:not(:disabled){ background:rgba(239,68,68,0.18); box-shadow:0 0 26px -6px rgba(239,68,68,0.55); }
+#eo-app .action-btn.escalate{ background:rgba(245,158,11,0.08); border-color:var(--amber); color:var(--amber); }
+#eo-app .action-btn.escalate:hover:not(:disabled){ background:rgba(245,158,11,0.18); box-shadow:0 0 26px -6px rgba(245,158,11,0.55); }
+#eo-app .action-btn:disabled{ opacity:.35; cursor:default; transform:none !important; box-shadow:none !important; }
+#eo-app #eo-audit-overlay{ position:fixed; inset:0; background:rgba(5,7,14,0.82); display:flex; align-items:center; justify-content:center; z-index:100; padding:20px; }
+#eo-app #eo-audit-modal{ background:#160b0b; border:2px solid var(--red); border-radius:16px; padding:30px 32px; max-width:440px; text-align:center; animation:eo-auditFlash .5s ease-in-out 3; box-shadow:0 0 60px -10px rgba(239,68,68,0.6); }
+@keyframes eo-auditFlash{ 0%,100%{ border-color:var(--red); } 50%{ border-color:#ff9d9d; } }
+#eo-app #eo-audit-modal .am-title{ font-family:var(--mono); font-weight:800; font-size:19px; color:var(--red); letter-spacing:.05em; margin-bottom:14px; }
+#eo-app #eo-audit-modal .am-body{ font-size:14px; line-height:1.6; color:var(--ink); margin-bottom:10px; }
+#eo-app #eo-audit-modal .am-correct{ font-family:var(--mono); font-size:11.5px; color:var(--ink-faint); margin-bottom:20px; }
+#eo-app #eo-audit-modal .am-correct b{ color:var(--emerald); }
+#eo-app #eo-audit-continue{ background:var(--red); color:#fff; padding:11px 30px; font-size:14px; border-radius:9px; }
+#eo-app #eo-audit-continue:hover{ background:#ff5c5c; }
+#eo-app #eo-toast{ position:fixed; top:24px; left:50%; transform:translateX(-50%) translateY(-20px); background:var(--panel-2); border:1px solid var(--emerald); color:var(--emerald); font-family:var(--mono); font-weight:700; font-size:13px; padding:10px 20px; border-radius:10px; opacity:0; transition:all .25s ease; z-index:90; pointer-events:none; }
+#eo-app #eo-toast.visible{ opacity:1; transform:translateX(-50%) translateY(0); }
+#eo-app #eo-screen-review{ text-align:center; padding:40px 20px; }
+#eo-app #eo-screen-review h2{ font-family:var(--mono); font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px; }
+#eo-app #eo-review-rating{ font-size:26px; font-weight:800; margin-bottom:6px; }
+#eo-app #eo-review-score{ font-size:56px; font-weight:800; background:linear-gradient(90deg,#22d3ee,#22c55e); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:28px; }
+#eo-app .review-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:560px; margin:0 auto 34px; }
+#eo-app .review-stat{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; }
+#eo-app .review-stat .rs-num{ font-size:24px; font-weight:800; margin-bottom:2px; }
+#eo-app .review-stat .rs-label{ font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); }
+#eo-app #eo-restart-btn{ font-size:15px; padding:14px 36px; background:var(--panel); border:1px solid var(--line); color:var(--ink); }
+#eo-app #eo-restart-btn:hover{ border-color:var(--cyan); color:var(--cyan); }
+
+
+#gk-app:root{
+    --bg:#05070d; --panel:#0d1220; --panel-2:#101832; --line:#1f2a4d;
+    --ink:#e7ecfb; --ink-soft:#9aa6c9; --ink-faint:#57628c;
+    --green:#22c55e; --green-dim:#12401f;
+    --yellow:#eab308; --yellow-dim:#4a3a08;
+    --orange:#f97316; --orange-dim:#4a2408;
+    --red:#ef4444; --red-dim:#4a1414;
+    --cyan:#38bdf8;
+    --mono:"Courier New",Consolas,Monaco,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+#gk-app{ width:100%; max-width:1180px; }
+#gk-app .hidden{ display:none !important; }
+#gk-app .mono{ font-family:var(--mono); }
+#gk-app #gk-screen-boot{ text-align:center; padding:70px 20px; }
+#gk-app #gk-boot-lines{ font-family:var(--mono); font-size:13px; color:var(--green); text-align:left; max-width:420px; margin:0 auto 30px; min-height:110px; line-height:1.9; }
+#gk-app #gk-boot-lines .bl-done::before{ content:"✓ "; }
+#gk-app #gk-screen-start{ text-align:center; padding:20px 20px 60px; }
+#gk-app #gk-screen-start h1{ font-size:36px; font-weight:800; letter-spacing:-.02em; margin-bottom:6px; }
+#gk-app #gk-screen-start h1 span{ color:var(--cyan); }
+#gk-app .subtitle{ font-family:var(--mono); font-size:12.5px; color:var(--ink-soft); letter-spacing:.05em; margin-bottom:34px; }
+#gk-app .rules-cols{ display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:820px; margin:0 auto 36px; text-align:left; }
+#gk-app .rules-box{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px 20px; }
+#gk-app .rules-box .rb-title{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--cyan); margin-bottom:10px; }
+#gk-app .rules-box ul{ list-style:none; font-size:12.5px; color:var(--ink-soft); line-height:1.9; }
+#gk-app .rules-box li b{ color:var(--ink); }
+#gk-app #gk-start-btn{ font-size:16px; padding:16px 44px; background:linear-gradient(90deg,#38bdf8,#22c55e); color:#03150c; box-shadow:0 8px 30px -8px rgba(56,189,248,0.5); }
+#gk-app #gk-start-btn:hover{ box-shadow:0 10px 36px -6px rgba(56,189,248,0.65); }
+#gk-app .glow-btn{ cursor:pointer; border:none; font-family:var(--sans); font-weight:700; border-radius:10px; transition:transform .12s ease, box-shadow .12s ease, background .12s ease; }
+#gk-app .glow-btn:hover{ transform:translateY(-2px); }
+#gk-app .hud{ display:flex; align-items:center; gap:14px; margin-bottom:16px; flex-wrap:wrap; }
+#gk-app .hud-stat{ background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:8px 15px; font-family:var(--mono); font-size:12.5px; }
+#gk-app .hud-stat b{ color:var(--ink); font-size:15px; }
+#gk-app .hud-stat .hs-label{ color:var(--ink-faint); font-size:9px; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:2px; }
+#gk-app #gk-combo-badge{ margin-left:auto; font-family:var(--mono); font-weight:800; font-size:19px; padding:8px 18px; border-radius:10px; background:var(--panel); border:1px solid var(--line); color:var(--ink-faint); transition:all .2s ease; }
+#gk-app #gk-combo-badge.hot{ color:#fff; background:linear-gradient(90deg,#f97316,#ef4444); border-color:transparent; box-shadow:0 0 22px -4px rgba(239,68,68,0.7); animation:gk-comboPulse .5s ease-in-out infinite; }
+@keyframes gk-comboPulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.06); } }
+#gk-app .progress-track{ height:5px; background:var(--panel); border-radius:4px; overflow:hidden; margin-bottom:16px; border:1px solid var(--line); }
+#gk-app .progress-fill{ height:100%; background:linear-gradient(90deg,#38bdf8,#22c55e); transition:width .25s ease; }
+#gk-app .dossier{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:22px 24px; margin-bottom:18px; position:relative; overflow:hidden; }
+#gk-app .dossier::before{ content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#38bdf8,#22c55e,#eab308,#f97316,#ef4444); }
+#gk-app .dossier-label{ font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:12px; }
+#gk-app .case-timer-track{ height:5px; background:#151d38; border-radius:4px; overflow:hidden; margin-bottom:18px; }
+#gk-app .case-timer-fill{ height:100%; background:var(--green); transition:width 1s linear, background-color .3s ease; }
+#gk-app .case-timer-track.warn .case-timer-fill{ background:var(--yellow); }
+#gk-app .case-timer-track.danger .case-timer-fill{ background:var(--red); }
+#gk-app .case-company{ font-size:21px; font-weight:800; margin-bottom:10px; }
+#gk-app .case-text{ font-size:14px; line-height:1.75; color:var(--ink-soft); }
+#gk-app .hub{ margin-bottom:14px; }
+#gk-app .hub-label{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px; }
+#gk-app .hub-row{ display:grid; gap:9px; }
+#gk-app .hub-row.status-row{ grid-template-columns:repeat(3,1fr); }
+#gk-app .hub-row.action-row{ grid-template-columns:repeat(4,1fr); }
+@media (max-width:760px){#gk-app .hub-row.status-row{ grid-template-columns:repeat(2,1fr); }
+#gk-app .hub-row.action-row{ grid-template-columns:repeat(2,1fr); }}
+#gk-app .hub-btn{ font-family:var(--sans); font-weight:700; font-size:12px; padding:13px 8px; border-radius:9px; border:2px solid var(--line); background:var(--panel); color:var(--ink-soft); text-align:center; line-height:1.3; }
+#gk-app .hub-btn:hover:not(:disabled){ border-color:var(--cyan); color:var(--ink); }
+#gk-app .hub-btn:disabled{ opacity:.4; cursor:default; transform:none !important; }
+#gk-app .hub-btn.armed{ color:#fff; }
+#gk-app .hub-btn[data-status].armed{ border-color:var(--cyan); background:rgba(56,189,248,0.14); box-shadow:0 0 18px -4px rgba(56,189,248,0.6); }
+#gk-app .hub-btn[data-action="standard"].armed{ border-color:var(--green); background:rgba(34,197,94,0.18); box-shadow:0 0 18px -4px rgba(34,197,94,0.6); }
+#gk-app .hub-btn[data-action="conditional"].armed{ border-color:var(--yellow); background:rgba(234,179,8,0.2); box-shadow:0 0 18px -4px rgba(234,179,8,0.6); }
+#gk-app .hub-btn[data-action="reviewdocs"].armed{ border-color:var(--orange); background:rgba(249,115,22,0.2); box-shadow:0 0 18px -4px rgba(249,115,22,0.6); }
+#gk-app .hub-btn[data-action="reject"].armed{ border-color:var(--red); background:rgba(239,68,68,0.2); box-shadow:0 0 18px -4px rgba(239,68,68,0.6); }
+#gk-app #gk-toast{ position:fixed; top:24px; left:50%; transform:translateX(-50%) translateY(-20px); background:var(--panel-2); border:1px solid var(--green); color:var(--green); font-family:var(--mono); font-weight:700; font-size:12.5px; padding:10px 20px; border-radius:10px; opacity:0; transition:all .25s ease; z-index:90; pointer-events:none; max-width:90vw; text-align:center; }
+#gk-app #gk-toast.visible{ opacity:1; transform:translateX(-50%) translateY(0); }
+#gk-app #gk-toast.trigger{ border-color:var(--cyan); color:var(--cyan); }
+#gk-app #gk-audit-overlay{ position:fixed; inset:0; background:rgba(20,0,0,0.88); display:flex; align-items:center; justify-content:center; z-index:100; padding:20px; }
+#gk-app #gk-audit-overlay.flashing{ animation:gk-screenFlash .35s ease-in-out 4; }
+@keyframes gk-screenFlash{ 0%,100%{ background:rgba(20,0,0,0.88); } 50%{ background:rgba(120,10,10,0.92); } }
+#gk-app #gk-audit-modal{ background:#180808; border:2px solid var(--red); border-radius:16px; padding:32px 34px; max-width:480px; text-align:center; box-shadow:0 0 70px -8px rgba(239,68,68,0.7); }
+#gk-app #gk-audit-modal .am-title{ font-family:var(--mono); font-weight:800; font-size:20px; color:var(--red); letter-spacing:.06em; margin-bottom:16px; }
+#gk-app #gk-audit-modal .am-row{ text-align:left; font-size:12.5px; font-family:var(--mono); color:var(--ink-faint); margin-bottom:6px; }
+#gk-app #gk-audit-modal .am-row b{ color:var(--ink); font-family:var(--sans); }
+#gk-app #gk-audit-modal .am-divider{ border-top:1px dashed var(--line); margin:14px 0; }
+#gk-app #gk-audit-modal .am-explain{ font-size:13.5px; line-height:1.6; color:var(--ink-soft); text-align:left; margin-bottom:22px; }
+#gk-app #gk-audit-continue{ background:var(--red); color:#fff; padding:11px 30px; font-size:14px; border-radius:9px; }
+#gk-app #gk-audit-continue:hover{ background:#ff5c5c; }
+#gk-app #gk-screen-review{ text-align:center; padding:40px 20px; }
+#gk-app #gk-screen-review h2{ font-family:var(--mono); font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px; }
+#gk-app #gk-review-rating{ font-size:25px; font-weight:800; margin-bottom:6px; }
+#gk-app #gk-review-score{ font-size:54px; font-weight:800; background:linear-gradient(90deg,#38bdf8,#22c55e); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:26px; }
+#gk-app .review-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:560px; margin:0 auto 34px; }
+#gk-app .review-stat{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; }
+#gk-app .review-stat .rs-num{ font-size:22px; font-weight:800; margin-bottom:2px; }
+#gk-app .review-stat .rs-label{ font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); }
+#gk-app #gk-restart-btn{ font-size:15px; padding:14px 36px; background:var(--panel); border:1px solid var(--line); color:var(--ink); }
+#gk-app #gk-restart-btn:hover{ border-color:var(--cyan); color:var(--cyan); }
+
+
+#cd-app:root{
+    --bg:#05070d; --panel:#0d1220; --panel-2:#101832; --line:#1f2a4d;
+    --ink:#e7ecfb; --ink-soft:#9aa6c9; --ink-faint:#57628c;
+    --green:#22c55e; --yellow:#eab308; --orange:#f97316; --red:#ef4444; --cyan:#38bdf8; --purple:#a78bfa;
+    --mono:"Courier New",Consolas,Monaco,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+#cd-app{ width:100%; max-width:900px; }
+#cd-app .hidden{ display:none !important; }
+#cd-app .glow-btn{ cursor:pointer; border:none; font-family:var(--sans); font-weight:700; border-radius:10px; transition:transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease; }
+#cd-app .glow-btn:hover{ transform:translateY(-2px); }
+#cd-app .glow-btn:disabled{ opacity:.4; cursor:default; transform:none !important; }
+#cd-app #cd-screen-start{ text-align:center; padding:40px 20px; }
+#cd-app #cd-screen-start h1{ font-size:36px; font-weight:800; letter-spacing:-.02em; margin-bottom:8px; }
+#cd-app #cd-screen-start h1 span{ color:var(--cyan); }
+#cd-app .subtitle{ font-family:var(--mono); font-size:12px; color:var(--ink-soft); letter-spacing:.05em; margin-bottom:28px; }
+#cd-app .event-list{ display:grid; grid-template-columns:repeat(5,1fr); gap:8px; max-width:700px; margin:0 auto 30px; }
+#cd-app .event-chip{ background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 6px; font-size:11px; color:var(--ink-soft); }
+#cd-app .event-chip b{ display:block; color:var(--cyan); font-family:var(--mono); font-size:10px; margin-bottom:4px; }
+#cd-app #cd-start-btn{ font-size:16px; padding:16px 44px; background:linear-gradient(90deg,#38bdf8,#a78bfa); color:#08061c; box-shadow:0 8px 30px -8px rgba(167,139,250,0.5); }
+#cd-app .hud{ display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
+#cd-app .hud-stat{ background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:8px 14px; font-family:var(--mono); font-size:12px; }
+#cd-app .hud-stat b{ color:var(--ink); font-size:15px; }
+#cd-app .hud-stat .hs-label{ color:var(--ink-faint); font-size:9px; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:2px; }
+#cd-app #cd-event-badge{ margin-left:auto; font-family:var(--mono); font-weight:700; font-size:12px; padding:8px 16px; border-radius:20px; background:rgba(167,139,250,0.15); border:1px solid var(--purple); color:var(--purple); }
+#cd-app .progress-track{ height:5px; background:var(--panel); border-radius:4px; overflow:hidden; margin-bottom:20px; border:1px solid var(--line); }
+#cd-app .progress-fill{ height:100%; background:linear-gradient(90deg,#38bdf8,#a78bfa); transition:width .25s ease; }
+#cd-app .qcard{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:24px 26px; margin-bottom:18px; }
+#cd-app .qcard-label{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:12px; }
+#cd-app .qcard-prompt{ font-size:16px; line-height:1.55; margin-bottom:20px; }
+#cd-app .option-list{ display:flex; flex-direction:column; gap:9px; margin-bottom:20px; }
+#cd-app .option-btn{ text-align:left; font-size:13.5px; padding:13px 16px; border-radius:9px; border:2px solid var(--line); background:var(--panel-2); color:var(--ink-soft); font-family:var(--sans); }
+#cd-app .option-btn:hover:not(:disabled){ border-color:var(--cyan); color:var(--ink); }
+#cd-app .option-btn.armed{ border-color:var(--cyan); background:rgba(56,189,248,0.12); color:#fff; box-shadow:0 0 16px -4px rgba(56,189,248,0.5); }
+#cd-app .option-btn:disabled{ opacity:.5; }
+#cd-app .tf-row{ display:flex; gap:12px; margin-bottom:20px; }
+#cd-app .tf-row .option-btn{ flex:1; text-align:center; font-weight:700; }
+#cd-app .tf-row .option-btn[data-tf="true"].armed{ border-color:var(--green); background:rgba(34,197,94,0.15); box-shadow:0 0 16px -4px rgba(34,197,94,0.5); }
+#cd-app .tf-row .option-btn[data-tf="false"].armed{ border-color:var(--red); background:rgba(239,68,68,0.15); box-shadow:0 0 16px -4px rgba(239,68,68,0.5); }
+#cd-app .checkbox-opt{ display:flex; align-items:center; gap:10px; }
+#cd-app .checkbox-opt input{ width:16px; height:16px; accent-color:var(--cyan); flex:0 0 auto; }
+#cd-app .wager-row{ margin-bottom:20px; }
+#cd-app .wager-label{ font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px; }
+#cd-app .wager-btns{ display:flex; gap:9px; }
+#cd-app .wager-btn{ flex:1; padding:11px 8px; border-radius:9px; border:2px solid var(--line); background:var(--panel-2); color:var(--ink-soft); font-family:var(--mono); font-weight:700; font-size:12.5px; }
+#cd-app .wager-btn:hover:not(:disabled){ border-color:var(--yellow); }
+#cd-app .wager-btn.armed{ border-color:var(--yellow); background:rgba(234,179,8,0.18); color:#fff; box-shadow:0 0 16px -4px rgba(234,179,8,0.5); }
+#cd-app #cd-lock-in-btn{ width:100%; padding:14px; font-size:14.5px; background:linear-gradient(90deg,#22c55e,#38bdf8); color:#03150c; }
+#cd-app #cd-lock-in-btn:disabled{ background:var(--panel-2); color:var(--ink-faint); }
+#cd-app .rank-list{ display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+#cd-app .rank-item{ display:flex; align-items:center; gap:10px; background:var(--panel-2); border:2px solid var(--line); border-radius:9px; padding:12px 14px; cursor:grab; }
+#cd-app .rank-item.dragging{ opacity:.4; }
+#cd-app .rank-item.drag-over{ border-color:var(--cyan); }
+#cd-app .rank-num{ font-family:var(--mono); font-weight:800; color:var(--cyan); width:22px; flex:0 0 auto; }
+#cd-app .rank-text{ flex:1; font-size:13px; color:var(--ink-soft); }
+#cd-app .rank-arrows{ display:flex; flex-direction:column; gap:2px; }
+#cd-app .rank-arrows button{ background:var(--panel); border:1px solid var(--line); color:var(--ink-soft); border-radius:4px; width:24px; height:18px; font-size:10px; cursor:pointer; }
+#cd-app .rank-arrows button:hover:not(:disabled){ border-color:var(--cyan); color:var(--cyan); }
+#cd-app .rank-hint{ font-family:var(--mono); font-size:10.5px; color:var(--ink-faint); margin-bottom:14px; }
+#cd-app #cd-explain-overlay{ position:fixed; inset:0; background:rgba(5,7,14,0.85); display:flex; align-items:center; justify-content:center; z-index:100; padding:20px; }
+#cd-app #cd-explain-modal{ background:var(--panel); border-radius:16px; padding:30px 32px; max-width:520px; width:100%; }
+#cd-app #cd-explain-modal.correct{ border:2px solid var(--green); box-shadow:0 0 60px -10px rgba(34,197,94,0.5); }
+#cd-app #cd-explain-modal.wrong{ border:2px solid var(--red); box-shadow:0 0 60px -10px rgba(239,68,68,0.5); }
+#cd-app #cd-explain-title{ font-family:var(--mono); font-weight:800; font-size:17px; letter-spacing:.03em; margin-bottom:6px; }
+#cd-app #cd-explain-modal.correct #cd-explain-title{ color:var(--green); }
+#cd-app #cd-explain-modal.wrong #cd-explain-title{ color:var(--red); }
+#cd-app #cd-explain-points{ font-family:var(--mono); font-size:12.5px; color:var(--ink-faint); margin-bottom:16px; }
+#cd-app #cd-explain-label{ font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--purple); margin-bottom:6px; }
+#cd-app #cd-explain-body{ font-size:13.5px; line-height:1.65; color:var(--ink-soft); background:var(--panel-2); border-left:3px solid var(--purple); padding:14px 16px; border-radius:6px; margin-bottom:22px; }
+#cd-app #cd-explain-continue{ width:100%; padding:13px; font-size:14px; background:var(--panel-2); border:1px solid var(--line); color:var(--ink); }
+#cd-app #cd-explain-continue:hover{ border-color:var(--cyan); color:var(--cyan); }
+#cd-app #cd-screen-review{ text-align:center; padding:40px 20px; }
+#cd-app #cd-screen-review h2{ font-family:var(--mono); font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px; }
+#cd-app #cd-review-medal{ font-size:44px; margin-bottom:4px; }
+#cd-app #cd-review-rating{ font-size:22px; font-weight:800; margin-bottom:6px; }
+#cd-app #cd-review-score{ font-size:50px; font-weight:800; background:linear-gradient(90deg,#38bdf8,#a78bfa); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:26px; }
+#cd-app .review-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:560px; margin:0 auto 30px; }
+#cd-app .review-stat{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; }
+#cd-app .review-stat .rs-num{ font-size:22px; font-weight:800; margin-bottom:2px; }
+#cd-app .review-stat .rs-label{ font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); }
+#cd-app #cd-restart-btn{ font-size:15px; padding:14px 36px; background:var(--panel); border:1px solid var(--line); color:var(--ink); }
+#cd-app #cd-restart-btn:hover{ border-color:var(--cyan); color:var(--cyan); }
+
+
+  #dr-app{
+    --dr-bg:#12161f; --dr-panel:#1a2030; --dr-panel-2:#212a40; --dr-line:#323d5c;
+    --dr-ink:#eef1fb; --dr-ink-soft:#a7b0cf; --dr-ink-faint:#68729a;
+    --dr-blue:#00d2ff; --dr-purple:#9d4edd; --dr-cyan:#00f5d4;
+    --dr-emerald-1:#390099; --dr-emerald-2:#00ff66;
+    --dr-orange:#ff9500; --dr-pink:#ff007f; --dr-gold:#ffd400;
+    --dr-mono:'Courier New',Consolas,Monaco,monospace;
+    --dr-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  #dr-app *{box-sizing:border-box;}
+  #dr-app{ background:var(--dr-bg); color:var(--dr-ink); font-family:var(--dr-sans); padding:22px; border-radius:16px; -webkit-font-smoothing:antialiased; }
+  .dr-hidden{ display:none !important; }
+  .dr-glow-btn{ cursor:pointer; border:none; font-family:var(--dr-sans); font-weight:700; border-radius:10px; transition:transform .12s ease, box-shadow .12s ease; }
+  .dr-glow-btn:hover{ transform:translateY(-2px); }
+
+  /* ---- start screen ---- */
+  #dr-screen-start{ text-align:center; padding:30px 20px; }
+  #dr-screen-start h1{ font-size:32px; font-weight:800; letter-spacing:-.02em; margin-bottom:8px; }
+  #dr-screen-start h1 span{ background:linear-gradient(90deg,#00d2ff,#9d4edd,#00f5d4,#00ff66); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .dr-subtitle{ font-family:var(--dr-mono); font-size:12px; color:var(--dr-ink-soft); letter-spacing:.05em; margin-bottom:26px; }
+  .dr-legend{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; max-width:560px; margin:0 auto 28px; text-align:left; }
+  .dr-legend-item{ background:var(--dr-panel); border:1px solid var(--dr-line); border-radius:10px; padding:12px 14px; font-size:12px; color:var(--dr-ink-soft); border-left:4px solid; }
+  .dr-legend-item b{ display:block; color:var(--dr-ink); font-size:12.5px; margin-bottom:3px; }
+  #dr-start-btn{ font-size:15px; padding:15px 40px; background:linear-gradient(90deg,#00d2ff,#00ff66); color:#031014; box-shadow:0 8px 30px -8px rgba(0,210,255,0.5); }
+
+  /* ---- HUD / timer ---- */
+  #dr-screen-game .dr-hud{ display:flex; align-items:center; gap:12px; margin-bottom:10px; flex-wrap:wrap; }
+  .dr-hud-stat{ background:var(--dr-panel); border:1px solid var(--dr-line); border-radius:10px; padding:7px 14px; font-family:var(--dr-mono); font-size:12px; }
+  .dr-hud-stat b{ color:var(--dr-ink); font-size:15px; }
+  #dr-combo-badge{ margin-left:auto; font-family:var(--dr-mono); font-weight:800; font-size:15px; padding:7px 16px; border-radius:10px; background:var(--dr-panel); border:1px solid var(--dr-line); color:var(--dr-ink-faint); }
+  #dr-combo-badge.dr-overdrive{ color:#1a1400; background:linear-gradient(90deg,var(--dr-gold),#fff176); border-color:transparent; box-shadow:0 0 24px -2px rgba(255,212,0,0.85); animation:dr-overdrivePulse .45s ease-in-out infinite; }
+  @keyframes dr-overdrivePulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.07); } }
+  .dr-core-track{ height:14px; background:#0a0d14; border-radius:8px; overflow:hidden; margin-bottom:18px; border:1px solid var(--dr-line); position:relative; }
+  .dr-core-fill{ height:100%; background:linear-gradient(90deg,#ff9500,#ffd400); transition:width .3s linear; box-shadow:0 0 14px 0 rgba(255,149,0,0.7); }
+  .dr-core-track.dr-critical .dr-core-fill{ background:linear-gradient(90deg,var(--dr-pink),#ff5c9d); animation:dr-criticalPulse .4s ease-in-out infinite; }
+  @keyframes dr-criticalPulse{ 0%,100%{ opacity:1; } 50%{ opacity:.5; } }
+
+  /* ---- layout ---- */
+  .dr-layout{ display:grid; grid-template-columns:1fr 300px; gap:20px; }
+  @media (max-width:760px){ .dr-layout{ grid-template-columns:1fr; } }
+
+  /* ---- wheel ---- */
+  .dr-wheel-wrap{ position:relative; width:100%; max-width:420px; aspect-ratio:1; margin:0 auto; }
+  .dr-wheel{ position:relative; width:100%; height:100%; border-radius:50%; transition:transform .6s cubic-bezier(.4,1.4,.4,1); }
+  .dr-quad{ position:absolute; width:50%; height:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; border:3px solid; background:var(--dr-panel); transition:.15s; }
+  .dr-quad-label{ font-size:11px; font-weight:700; text-align:center; padding:8px; line-height:1.3; color:var(--dr-ink); }
+  .dr-quad[data-scn="A"]{ top:0; left:0; border-radius:100% 0 0 0; border-color:var(--dr-blue); box-shadow:inset 0 0 24px -6px var(--dr-blue); }
+  .dr-quad[data-scn="B"]{ top:0; right:0; border-radius:0 100% 0 0; border-color:var(--dr-purple); box-shadow:inset 0 0 24px -6px var(--dr-purple); }
+  .dr-quad[data-scn="C"]{ bottom:0; right:0; border-radius:0 0 100% 0; border-color:var(--dr-cyan); box-shadow:inset 0 0 24px -6px var(--dr-cyan); }
+  .dr-quad[data-scn="D"]{ bottom:0; left:0; border-radius:0 0 0 100%; border-color:var(--dr-emerald-2); box-shadow:inset 0 0 24px -6px var(--dr-emerald-2); background:linear-gradient(135deg, rgba(57,0,153,0.35), rgba(0,255,102,0.15)), var(--dr-panel); }
+  .dr-quad.dr-active{ filter:brightness(1.5); z-index:2; }
+  .dr-quad.dr-solved{ opacity:.4; cursor:default; }
+  .dr-quad.dr-solved::after{ content:'\2713'; position:absolute; font-size:28px; color:#fff; }
+  .dr-wheel-center{ position:absolute; top:50%; left:50%; width:34%; height:34%; transform:translate(-50%,-50%); border-radius:50%; background:var(--dr-bg); border:2px solid var(--dr-line); display:flex; align-items:center; justify-content:center; font-family:var(--dr-mono); font-size:10px; color:var(--dr-ink-faint); text-align:center; z-index:3; pointer-events:none; }
+
+  .dr-target-zone{ margin-top:18px; border:2px dashed var(--dr-line); border-radius:14px; padding:18px 20px; min-height:110px; background:var(--dr-panel); transition:.15s; }
+  .dr-target-zone.dr-dragover{ border-color:var(--dr-gold); background:var(--dr-panel-2); }
+  .dr-target-label{ font-family:var(--dr-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--dr-ink-faint); margin-bottom:6px; }
+  .dr-target-scenario{ font-size:14.5px; font-weight:700; margin-bottom:6px; }
+  .dr-target-need{ font-size:12px; color:var(--dr-ink-soft); }
+  .dr-target-need b{ color:var(--dr-ink); }
+
+  /* ---- sidebar cards ---- */
+  .dr-sidebar-label{ font-family:var(--dr-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--dr-ink-faint); margin-bottom:10px; }
+  .dr-cards{ display:flex; flex-direction:column; gap:9px; }
+  .dr-card{ background:var(--dr-panel-2); border:2px solid var(--dr-line); border-radius:10px; padding:11px 13px; font-size:12.5px; font-weight:600; cursor:grab; transition:.12s; }
+  .dr-card:hover{ border-color:var(--dr-ink-soft); transform:translateX(2px); }
+  .dr-card.dr-selected{ border-color:var(--dr-gold); box-shadow:0 0 14px -2px rgba(255,212,0,0.6); }
+  .dr-card.dr-dragging{ opacity:.4; }
+  .dr-place-hint{ font-family:var(--dr-mono); font-size:10.5px; color:var(--dr-ink-faint); margin-top:12px; text-align:center; }
+
+  /* ---- audit modal ---- */
+  #dr-audit-overlay{ position:fixed; inset:0; background:rgba(10,0,8,0.88); display:flex; align-items:center; justify-content:center; z-index:200; padding:20px; }
+  #dr-audit-overlay.dr-flashing{ animation:dr-screenFlash .3s ease-in-out 4; }
+  @keyframes dr-screenFlash{ 0%,100%{ background:rgba(10,0,8,0.88); } 50%{ background:rgba(255,0,127,0.35); } }
+  #dr-audit-modal{ background:#1f0512; border:2px solid var(--dr-pink); border-radius:16px; padding:30px 32px; max-width:460px; box-shadow:0 0 70px -6px rgba(255,0,127,0.7); }
+  #dr-audit-title{ font-family:var(--dr-mono); font-weight:800; font-size:19px; color:var(--dr-pink); letter-spacing:.05em; margin-bottom:14px; text-align:center; }
+  #dr-audit-explain{ font-size:13.5px; line-height:1.6; color:var(--dr-ink-soft); margin-bottom:22px; }
+  #dr-audit-continue{ width:100%; padding:12px; font-size:14px; background:var(--dr-pink); color:#fff; }
+  #dr-audit-continue:hover{ background:#ff3d9c; }
+
+  /* ---- correct toast ---- */
+  #dr-toast{ position:fixed; top:24px; left:50%; transform:translateX(-50%) translateY(-20px); background:var(--dr-panel-2); border:1px solid var(--dr-cyan); color:var(--dr-cyan); font-family:var(--dr-mono); font-weight:700; font-size:12.5px; padding:10px 20px; border-radius:10px; opacity:0; transition:all .25s ease; z-index:190; pointer-events:none; }
+  #dr-toast.dr-visible{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  /* ---- end screens ---- */
+  #dr-screen-review, #dr-screen-meltdown{ text-align:center; padding:40px 20px; }
+  #dr-screen-review h2, #dr-screen-meltdown h2{ font-family:var(--dr-mono); font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--dr-ink-faint); margin-bottom:8px; }
+  #dr-review-rating, #dr-meltdown-title{ font-size:22px; font-weight:800; margin-bottom:6px; }
+  #dr-meltdown-title{ color:var(--dr-pink); }
+  #dr-review-score, #dr-meltdown-score{ font-size:48px; font-weight:800; margin-bottom:24px; }
+  #dr-review-score{ background:linear-gradient(90deg,#00d2ff,#00ff66); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .dr-review-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:520px; margin:0 auto 28px; }
+  .dr-review-stat{ background:var(--dr-panel); border:1px solid var(--dr-line); border-radius:12px; padding:14px; }
+  .dr-review-stat .dr-rs-num{ font-size:20px; font-weight:800; }
+  .dr-review-stat .dr-rs-label{ font-family:var(--dr-mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:var(--dr-ink-faint); }
+  #dr-restart-btn{ font-size:14px; padding:13px 34px; background:var(--dr-panel); border:1px solid var(--dr-line); color:var(--dr-ink); }
+  #dr-restart-btn:hover{ border-color:var(--dr-cyan); color:var(--dr-cyan); }
+
+</style>
+</head>
+<body>
+<div class="site-shell">
+  <div class="site-header">
+    <div class="site-eyebrow">JURISDICTION TRAINING</div>
+    <div class="site-title">New <span>Zealand</span></div>
+  </div>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="eo">Entity Overlord</button>
+    <button class="tab-btn" data-tab="gk">The Gatekeeper</button>
+    <button class="tab-btn" data-tab="cd">The Compliance Decathlon</button>
+    <button class="tab-btn" data-tab="dr">The Documentation Reactor</button>
+  </nav>
+
+  <section class="panel active" id="panel-eo">
+<div id="eo-app">
+
+  <div id="eo-screen-start">
+    <div class="eyebrow">New Zealand · Entity Classification Drill</div>
+    <h1>Entity Overlord</h1>
+    <div class="subtitle">Three-Tier Compliance Sandbox — sort every application, fast and right.</div>
+    <div class="rules-grid">
+      <div class="rule-card onboard">
+        <div class="rc-title">✅ Onboard</div>
+        <div class="rc-body">Sole Traders, Limited Companies, General &amp; Limited Partnerships, Charities/non-profits, Government Entities.</div>
+      </div>
+      <div class="rule-card dont">
+        <div class="rc-title">🚫 Don't Onboard</div>
+        <div class="rc-body">Overseas branch registrations — Overseas Company or Overseas ASIC Company entity types.</div>
+      </div>
+      <div class="rule-card escalate">
+        <div class="rc-title">⚠ Escalate to Offshore</div>
+        <div class="rc-body">Trusts (incl. charitable trusts) and companies with a trustee shareholder — unless that trust is Australian.</div>
+      </div>
+    </div>
+    <button class="glow-btn" id="eo-start-btn">▶ Start Shift</button>
+  </div>
+
+  <div id="eo-screen-game" class="hidden">
+    <div class="hud">
+      <div class="hud-stat"><span class="hs-label">Score</span><b id="eo-hud-score">0</b></div>
+      <div class="hud-stat"><span class="hs-label">Card</span><b id="eo-hud-card-idx">1</b>/<span id="eo-hud-card-total">18</span></div>
+      <div class="hud-stat"><span class="hs-label">Streak</span><b id="eo-hud-streak">0</b></div>
+      <div id="eo-combo-badge">1x</div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="eo-round-progress" style="width:0%;"></div></div>
+
+    <div class="main-layout">
+      <div class="inbox-panel">
+        <div class="inbox-label">📥 Client Inbox — New Application</div>
+        <div class="eo-card-timer-track" id="eo-card-timer-track"><div class="eo-card-timer-fill" id="eo-card-timer-fill" style="width:100%;"></div></div>
+        <div class="company-name" id="eo-card-name">—</div>
+        <div class="entity-type-tag" id="eo-card-type">—</div>
+        <div class="snapshot-label">Entity Profile Snapshot</div>
+        <div class="snapshot-text" id="eo-card-snapshot">—</div>
+      </div>
+      <div class="action-panel">
+        <button class="glow-btn action-btn onboard" id="eo-btn-onboard">✅ ONBOARD<span class="ab-sub">Supported entity type</span></button>
+        <button class="glow-btn action-btn dont" id="eo-btn-dont">🚫 DON'T ONBOARD<span class="ab-sub">Not a supported entity</span></button>
+        <button class="glow-btn action-btn escalate" id="eo-btn-escalate">⚠ ESCALATE TO OFFSHORE<span class="ab-sub">Trust-related structure</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="eo-screen-review" class="hidden">
+    <h2>Compliance Review</h2>
+    <div id="eo-review-rating">—</div>
+    <div id="eo-review-score">0</div>
+    <div class="review-stats">
+      <div class="review-stat"><div class="rs-num" id="eo-review-accuracy">0%</div><div class="rs-label">Accuracy</div></div>
+      <div class="review-stat"><div class="rs-num" id="eo-review-best-combo">1x</div><div class="rs-label">Best Combo</div></div>
+      <div class="review-stat"><div class="rs-num" id="eo-review-correct">0/0</div><div class="rs-label">Correct Sorts</div></div>
+    </div>
+    <button class="glow-btn" id="eo-restart-btn">↻ Run Another Shift</button>
+  </div>
+
+</div>
+
+<div id="eo-audit-overlay" class="hidden">
+  <div id="eo-audit-modal">
+    <div class="am-title">⚠ AUDIT WARNING ⚠</div>
+    <div class="am-body" id="eo-audit-explain">—</div>
+    <div class="am-correct">Correct action: <b id="eo-audit-correct-label">—</b></div>
+    <button class="glow-btn" id="eo-audit-continue">Acknowledge &amp; Continue</button>
+  </div>
+</div>
+
+<div id="eo-toast"></div>
+  </section>
+
+  <section class="panel" id="panel-gk">
+<div id="gk-app">
+
+  <div id="gk-screen-boot">
+    <div class="mono" style="font-size:11px; letter-spacing:.15em; color:#57628c; margin-bottom:16px;">VERIFICATION TERMINAL</div>
+    <div id="gk-boot-lines"></div>
+  </div>
+
+  <div id="gk-screen-start" class="hidden">
+    <h1>The <span>Gatekeeper</span></h1>
+    <div class="subtitle">OPERATIONAL ALPHA — NEW ZEALAND BUSINESS STATUS DETERMINATION</div>
+    <div class="rules-cols">
+      <div class="rules-box">
+        <div class="rb-title">Status → Required Action</div>
+        <ul>
+          <li><b>Registered</b> → Standard Onboard</li>
+          <li><b>Inactive</b> → Conditional Onboard</li>
+          <li><b>External Admin (EXAD)</b> → Review Administrator Docs</li>
+          <li><b>Dissolved / Deregistered / Closed</b> → Outright Reject</li>
+        </ul>
+      </div>
+      <div class="rules-box">
+        <div class="rb-title">How To Play</div>
+        <ul>
+          <li>Read each dossier carefully — some details are decoys.</li>
+          <li>Select the correct <b>status</b>, then the correct <b>action</b>.</li>
+          <li>12-second decay bar per case. Fast + correct = combo, up to 5x.</li>
+          <li>Wrong on either part triggers an Audit Warning and breaks your streak.</li>
+        </ul>
+      </div>
+    </div>
+    <button class="glow-btn" id="gk-start-btn">▶ Begin Shift</button>
+  </div>
+
+  <div id="gk-screen-game" class="hidden">
+    <div class="hud">
+      <div class="hud-stat"><span class="hs-label">Score</span><b id="gk-hud-score">0</b></div>
+      <div class="hud-stat"><span class="hs-label">Case</span><b id="gk-hud-case-idx">1</b>/6</div>
+      <div class="hud-stat"><span class="hs-label">Streak</span><b id="gk-hud-streak">0</b></div>
+      <div id="gk-combo-badge">1x</div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="gk-round-progress" style="width:0%;"></div></div>
+
+    <div class="dossier">
+      <div class="dossier-label">📁 Dossier Workspace — Case Under Review</div>
+      <div class="gk-case-timer-track" id="gk-case-timer-track"><div class="gk-case-timer-fill" id="gk-case-timer-fill" style="width:100%;"></div></div>
+      <div class="gk-case-company" id="gk-case-company">—</div>
+      <div class="gk-case-text" id="gk-case-text">—</div>
+    </div>
+
+    <div class="hub">
+      <div class="hub-label">① Business Status</div>
+      <div class="hub-row status-row" id="gk-status-hub">
+        <button class="hub-btn" data-status="registered">REGISTERED</button>
+        <button class="hub-btn" data-status="inactive">INACTIVE</button>
+        <button class="hub-btn" data-status="exad">EXTERNAL ADMIN (EXAD)</button>
+        <button class="hub-btn" data-status="dissolved">DISSOLVED</button>
+        <button class="hub-btn" data-status="deregistered">DEREGISTERED</button>
+        <button class="hub-btn" data-status="closed">CLOSED (REMOVED)</button>
+      </div>
+    </div>
+    <div class="hub">
+      <div class="hub-label">② Operational Decision</div>
+      <div class="hub-row action-row" id="gk-action-hub">
+        <button class="hub-btn" data-action="standard">STANDARD<br>ONBOARD</button>
+        <button class="hub-btn" data-action="conditional">CONDITIONAL<br>ONBOARD</button>
+        <button class="hub-btn" data-action="reviewdocs">REVIEW ADMIN<br>DOCS</button>
+        <button class="hub-btn" data-action="reject">OUTRIGHT<br>REJECT</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="gk-screen-review" class="hidden">
+    <h2>Compliance Review</h2>
+    <div id="gk-review-rating">—</div>
+    <div id="gk-review-score">0</div>
+    <div class="review-stats">
+      <div class="review-stat"><div class="rs-num" id="gk-review-accuracy">0%</div><div class="rs-label">Accuracy</div></div>
+      <div class="review-stat"><div class="rs-num" id="gk-review-best-combo">1x</div><div class="rs-label">Best Combo</div></div>
+      <div class="review-stat"><div class="rs-num" id="gk-review-correct">0/0</div><div class="rs-label">Correct Cases</div></div>
+    </div>
+    <button class="glow-btn" id="gk-restart-btn">↻ Run Another Shift</button>
+  </div>
+
+</div>
+
+<div id="gk-audit-overlay" class="hidden">
+  <div id="gk-audit-modal">
+    <div class="am-title">🚨 INTERNAL AUDIT WARNING 🚨</div>
+    <div class="am-row">Your determination: <b id="gk-audit-yours">—</b></div>
+    <div class="am-row">Correct determination: <b id="gk-audit-correct">—</b></div>
+    <div class="am-divider"></div>
+    <div class="am-explain" id="gk-audit-explain">—</div>
+    <button class="glow-btn" id="gk-audit-continue">Acknowledge &amp; Continue</button>
+  </div>
+</div>
+
+<div id="gk-toast"></div>
+  </section>
+
+  <section class="panel" id="panel-cd">
+<div id="cd-app">
+
+  <div id="cd-screen-start">
+    <div style="font-family:var(--mono); font-size:11px; letter-spacing:.15em; color:var(--ink-faint); margin-bottom:12px;">NEW ZEALAND</div>
+    <h1>The Compliance <span>Decathlon</span></h1>
+    <div class="subtitle">5 EVENTS · WAGER YOUR CONFIDENCE · RANK BY RISK · EVERY ANSWER EXPLAINED</div>
+    <div class="event-list">
+      <div class="event-chip"><b>EVENT 1</b>MCQ Sprint</div>
+      <div class="event-chip"><b>EVENT 2</b>True/False Gauntlet</div>
+      <div class="event-chip"><b>EVENT 3</b>Shareholding &amp; Minors</div>
+      <div class="event-chip"><b>EVENT 4</b>Trust Escalation Drill</div>
+      <div class="event-chip"><b>EVENT 5</b>Risk Ranking</div>
+    </div>
+    <button class="glow-btn" id="cd-start-btn">▶ Begin Decathlon</button>
+  </div>
+
+  <div id="cd-screen-game" class="hidden">
+    <div class="hud">
+      <div class="hud-stat"><span class="hs-label">Score</span><b id="cd-hud-score">0</b></div>
+      <div class="hud-stat"><span class="hs-label">Question</span><b id="cd-hud-q-idx">1</b>/<span id="cd-hud-q-total">19</span></div>
+      <div id="cd-event-badge">EVENT 1 — MCQ SPRINT</div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="cd-round-progress" style="width:0%;"></div></div>
+
+    <div id="cd-question-slot"></div>
+  </div>
+
+  <div id="cd-screen-review" class="hidden">
+    <h2>Decathlon Complete</h2>
+    <div id="cd-review-medal">🥇</div>
+    <div id="cd-review-rating">—</div>
+    <div id="cd-review-score">0</div>
+    <div class="review-stats">
+      <div class="review-stat"><div class="rs-num" id="cd-review-accuracy">0%</div><div class="rs-label">Accuracy</div></div>
+      <div class="review-stat"><div class="rs-num" id="cd-review-correct">0/0</div><div class="rs-label">Correct</div></div>
+      <div class="review-stat"><div class="rs-num" id="cd-review-highwager">0</div><div class="rs-label">High-Wager Wins</div></div>
+    </div>
+    <button class="glow-btn" id="cd-restart-btn">↻ Run the Decathlon Again</button>
+  </div>
+
+</div>
+
+<div id="cd-explain-overlay" class="hidden">
+  <div id="cd-explain-modal">
+    <div id="cd-explain-title">—</div>
+    <div id="cd-explain-points">—</div>
+    <div id="cd-explain-label">Internal Regulatory Reference</div>
+    <div id="cd-explain-body">—</div>
+    <button class="glow-btn" id="cd-explain-continue">Continue →</button>
+  </div>
+</div>
+  </section>
+
+
+  <section class="panel" id="panel-dr">
+<div id="dr-app">
+
+  <div id="dr-screen-start">
+    <h1>The Documentation <span>Reactor</span></h1>
+    <div class="dr-subtitle">HIGH-RISK UBO ADDRESS VERIFICATION — DOCUMENT ACCEPTANCE MATRIX</div>
+    <div class="dr-legend">
+      <div class="dr-legend-item" style="border-color:#00d2ff;"><b>Scenario A</b>UBO with NZ address, verified via NZ Driver Licence</div>
+      <div class="dr-legend-item" style="border-color:#9d4edd;"><b>Scenario B</b>UBO with NZ address, verified via Passport</div>
+      <div class="dr-legend-item" style="border-color:#00f5d4;"><b>Scenario C</b>UBO living outside New Zealand</div>
+      <div class="dr-legend-item" style="border-color:#00ff66;"><b>Scenario D</b>Multiple UBOs on the profile</div>
+    </div>
+    <button class="dr-glow-btn" id="dr-start-btn">▶ Power Up the Reactor</button>
+  </div>
+
+  <div id="dr-screen-game" class="dr-hidden">
+    <div class="dr-hud">
+      <div class="dr-hud-stat"><span style="color:var(--dr-ink-faint); display:block; font-size:9px; letter-spacing:.08em; text-transform:uppercase;">Score</span><b id="dr-hud-score">0</b></div>
+      <div class="dr-hud-stat"><span style="color:var(--dr-ink-faint); display:block; font-size:9px; letter-spacing:.08em; text-transform:uppercase;">Solved</span><b id="dr-hud-solved">0</b>/4</div>
+      <div id="dr-combo-badge">1x</div>
+    </div>
+    <div class="dr-core-track" id="dr-core-track"><div class="dr-core-fill" id="dr-core-fill" style="width:100%;"></div></div>
+
+    <div class="dr-layout">
+      <div>
+        <div class="dr-wheel-wrap">
+          <div class="dr-wheel" id="dr-wheel">
+            <div class="dr-quad" data-scn="A"><div class="dr-quad-label">A<br>NZDL</div></div>
+            <div class="dr-quad" data-scn="B"><div class="dr-quad-label">B<br>Passport</div></div>
+            <div class="dr-quad" data-scn="C"><div class="dr-quad-label">C<br>Overseas</div></div>
+            <div class="dr-quad" data-scn="D"><div class="dr-quad-label">D<br>Multi-UBO</div></div>
+          </div>
+          <div class="dr-wheel-center" id="dr-wheel-center">SELECT<br>QUADRANT</div>
+        </div>
+        <div class="dr-target-zone" id="dr-target-zone">
+          <div class="dr-target-label">Active Target Position</div>
+          <div class="dr-target-scenario" id="dr-target-scenario">Click a quadrant to begin</div>
+          <div class="dr-target-need" id="dr-target-need"></div>
+        </div>
+      </div>
+      <div>
+        <div class="dr-sidebar-label">📄 Document Stack</div>
+        <div class="dr-cards" id="dr-cards"></div>
+        <div class="dr-place-hint">Drag a card onto the target zone, or click a card then click the target zone.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dr-screen-review" class="dr-hidden">
+    <h2>Reactor Stabilised</h2>
+    <div id="dr-review-rating">—</div>
+    <div id="dr-review-score">0</div>
+    <div class="dr-review-stats">
+      <div class="dr-review-stat"><div class="dr-rs-num" id="dr-review-accuracy">0%</div><div class="dr-rs-label">Accuracy</div></div>
+      <div class="dr-review-stat"><div class="dr-rs-num" id="dr-review-combo">1x</div><div class="dr-rs-label">Best Combo</div></div>
+      <div class="dr-review-stat"><div class="dr-rs-num" id="dr-review-time">0s</div><div class="dr-rs-label">Time Left</div></div>
+    </div>
+    <button class="dr-glow-btn" id="dr-restart-btn">↻ Restart the Reactor</button>
+  </div>
+
+  <div id="dr-screen-meltdown" class="dr-hidden">
+    <h2>Core Status</h2>
+    <div id="dr-meltdown-title">⚠ CORE MELTDOWN ⚠</div>
+    <div id="dr-meltdown-score">0</div>
+    <button class="dr-glow-btn" id="dr-restart-btn-2">↻ Restart the Reactor</button>
+  </div>
+
+</div>
+
+<div id="dr-audit-overlay" class="dr-hidden">
+  <div id="dr-audit-modal">
+    <div id="dr-audit-title">📌 DOCUMENT REJECTED 📌</div>
+    <div id="dr-audit-explain">—</div>
+    <button class="dr-glow-btn" id="dr-audit-continue">Acknowledge &amp; Retry</button>
+  </div>
+</div>
+
+<div id="dr-toast"></div>
+  </section>
+
+  <div class="site-footer">Created by Tam</div>
+</div>
+
+<script>
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+</script>
+<script>
+
+(function(){
+  "use strict";
+
+  var ENTITY_POOL = [
+    { name:"Kiwi Coastal Tours", type:"Sole Trader", snapshot:"Individual owner-operator running boat tours out of Paihia, Bay of Islands. Trading under a registered business name, no separate legal entity.", correct:"onboard", reason:"Sole Traders are a supported onboarding entity type." },
+    { name:"Aurora Software Solutions Ltd", type:"Limited Company", snapshot:"NZ-incorporated software consultancy, two natural-person shareholders each holding 50%, registered office in Wellington.", correct:"onboard", reason:"Limited Companies are a supported onboarding entity type." },
+    { name:"Thompson & Reid Chartered Surveyors", type:"General Partnership", snapshot:"Two-partner land surveying practice operating under a partnership agreement, both partners NZ residents.", correct:"onboard", reason:"General Partnerships are a supported onboarding entity type." },
+    { name:"Southern Ridge Vineyards LP", type:"Limited Partnership", snapshot:"Wine-growing investment vehicle structured as a Limited Partnership — a general partner manages operations, limited partners are passive investors.", correct:"onboard", reason:"Limited Partnerships are a supported onboarding entity type." },
+    { name:"Hauraki Gulf Marine Trust", type:"Incorporated Society (Registered Charity)", snapshot:"Marine conservation non-profit registered as an Incorporated Society and a registered charity — not structured as a trust.", correct:"onboard", reason:"Charities and non-profits are supported — this one is legally an Incorporated Society, not a trust, so it onboards rather than escalates." },
+    { name:"Otago Regional Council", type:"Government Entity", snapshot:"Local government authority responsible for regional environmental management and public transport across Otago.", correct:"onboard", reason:"Government Entities are a supported onboarding entity type." },
+    { name:"Pacific Rim Holdings", type:"Overseas Company", snapshot:"NZ branch registration of a Singapore-incorporated parent company, registered with the NZ Companies Office as an Overseas Company.", correct:"dont", reason:"Overseas branch offices registered as an Overseas Company are not supported for onboarding." },
+    { name:"Meridian Trading Co (NZ Branch)", type:"Overseas ASIC Company", snapshot:"Australian company registered with ASIC, now also registered in New Zealand as an Overseas ASIC Company to operate a local branch.", correct:"dont", reason:"Overseas branch offices registered as an Overseas ASIC Company are not supported for onboarding." },
+    { name:"The Merrivale Family Trust", type:"Trust", snapshot:"Discretionary family trust holding investment property across the North Island. Trustees are two family members.", correct:"escalate", reason:"Trusts are supported for onboarding but must be handled by the Offshore team, not TS." },
+    { name:"Whakatipu Community Charitable Trust", type:"Charitable Trust", snapshot:"Community grant-making organisation legally structured and registered as a charitable trust.", correct:"escalate", reason:"Charitable trusts are still trusts in legal form — unlike other charity structures, they route to the Offshore team." },
+    { name:"Northland Property Holdings Ltd", type:"Limited Company (Trustee Shareholder)", snapshot:"NZ limited company whose sole shareholder is 'The Prentice Family Trust', a New Zealand-resident discretionary trust.", correct:"escalate", reason:"Companies with a trustee shareholder escalate to the Offshore team." },
+    { name:"Bridgewater Logistics NZ Ltd", type:"Limited Company (Trustee Shareholder — AU Trust)", snapshot:"NZ limited company whose sole shareholder is 'The Caldwell Family Trust', a trust established and resident in Australia.", correct:"onboard", reason:"Companies with a trustee shareholder normally escalate — but the exception applies here: when the trustee shareholder is specifically an Australian trust, it's handled as a standard TS case." },
+    { name:"Emerald Peaks Consulting Ltd", type:"Limited Company (Corporate Shareholder)", snapshot:"NZ limited company wholly owned by its parent, 'Emerald Peaks Holdings Ltd', an ordinary NZ limited company — no trust anywhere in the structure.", correct:"onboard", reason:"A corporate shareholder alone doesn't trigger escalation — only a trustee shareholder does, and there isn't one here." },
+    { name:"Solo Ink Tattoo Studio", type:"Sole Trader", snapshot:"Individually owned tattoo studio in Christchurch. Owner is the sole registered proprietor.", correct:"onboard", reason:"Sole Traders are a supported onboarding entity type." },
+    { name:"Fenwick & Associates", type:"General Partnership", snapshot:"Three-partner accounting practice, all partners jointly and severally liable under a standard partnership agreement.", correct:"onboard", reason:"General Partnerships are a supported onboarding entity type." },
+    { name:"Global Freight Direct", type:"Overseas Company", snapshot:"Branch office of a US-incorporated logistics company, registered with the NZ Companies Office under the Overseas Company entity type.", correct:"dont", reason:"Overseas branch offices registered as an Overseas Company are not supported for onboarding." },
+    { name:"Ministry Support Services", type:"Government Entity", snapshot:"Crown entity providing shared administrative services across central government departments.", correct:"onboard", reason:"Government Entities are a supported onboarding entity type." },
+    { name:"Silver Fern Legacy Trust", type:"Trust", snapshot:"Testamentary trust established under a will, managing inherited farmland on behalf of beneficiaries.", correct:"escalate", reason:"Trusts are supported for onboarding but must be handled by the Offshore team, not TS." }
+  ];
+
+  var ACTION_LABEL = { onboard:"✅ Onboard", dont:"🚫 Don't Onboard", escalate:"⚠ Escalate to Offshore" };
+  var CARD_TIME_MS = 7000;
+  var BASE_POINTS = 100;
+  var MAX_MULTIPLIER = 5;
+  var WRONG_PENALTY = 50;
+
+  var state = {};
+
+  function shuffle(arr){
+    var a = arr.slice();
+    for(var i=a.length-1;i>0;i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var t=a[i]; a[i]=a[j]; a[j]=t;
+    }
+    return a;
+  }
+
+  function $(id){ return document.getElementById(id); }
+
+  function initGame(){
+    state = {
+      deck: shuffle(ENTITY_POOL),
+      idx: 0,
+      score: 0,
+      multiplier: 1,
+      streak: 0,
+      bestCombo: 1,
+      correctCount: 0,
+      answered: 0,
+      locked: false,
+      timerId: null,
+      timeLeft: CARD_TIME_MS/1000
+    };
+    $('eo-screen-start').classList.add('hidden');
+    $('eo-screen-review').classList.add('hidden');
+    $('eo-screen-game').classList.remove('hidden');
+    $('eo-hud-card-total').textContent = state.deck.length;
+    updateHud();
+    loadCard();
+  }
+
+  function updateHud(){
+    $('eo-hud-score').textContent = state.score;
+    $('eo-hud-card-idx').textContent = Math.min(state.idx+1, state.deck.length);
+    $('eo-hud-streak').textContent = state.streak;
+    var badge = $('eo-combo-badge');
+    badge.textContent = state.multiplier + 'x';
+    if(state.multiplier >= 3){ badge.classList.add('hot'); } else { badge.classList.remove('hot'); }
+    $('eo-round-progress').style.width = Math.round((state.idx/state.deck.length)*100)+'%';
+  }
+
+  function loadCard(){
+    clearCardTimer();
+    if(state.idx >= state.deck.length){ endRound(); return; }
+    state.locked = false;
+    var c = state.deck[state.idx];
+    $('eo-card-name').textContent = c.name;
+    $('eo-card-type').textContent = c.type;
+    $('eo-card-snapshot').textContent = c.snapshot;
+    ['eo-btn-onboard','eo-btn-dont','eo-btn-escalate'].forEach(function(id){ $(id).disabled = false; });
+    updateHud();
+    startCardTimer(c);
+  }
+
+  function clearCardTimer(){
+    if(state.timerId){ clearInterval(state.timerId); state.timerId = null; }
+  }
+
+  function startCardTimer(c){
+    state.timeLeft = CARD_TIME_MS/1000;
+    updateCardTimerUI();
+    state.timerId = setInterval(function(){
+      state.timeLeft -= 1;
+      updateCardTimerUI();
+      if(state.timeLeft <= 0){
+        clearCardTimer();
+        handleTimeout(c);
+      }
+    }, 1000);
+  }
+
+  function updateCardTimerUI(){
+    var track = $('eo-card-timer-track');
+    var fill = $('eo-card-timer-fill');
+    var pct = Math.max(0, (state.timeLeft/(CARD_TIME_MS/1000))*100);
+    fill.style.width = pct+'%';
+    track.classList.remove('warn','danger');
+    if(state.timeLeft <= 2) track.classList.add('danger');
+    else if(state.timeLeft <= 4) track.classList.add('warn');
+  }
+
+  function disableActionButtons(){
+    ['eo-btn-onboard','eo-btn-dont','eo-btn-escalate'].forEach(function(id){ $(id).disabled = true; });
+  }
+
+  function handleTimeout(c){
+    if(state.locked) return;
+    state.locked = true;
+    disableActionButtons();
+    state.answered++;
+    state.streak = 0;
+    state.multiplier = 1;
+    state.score = Math.max(0, state.score - WRONG_PENALTY);
+    updateHud();
+    showAudit(c, "No action taken before the review window closed — inaction on a compliance decision carries the same risk as sorting it incorrectly.");
+  }
+
+  function handleSort(choice){
+    if(state.locked) return;
+    state.locked = true;
+    clearCardTimer();
+    disableActionButtons();
+    var c = state.deck[state.idx];
+    state.answered++;
+    if(choice === c.correct){
+      state.correctCount++;
+      state.streak++;
+      var speedBonus = Math.round(state.timeLeft * 10);
+      var points = BASE_POINTS * state.multiplier + speedBonus;
+      state.score += points;
+      state.multiplier = Math.min(MAX_MULTIPLIER, state.multiplier + 1);
+      state.bestCombo = Math.max(state.bestCombo, state.multiplier);
+      updateHud();
+      showToast('✓ Correct — +' + points + ' pts');
+      setTimeout(advanceCard, 550);
+    } else {
+      state.streak = 0;
+      state.multiplier = 1;
+      state.score = Math.max(0, state.score - WRONG_PENALTY);
+      updateHud();
+      showAudit(c, c.reason);
+    }
+  }
+
+  function showToast(msg){
+    var t = $('eo-toast');
+    t.textContent = msg;
+    t.classList.add('visible');
+    setTimeout(function(){ t.classList.remove('visible'); }, 500);
+  }
+
+  function showAudit(c, explain){
+    $('eo-audit-explain').textContent = explain;
+    $('eo-audit-correct-label').textContent = ACTION_LABEL[c.correct] + ' — ' + c.name;
+    $('eo-audit-overlay').classList.remove('hidden');
+  }
+
+  function dismissAudit(){
+    $('eo-audit-overlay').classList.add('hidden');
+    advanceCard();
+  }
+
+  function advanceCard(){
+    state.idx++;
+    loadCard();
+  }
+
+  function endRound(){
+    clearCardTimer();
+    $('eo-screen-game').classList.add('hidden');
+    $('eo-screen-review').classList.remove('hidden');
+    var accuracy = state.answered>0 ? Math.round((state.correctCount/state.answered)*100) : 0;
+    var rating = accuracy>=90 ? 'Compliance Officer of the Year' : accuracy>=70 ? 'Solid Shift — Minor Slip-ups' : 'Needs Retraining Before Next Shift';
+    $('eo-review-rating').textContent = rating;
+    $('eo-review-score').textContent = state.score;
+    $('eo-review-accuracy').textContent = accuracy+'%';
+    $('eo-review-best-combo').textContent = state.bestCombo+'x';
+    $('eo-review-correct').textContent = state.correctCount+'/'+state.answered;
+  }
+
+  $('eo-start-btn').addEventListener('click', initGame);
+  $('eo-restart-btn').addEventListener('click', initGame);
+  $('eo-btn-onboard').addEventListener('click', function(){ handleSort('onboard'); });
+  $('eo-btn-dont').addEventListener('click', function(){ handleSort('dont'); });
+  $('eo-btn-escalate').addEventListener('click', function(){ handleSort('escalate'); });
+  $('eo-audit-continue').addEventListener('click', dismissAudit);
+
+})();
+
+</script>
+<script>
+
+(function(){
+  "use strict";
+
+  var STATUS_META = {
+    registered:   { label:"Registered",              action:"standard",    rule:"A business in good standing with full legal capacity to trade is eligible for Standard Onboard — no further verification steps are required beyond normal KYB." },
+    inactive:     { label:"Inactive",                 action:"conditional", rule:"A dormant company still current with the Companies Office can be verified under Conditional Onboard once the documented business purpose and use case are confirmed.", trigger:"Verifying documented business purpose and use case..." },
+    exad:         { label:"External Admin (EXAD)",    action:"reviewdocs",  rule:"Once a court-appointed administrator, receiver, statutory manager, or liquidator has taken control, directors lose authority to instruct us — the case must go to Review Administrator Docs to confirm who is actually authorised to act.", trigger:"Verifying authorised court-appointed liquidator/administrator documentation..." },
+    dissolved:    { label:"Dissolved",                 action:"reject",      rule:"A dissolved company has no legal existence — there is no entity left to onboard or service, so it's an Outright Reject." },
+    deregistered: { label:"Deregistered",              action:"reject",      rule:"A deregistered company has ceased to exist as a recognised legal entity — it must be an Outright Reject, and any live profile has to be deactivated until reinstatement." },
+    closed:       { label:"Closed (Removed)",          action:"reject",      rule:"A voluntarily closed and removed company is inactive/non-existent on the register — it's an Outright Reject." }
+  };
+
+  var ACTION_LABEL = {
+    standard:"Standard Onboard", conditional:"Conditional Onboard",
+    reviewdocs:"Review Administrator Docs", reject:"Outright Reject"
+  };
+
+  var CASE_POOL = [
+    { status:"registered", company:"Silverline Freight Solutions Ltd", text:"Auckland-based logistics provider, incorporated 2019. Companies Office filings are current, with the annual return filed three weeks ago. The company recently changed its trading name from \"Silverline Transport\" following a rebrand, and temporarily suspended two contracted delivery routes last quarter due to a supplier dispute. Directors report normal day-to-day trading continues across all other operations." },
+    { status:"registered", company:"Hilltop Dairy Exports Ltd", text:"Waikato-based dairy export business. The company briefly appeared on an internal watchlist for a late GST filing in 2022, since resolved with Inland Revenue. The current Companies Office record shows the company in good standing, actively trading, with its most recent annual return filed on time." },
+
+    { status:"inactive", company:"Fernridge Holdings Ltd", text:"A property holding company incorporated in 2015 to hold a single commercial building in Hamilton. No trading activity has been recorded for the past 26 months, but the company remains current with the Companies Office: annual returns filed on schedule, registered office and director details up to date. The company's sole purpose is to hold the property pending a future sale." },
+    { status:"inactive", company:"Coastal Ventures Ltd", text:"Originally set up for a hospitality project that never launched. The company has never traded since incorporation four years ago. It remains on the Companies Office register in good standing, with all statutory filings current, and the sole director has indicated the entity may be used for a future venture." },
+
+    { status:"exad", company:"Redwood Construction Group Ltd", text:"A mid-sized construction firm. Following cash flow difficulties, the company's creditors appointed a receiver three weeks ago under the terms of a general security agreement. The receiver has taken control of the company's bank accounts and is currently assessing the business for a possible sale as a going concern. Directors remain listed on the Companies Office register but no longer have authority over company operations." },
+    { status:"exad", company:"Northgate Manufacturing Ltd", text:"Placed into voluntary administration two months ago after breaching banking covenants. The appointed administrator is currently investigating restructuring options and preparing a report to creditors, who will vote on the company's future at a forthcoming meeting. The administrator has statutory control of the company's affairs during this period." },
+
+    { status:"dissolved", company:"Kaimai Ridge Farms Ltd", text:"Entered liquidation 18 months ago after a court order. The liquidator has now filed a final report confirming all creditor claims were addressed and the winding-up process is complete. The Companies Office has formally ended the company's legal existence, with any remaining minor assets vesting in the Crown." },
+    { status:"dissolved", company:"Ashgrove Import Co Ltd", text:"A liquidator was appointed following insolvency proceedings. All company assets have since been realised and distributed to creditors under the now-completed liquidation, and the Companies Office register confirms the company no longer has a separate legal existence." },
+
+    { status:"deregistered", company:"Bright Path Media Ltd", text:"A small marketing agency. The company failed to file annual returns for three consecutive years despite repeated Companies Office reminders, and was struck off the register for non-compliance six months ago. The business's website and social media pages remain live, still advertising services under the company's former trading name." },
+    { status:"deregistered", company:"Summit Trade Partners Ltd", text:"Struck off the Companies Office register last year after the Registrar determined the company was not carrying on business and had failed to respond to statutory notices. The former director has since referenced the company name on a personal LinkedIn profile as a \"current business.\"" },
+
+    { status:"closed", company:"Lakeside Bakery Co Ltd", text:"The sole shareholder-director voluntarily wound up the solvent business after retiring, distributing remaining funds to herself as the sole shareholder and formally applying to have the company removed from the Companies Office register. The removal was completed four months ago." },
+    { status:"closed", company:"Northern Star Consulting Ltd", text:"The two shareholders agreed to close the business after their remaining contract concluded. Final accounts were settled, remaining funds distributed between the shareholders, and the company was formally removed from the register at their joint request, with no involvement from a liquidator or administrator." }
+  ];
+
+  var CASE_TIME_MS = 12000;
+  var BASE_POINTS = 100;
+  var MAX_MULTIPLIER = 5;
+  var WRONG_PENALTY = 60;
+
+  var state = {};
+
+  function shuffle(arr){
+    var a = arr.slice();
+    for(var i=a.length-1;i>0;i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var t=a[i]; a[i]=a[j]; a[j]=t;
+    }
+    return a;
+  }
+
+  function $(id){ return document.getElementById(id); }
+
+  function buildRound(){
+    var byStatus = {};
+    CASE_POOL.forEach(function(c){ (byStatus[c.status] = byStatus[c.status]||[]).push(c); });
+    var round = Object.keys(byStatus).map(function(status){
+      var variants = byStatus[status];
+      return variants[Math.floor(Math.random()*variants.length)];
+    });
+    return shuffle(round);
+  }
+
+  function runBootSequence(cb){
+    var lines = [
+      "AUTHENTICATING ANALYST...",
+      "ACCESS GRANTED — ANALYST CLEARANCE",
+      "LOADING NZ COMPANIES OFFICE FEED...",
+      "GATEKEEPER TERMINAL READY."
+    ];
+    var el = $('gk-boot-lines');
+    el.innerHTML = "";
+    var i = 0;
+    function next(){
+      if(i >= lines.length){ cb(); return; }
+      var div = document.createElement('div');
+      div.className = 'bl-done';
+      div.textContent = lines[i];
+      el.appendChild(div);
+      i++;
+      setTimeout(next, 260);
+    }
+    next();
+  }
+
+  function initGame(){
+    state = {
+      round: buildRound(),
+      idx: 0,
+      score: 0,
+      multiplier: 1,
+      streak: 0,
+      bestCombo: 1,
+      correctCount: 0,
+      answered: 0,
+      locked: false,
+      timerId: null,
+      timeLeft: CASE_TIME_MS/1000,
+      selStatus: null,
+      selAction: null
+    };
+    $('gk-screen-start').classList.add('hidden');
+    $('gk-screen-review').classList.add('hidden');
+    $('gk-screen-game').classList.remove('hidden');
+    updateHud();
+    loadCase();
+  }
+
+  function updateHud(){
+    $('gk-hud-score').textContent = state.score;
+    $('gk-hud-case-idx').textContent = Math.min(state.idx+1, state.round.length);
+    $('gk-hud-streak').textContent = state.streak;
+    var badge = $('gk-combo-badge');
+    badge.textContent = state.multiplier + 'x';
+    if(state.multiplier >= 3){ badge.classList.add('hot'); } else { badge.classList.remove('hot'); }
+    $('gk-round-progress').style.width = Math.round((state.idx/state.round.length)*100)+'%';
+  }
+
+  function loadCase(){
+    clearCaseTimer();
+    if(state.idx >= state.round.length){ endRound(); return; }
+    state.locked = false;
+    state.selStatus = null;
+    state.selAction = null;
+    var c = state.round[state.idx];
+    $('gk-case-company').textContent = c.company;
+    $('gk-case-text').textContent = c.text;
+    resetHubButtons();
+    updateHud();
+    startCaseTimer(c);
+  }
+
+  function resetHubButtons(){
+    document.querySelectorAll('#gk-status-hub .hub-btn, #gk-action-hub .hub-btn').forEach(function(b){
+      b.disabled = false;
+      b.classList.remove('armed');
+    });
+  }
+
+  function disableHubButtons(){
+    document.querySelectorAll('#gk-status-hub .hub-btn, #gk-action-hub .hub-btn').forEach(function(b){ b.disabled = true; });
+  }
+
+  function clearCaseTimer(){
+    if(state.timerId){ clearInterval(state.timerId); state.timerId = null; }
+  }
+
+  function startCaseTimer(c){
+    state.timeLeft = CASE_TIME_MS/1000;
+    updateCaseTimerUI();
+    state.timerId = setInterval(function(){
+      state.timeLeft -= 1;
+      updateCaseTimerUI();
+      if(state.timeLeft <= 0){
+        clearCaseTimer();
+        handleTimeout(c);
+      }
+    }, 1000);
+  }
+
+  function updateCaseTimerUI(){
+    var track = $('gk-case-timer-track');
+    var fill = $('gk-case-timer-fill');
+    var pct = Math.max(0, (state.timeLeft/(CASE_TIME_MS/1000))*100);
+    fill.style.width = pct+'%';
+    track.classList.remove('warn','danger');
+    if(state.timeLeft <= 3) track.classList.add('danger');
+    else if(state.timeLeft <= 6) track.classList.add('warn');
+  }
+
+  function showToast(msg, isTrigger){
+    var t = $('gk-toast');
+    t.textContent = msg;
+    t.classList.toggle('trigger', !!isTrigger);
+    t.classList.add('visible');
+    setTimeout(function(){ t.classList.remove('visible'); }, isTrigger ? 1400 : 600);
+  }
+
+  function onStatusPick(status){
+    if(state.locked) return;
+    state.selStatus = status;
+    document.querySelectorAll('#gk-status-hub .hub-btn').forEach(function(b){
+      b.classList.toggle('armed', b.dataset.status === status);
+    });
+    tryEvaluate();
+  }
+
+  function onActionPick(action){
+    if(state.locked) return;
+    state.selAction = action;
+    document.querySelectorAll('#gk-action-hub .hub-btn').forEach(function(b){
+      b.classList.toggle('armed', b.dataset.action === action);
+    });
+    tryEvaluate();
+  }
+
+  function tryEvaluate(){
+    if(state.selStatus === null || state.selAction === null) return;
+    if(state.locked) return;
+    state.locked = true;
+    clearCaseTimer();
+    disableHubButtons();
+    var c = state.round[state.idx];
+    var meta = STATUS_META[c.status];
+    var correct = (state.selStatus === c.status) && (state.selAction === meta.action);
+    state.answered++;
+    if(correct){
+      state.correctCount++;
+      state.streak++;
+      var speedBonus = Math.round(state.timeLeft * 8);
+      var points = BASE_POINTS * state.multiplier + speedBonus;
+      state.score += points;
+      state.multiplier = Math.min(MAX_MULTIPLIER, state.multiplier + 1);
+      state.bestCombo = Math.max(state.bestCombo, state.multiplier);
+      updateHud();
+      if(meta.trigger){
+        showToast(meta.trigger, true);
+        setTimeout(function(){ showToast('✓ Correct Determination — +' + points + ' pts'); }, 1450);
+        setTimeout(advanceCase, 2000);
+      } else {
+        showToast('✓ Correct Determination — +' + points + ' pts');
+        setTimeout(advanceCase, 650);
+      }
+    } else {
+      state.streak = 0;
+      state.multiplier = 1;
+      state.score = Math.max(0, state.score - WRONG_PENALTY);
+      updateHud();
+      showAudit(c, meta);
+    }
+  }
+
+  function handleTimeout(c){
+    if(state.locked) return;
+    state.locked = true;
+    disableHubButtons();
+    state.answered++;
+    state.streak = 0;
+    state.multiplier = 1;
+    state.score = Math.max(0, state.score - WRONG_PENALTY);
+    updateHud();
+    var meta = STATUS_META[c.status];
+    showAudit(c, meta, true);
+  }
+
+  function showAudit(c, meta, timedOut){
+    var yours = timedOut
+      ? "No determination submitted before the review window closed"
+      : (state.selStatus ? STATUS_META[state.selStatus].label : "—") + " / " + (state.selAction ? ACTION_LABEL[state.selAction] : "—");
+    $('gk-audit-yours').textContent = yours;
+    $('gk-audit-correct').textContent = meta.label + " / " + ACTION_LABEL[meta.action];
+    $('gk-audit-explain').textContent = meta.rule;
+    var overlay = $('gk-audit-overlay');
+    overlay.classList.remove('hidden');
+    overlay.classList.add('flashing');
+    setTimeout(function(){ overlay.classList.remove('flashing'); }, 1500);
+  }
+
+  function dismissAudit(){
+    $('gk-audit-overlay').classList.add('hidden');
+    advanceCase();
+  }
+
+  function advanceCase(){
+    state.idx++;
+    loadCase();
+  }
+
+  function endRound(){
+    clearCaseTimer();
+    $('gk-screen-game').classList.add('hidden');
+    $('gk-screen-review').classList.remove('hidden');
+    var accuracy = state.answered>0 ? Math.round((state.correctCount/state.answered)*100) : 0;
+    var rating = accuracy>=90 ? 'Senior Gatekeeper — Full Clearance' : accuracy>=60 ? 'Operational Pass — Review Misses' : 'Retraining Required Before Next Shift';
+    $('gk-review-rating').textContent = rating;
+    $('gk-review-score').textContent = state.score;
+    $('gk-review-accuracy').textContent = accuracy+'%';
+    $('gk-review-best-combo').textContent = state.bestCombo+'x';
+    $('gk-review-correct').textContent = state.correctCount+'/'+state.answered;
+  }
+
+  document.querySelectorAll('#gk-status-hub .hub-btn').forEach(function(b){
+    b.addEventListener('click', function(){ onStatusPick(b.dataset.status); });
+  });
+  document.querySelectorAll('#gk-action-hub .hub-btn').forEach(function(b){
+    b.addEventListener('click', function(){ onActionPick(b.dataset.action); });
+  });
+  $('gk-start-btn').addEventListener('click', initGame);
+  $('gk-restart-btn').addEventListener('click', initGame);
+  $('gk-audit-continue').addEventListener('click', dismissAudit);
+
+  runBootSequence(function(){
+    $('gk-screen-boot').classList.add('hidden');
+    $('gk-screen-start').classList.remove('hidden');
+  });
+
+})();
+
+</script>
+<script>
+
+(function(){
+  "use strict";
+
+  // ---- Event 1: MCQ Sprint ----
+  var EVENT1 = [
+    { prompt:"You're verifying Bamboo Balloons Invest, an investment company with a LESH UBO. What additional information should you collect for the UBOs of this New Zealand business?",
+      options:["Post code","Position in the company","Collect the LESH's full registered office address and the UBO's full residential address"],
+      correct:2,
+      explain:"We collect the LESH's full registered office address and the UBO's full residential address. Address verification depth for UBOs/LESH is informed by whether the business is high-risk." },
+    { prompt:"You're verifying People of Your Kind, and you see a \u201cMust Verify Personal User Profile\u201d error even though Edentiti has passed. What do you do?",
+      options:["Email the customer to verify their personal profile first","Place a 7-day hold so the customer can verify their profile","Check under \u201cWhy are these traffic lights displayed?\u201d","If you see BORDERLESS_USD_BUSINESS_OPEN_BANK_DETAILS, verify the customer's ID document and address to proceed"],
+      correct:2,
+      explain:"Check under \u201cWhy are these traffic lights displayed?\u201d first. If the reason shown is BORDERLESS_USD_BUSINESS_OPEN_BANK_DETAILS, the customer is trying to open USD bank details \u2014 verify their ID document, and verify their address too if the business category is high-risk." },
+    { prompt:"Gorilla Ltd, an Overseas Company, wants to onboard as a branch into consulting. What's the correct action?",
+      options:["Escalate to Offshore","Don't onboard","Escalate to HRA","Collect all the correct information and verify as necessary"],
+      correct:1,
+      explain:"Businesses registered as \u201cOverseas Company\u201d or \u201cOverseas ASIC Company\u201d branch offices in NZ are not supported and should not be onboarded \u2014 this isn't an escalation matter, it's a hard no." },
+    { prompt:"A UBO lives outside New Zealand. Which POA rule applies?",
+      options:["A globally accepted POA issued in their country of residence is acceptable","Only a tax return issued in their country of residence is accepted as POA","A globally accepted POA issued to the business can be accepted"],
+      correct:0,
+      explain:"A UBO living outside New Zealand can provide a standard, globally accepted POA issued in their own country of residence \u2014 it doesn't need to be NZ-issued, and it must be issued to the individual, not the business." }
+  ];
+
+  // ---- Event 2: True/False Gauntlet (mixed, not all-False) ----
+  var EVENT2 = [
+    { statement:"The address on a company registration document can be used to verify a high-risk UBO's address \u2014 a separate document is not required.", answer:false,
+      explain:"The company registration document can't be used to verify a UBO's address \u2014 a separate document is always required for a high-risk UBO." },
+    { statement:"For every New Zealand business, you must always request a POA document for the UBO's address.", answer:false,
+      explain:"Address verification depth is risk-informed, not a blanket requirement for every NZ business \u2014 it applies where the business is high-risk." },
+    { statement:"If a bank statement or personal tax return provided as Source of Wealth shows the UBO's address and is itself acceptable as a POA, you can use it \u2014 no separate document is needed.", answer:true,
+      explain:"If a document already on file shows the UBO's address and independently qualifies as an acceptable POA type, you don't need to request anything further." },
+    { statement:"If a bank statement or tax return shows the UBO's address but is unacceptable as a POA, you should accept it anyway since it shows the right address.", answer:false,
+      explain:"Showing the correct address isn't enough \u2014 the document itself must independently qualify as an acceptable POA type, or a proper POA must be separately requested." },
+    { statement:"If a business has multiple UBOs, you only need to request a POA document for the senior management officer.", answer:false,
+      explain:"Every UBO needs their own address document \u2014 verifying just the senior management officer isn't enough when there are multiple UBOs." },
+    { statement:"If a business has multiple UBOs, request an address document for each one, using file purpose \u201cOther\u201d with the comment \u201cUBO address.\u201d", answer:true,
+      explain:"This is the correct process: one document per UBO, filed under purpose \u201cOther\u201d with the comment \u201cUBO address\u201d for a clear audit trail." },
+    { statement:"A UBO's address document should be saved to their personal profile, since that's where POA documents are stored.", answer:false,
+      explain:"A UBO address document for a business verification isn't saved to a personal profile \u2014 it belongs on the business's file, under file purpose \u201cOther\u201d with the comment \u201cUBO address.\u201d" },
+    { statement:"It's possible for a minor (under 18) to be a beneficial owner of a New Zealand business.", answer:true,
+      explain:"New Zealand allows minors to be beneficial owners \u2014 the extent of verification required is informed by the level of risk, not blocked outright by age." }
+  ];
+
+  // ---- Event 3: Shareholding & Minors ----
+  var EVENT3 = [
+    { prompt:"In New Zealand we can onboard businesses with beneficial owners \u2014 what age restriction applies?",
+      options:["Only if the beneficial owner is over 18","Only if the beneficial owner is exactly 18","We can onboard even if the beneficial owner is under 18"],
+      correct:2,
+      explain:"It's possible for a minor to be a beneficial owner \u2014 the extent of verification required is informed by the level of risk." },
+    { prompt:"We can onboard a company with an underage UBO if \u2014 who is recorded as the beneficial owner?",
+      options:["The underage UBO themselves","The parent or guardian","A LESH"],
+      correct:1,
+      explain:"We can onboard companies with an underage UBO if the parent or guardian is recorded as the beneficial owner on behalf of the minor." },
+    { prompt:"Generally, shares will be held in trust by whom until the individual UBO turns 18?",
+      options:["A guardian","A bank","The UBO themselves"],
+      correct:0,
+      explain:"In most cases, shares are held in trust by a guardian until the individual UBO reaches 18." },
+    { prompt:"Under New Zealand regulations, which UBOs can also enter into contracts that aren't for their own benefit?",
+      options:["UBOs over 18","UBOs under 18","UBOs of any age"],
+      correct:0,
+      explain:"Adult UBOs (18+) have full contractual capacity and can enter contracts that aren't necessarily for their own benefit. Under-18 UBOs generally can't \u2014 their contracts must be for their benefit." }
+  ];
+
+  // ---- Event 4: Trust & Structure Escalation Drill (multi-select) ----
+  var EVENT4 = [
+    { prompt:"Select all correct statements about trustee shareholders and escalation.",
+      options:[
+        { text:"If an entity has trustee shareholders (other than Australian trusts) or is itself a Trust, escalate to the Offshore Team", correct:true },
+        { text:"If an entity has trustee shareholders (other than Australian trusts) or is itself a Trust, handle it as a TS senior analyst", correct:false },
+        { text:"If an entity has a trustee shareholder that is an Australian trust, escalate to the Offshore Team", correct:false },
+        { text:"If an entity has a trustee shareholder that is an Australian trust, handle it as a TS senior analyst", correct:true }
+      ],
+      explain:"If a shareholder is specifically an Australian trust, don't escalate \u2014 handle it as a standard TS case. Every other trust-related structure (the entity itself is a trust, or has a non-Australian trustee shareholder) goes to the Offshore Team." },
+    { prompt:"A New Zealand business has an underage UBO and operates in a high-risk category. Select all correct statements.",
+      options:[
+        { text:"The parent/guardian must be recorded as the beneficial owner on behalf of the minor", correct:true },
+        { text:"Because the business is high-risk, a separate POA document is required to verify the guardian's address", correct:true },
+        { text:"The minor UBO's own signature is required on all account contracts", correct:false },
+        { text:"The company registration document alone is sufficient to verify the guardian's address", correct:false }
+      ],
+      explain:"This combines two rules: an underage UBO must be represented by a parent/guardian as the recorded beneficial owner, and separately, a high-risk business always needs a dedicated POA document for that beneficial owner's address \u2014 the registration document alone never substitutes for it." }
+  ];
+
+  // ---- Event 5: Risk Ranking (lowest -> highest verification/escalation intensity) ----
+  var RANK_ITEMS = [
+    { id:"standard", label:"Standard NZ Registered company, low-risk sector, adult UBOs \u2014 baseline KYB only", correctRank:0 },
+    { id:"highrisk", label:"High-risk sector business \u2014 UBO/LESH address needs a separate dedicated POA document", correctRank:1 },
+    { id:"minor", label:"Underage UBO, shares held in trust by a guardian \u2014 guardian relationship plus address verification required", correctRank:2 },
+    { id:"autrust", label:"Company with an Australian trust as trustee shareholder \u2014 classification checkpoint, resolves to standard TS handling", correctRank:3 },
+    { id:"offshore", label:"Entity that is itself a Trust, or has a non-Australian trustee shareholder \u2014 must escalate entirely to the Offshore Team", correctRank:4 }
+  ];
+  var RANK_EXPLAIN = "From lowest to highest verification/escalation intensity: a standard low-risk business needs only baseline KYB; a high-risk business adds a dedicated UBO address POA; an underage UBO adds guardian-relationship verification; an Australian trustee shareholder is a checkpoint that still resolves to normal TS handling; and a Trust entity or non-Australian trustee shareholder is the only tier that leaves TS entirely and goes to the Offshore Team. (Overseas Company / Overseas ASIC Company branches aren't on this scale at all \u2014 they're excluded outright, not a matter of degree.)";
+
+  var WAGER_MULT = [1,2,3];
+  var BASE_POINTS = 100;
+  var BASE_PENALTY = 50;
+
+  var state = {};
+  function $(id){ return document.getElementById(id); }
+
+  function buildQueue(){
+    var q = [];
+    EVENT1.forEach(function(item){ q.push({ type:'mcq', event:1, eventLabel:'EVENT 1 \u2014 MCQ SPRINT', data:item }); });
+    EVENT2.forEach(function(item){ q.push({ type:'tf', event:2, eventLabel:'EVENT 2 \u2014 TRUE/FALSE GAUNTLET', data:item }); });
+    EVENT3.forEach(function(item){ q.push({ type:'mcq', event:3, eventLabel:'EVENT 3 \u2014 SHAREHOLDING & MINORS', data:item }); });
+    EVENT4.forEach(function(item){ q.push({ type:'multi', event:4, eventLabel:'EVENT 4 \u2014 TRUST ESCALATION DRILL', data:item }); });
+    q.push({ type:'rank', event:5, eventLabel:'EVENT 5 \u2014 RISK RANKING', data:null });
+    return q;
+  }
+
+  function initGame(){
+    state = {
+      queue: buildQueue(),
+      idx: 0,
+      score: 0,
+      correctCount: 0,
+      answered: 0,
+      highWagerWins: 0,
+      selectedOption: null,
+      selectedTF: null,
+      selectedSet: {},
+      wager: null,
+      rankOrder: null,
+      dragSrcIdx: null
+    };
+    $('cd-screen-start').classList.add('hidden');
+    $('cd-screen-review').classList.add('hidden');
+    $('cd-screen-game').classList.remove('hidden');
+    $('cd-hud-q-total').textContent = state.queue.length;
+    updateHud();
+    loadQuestion();
+  }
+
+  function updateHud(){
+    $('cd-hud-score').textContent = state.score;
+    $('cd-hud-q-idx').textContent = Math.min(state.idx+1, state.queue.length);
+    $('cd-round-progress').style.width = Math.round((state.idx/state.queue.length)*100)+'%';
+  }
+
+  function loadQuestion(){
+    if(state.idx >= state.queue.length){ endGame(); return; }
+    var q = state.queue[state.idx];
+    $('cd-event-badge').textContent = q.eventLabel;
+    state.selectedOption = null;
+    state.selectedTF = null;
+    state.selectedSet = {};
+    state.wager = null;
+    state.rankOrder = null;
+    updateHud();
+    if(q.type === 'mcq') renderMcq(q.data);
+    else if(q.type === 'tf') renderTf(q.data);
+    else if(q.type === 'multi') renderMulti(q.data);
+    else if(q.type === 'rank') renderRank();
+  }
+
+  function wagerHtml(){
+    return '<div class="wager-row"><div class="wager-label">Confidence Wager</div><div class="wager-btns">' +
+      '<button class="wager-btn" data-w="0">Unsure (1x)</button>' +
+      '<button class="wager-btn" data-w="1">Confident (2x)</button>' +
+      '<button class="wager-btn" data-w="2">Certain (3x)</button>' +
+      '</div></div>';
+  }
+  function wireWager(onChange){
+    document.querySelectorAll('#cd-app .wager-btn').forEach(function(b){
+      b.addEventListener('click', function(){
+        state.wager = parseInt(b.dataset.w,10);
+        document.querySelectorAll('#cd-app .wager-btn').forEach(function(x){ x.classList.toggle('armed', x===b); });
+        onChange();
+      });
+    });
+  }
+
+  function renderMcq(d){
+    var slot = $('cd-question-slot');
+    slot.innerHTML = '<div class="qcard">' +
+      '<div class="qcard-label">Multiple Choice</div>' +
+      '<div class="qcard-prompt">'+d.prompt+'</div>' +
+      '<div class="option-list" id="cd-opt-list">' + d.options.map(function(o,i){ return '<button class="option-btn" data-i="'+i+'">'+o+'</button>'; }).join('') + '</div>' +
+      wagerHtml() +
+      '<button class="glow-btn" id="cd-lock-in-btn" disabled>Lock In Answer</button>' +
+      '</div>';
+    document.querySelectorAll('#cd-opt-list .option-btn').forEach(function(b){
+      b.addEventListener('click', function(){
+        state.selectedOption = parseInt(b.dataset.i,10);
+        document.querySelectorAll('#cd-opt-list .option-btn').forEach(function(x){ x.classList.toggle('armed', x===b); });
+        refreshLockBtn();
+      });
+    });
+    wireWager(refreshLockBtn);
+    function refreshLockBtn(){ $('cd-lock-in-btn').disabled = !(state.selectedOption!==null && state.wager!==null); }
+    $('cd-lock-in-btn').addEventListener('click', function(){ evaluateMcq(d); });
+  }
+
+  function evaluateMcq(d){
+    var correct = state.selectedOption === d.correct;
+    settle(correct, d.explain, d.options[d.correct]);
+  }
+
+  function renderTf(d){
+    var slot = $('cd-question-slot');
+    slot.innerHTML = '<div class="qcard">' +
+      '<div class="qcard-label">True or False</div>' +
+      '<div class="qcard-prompt">'+d.statement+'</div>' +
+      '<div class="tf-row"><button class="option-btn" data-tf="true">TRUE</button><button class="option-btn" data-tf="false">FALSE</button></div>' +
+      wagerHtml() +
+      '<button class="glow-btn" id="cd-lock-in-btn" disabled>Lock In Answer</button>' +
+      '</div>';
+    document.querySelectorAll('#cd-app .tf-row .option-btn').forEach(function(b){
+      b.addEventListener('click', function(){
+        state.selectedTF = b.dataset.tf === 'true';
+        document.querySelectorAll('#cd-app .tf-row .option-btn').forEach(function(x){ x.classList.toggle('armed', x===b); });
+        refreshLockBtn();
+      });
+    });
+    wireWager(refreshLockBtn);
+    function refreshLockBtn(){ $('cd-lock-in-btn').disabled = !(state.selectedTF!==null && state.wager!==null); }
+    $('cd-lock-in-btn').addEventListener('click', function(){ evaluateTf(d); });
+  }
+
+  function evaluateTf(d){
+    var correct = state.selectedTF === d.answer;
+    settle(correct, d.explain, d.answer ? 'TRUE' : 'FALSE');
+  }
+
+  function renderMulti(d){
+    var slot = $('cd-question-slot');
+    slot.innerHTML = '<div class="qcard">' +
+      '<div class="qcard-label">Select All That Apply</div>' +
+      '<div class="qcard-prompt">'+d.prompt+'</div>' +
+      '<div class="option-list" id="cd-opt-list">' + d.options.map(function(o,i){
+        return '<label class="option-btn checkbox-opt"><input type="checkbox" data-i="'+i+'"><span>'+o.text+'</span></label>';
+      }).join('') + '</div>' +
+      wagerHtml() +
+      '<button class="glow-btn" id="cd-lock-in-btn" disabled>Lock In Answer</button>' +
+      '</div>';
+    document.querySelectorAll('#cd-opt-list input[type=checkbox]').forEach(function(cb){
+      cb.addEventListener('change', function(){
+        state.selectedSet[cb.dataset.i] = cb.checked;
+        cb.closest('.option-btn').classList.toggle('armed', cb.checked);
+        refreshLockBtn();
+      });
+    });
+    wireWager(refreshLockBtn);
+    function refreshLockBtn(){
+      var anyChecked = Object.keys(state.selectedSet).some(function(k){ return state.selectedSet[k]; });
+      $('cd-lock-in-btn').disabled = !(anyChecked && state.wager!==null);
+    }
+    $('cd-lock-in-btn').addEventListener('click', function(){ evaluateMulti(d); });
+  }
+
+  function evaluateMulti(d){
+    var correct = d.options.every(function(o,i){
+      var picked = !!state.selectedSet[i];
+      return picked === o.correct;
+    });
+    var correctLabels = d.options.filter(function(o){ return o.correct; }).map(function(o){ return o.text; }).join(' • ');
+    settle(correct, d.explain, correctLabels);
+  }
+
+  function renderRank(){
+    var order = shuffle(RANK_ITEMS.map(function(it){ return it.id; }));
+    state.rankOrder = order;
+    var slot = $('cd-question-slot');
+    slot.innerHTML = '<div class="qcard">' +
+      '<div class="qcard-label">Drag &amp; Drop Stacking</div>' +
+      '<div class="qcard-prompt">Rank these five verification scenarios from LOWEST to HIGHEST verification/escalation intensity. Drag to reorder, or use the arrows.</div>' +
+      '<div class="rank-hint">1 = lowest intensity · 5 = highest intensity</div>' +
+      '<div class="cd-rank-list" id="cd-rank-list"></div>' +
+      wagerHtml() +
+      '<button class="glow-btn" id="cd-lock-in-btn">Submit Ranking</button>' +
+      '</div>';
+    renderRankList();
+    wireWager(function(){});
+    $('cd-lock-in-btn').addEventListener('click', evaluateRank);
+  }
+
+  function renderRankList(){
+    var list = $('cd-rank-list');
+    list.innerHTML = state.rankOrder.map(function(id, i){
+      var item = RANK_ITEMS.filter(function(r){ return r.id===id; })[0];
+      return '<div class="rank-item" draggable="true" data-id="'+id+'" data-idx="'+i+'">' +
+        '<div class="rank-num">'+(i+1)+'</div>' +
+        '<div class="rank-text">'+item.label+'</div>' +
+        '<div class="rank-arrows">' +
+          '<button data-dir="up" data-idx="'+i+'" '+(i===0?'disabled':'')+'>\u25B2</button>' +
+          '<button data-dir="down" data-idx="'+i+'" '+(i===state.rankOrder.length-1?'disabled':'')+'>\u25BC</button>' +
+        '</div></div>';
+    }).join('');
+
+    document.querySelectorAll('#cd-app .rank-arrows button').forEach(function(b){
+      b.addEventListener('click', function(){
+        var i = parseInt(b.dataset.idx,10);
+        var dir = b.dataset.dir;
+        var j = dir==='up' ? i-1 : i+1;
+        if(j<0 || j>=state.rankOrder.length) return;
+        var tmp = state.rankOrder[i];
+        state.rankOrder[i] = state.rankOrder[j];
+        state.rankOrder[j] = tmp;
+        renderRankList();
+      });
+    });
+
+    document.querySelectorAll('#cd-app .rank-item').forEach(function(el){
+      el.addEventListener('dragstart', function(e){
+        state.dragSrcIdx = parseInt(el.dataset.idx,10);
+        el.classList.add('dragging');
+      });
+      el.addEventListener('dragend', function(){ el.classList.remove('dragging'); });
+      el.addEventListener('dragover', function(e){ e.preventDefault(); el.classList.add('drag-over'); });
+      el.addEventListener('dragleave', function(){ el.classList.remove('drag-over'); });
+      el.addEventListener('drop', function(e){
+        e.preventDefault();
+        el.classList.remove('drag-over');
+        var targetIdx = parseInt(el.dataset.idx,10);
+        if(state.dragSrcIdx===null || state.dragSrcIdx===targetIdx) return;
+        var moved = state.rankOrder.splice(state.dragSrcIdx,1)[0];
+        state.rankOrder.splice(targetIdx,0,moved);
+        state.dragSrcIdx = null;
+        renderRankList();
+      });
+    });
+  }
+
+  function evaluateRank(){
+    var correct = state.rankOrder.every(function(id, i){
+      var item = RANK_ITEMS.filter(function(r){ return r.id===id; })[0];
+      return item.correctRank === i;
+    });
+    settle(correct, RANK_EXPLAIN, RANK_ITEMS.slice().sort(function(a,b){return a.correctRank-b.correctRank;}).map(function(r){return r.label;}).join(' \u2192 '));
+  }
+
+  function settle(correct, explainText, correctAnswerText){
+    state.answered++;
+    var wagerMult = state.wager!==null ? WAGER_MULT[state.wager] : 1;
+    var points = 0;
+    if(correct){
+      state.correctCount++;
+      points = BASE_POINTS * wagerMult;
+      state.score += points;
+      if(state.wager===2) state.highWagerWins++;
+    } else {
+      points = -(BASE_PENALTY * wagerMult);
+      state.score = Math.max(0, state.score + points);
+    }
+    updateHud();
+    showExplain(correct, points, explainText, correctAnswerText);
+  }
+
+  function showExplain(correct, points, explainText, correctAnswerText){
+    var modal = $('cd-explain-modal');
+    modal.classList.remove('correct','wrong');
+    modal.classList.add(correct ? 'correct' : 'wrong');
+    $('cd-explain-title').textContent = correct ? '\u2713 CORRECT DETERMINATION' : '\u2717 INCORRECT DETERMINATION';
+    $('cd-explain-points').textContent = (points>=0?'+':'') + points + ' pts' + (correctAnswerText ? '  \u2014  Correct answer: ' + correctAnswerText : '');
+    $('cd-explain-body').textContent = explainText;
+    $('cd-explain-overlay').classList.remove('hidden');
+  }
+
+  function dismissExplain(){
+    $('cd-explain-overlay').classList.add('hidden');
+    state.idx++;
+    loadQuestion();
+  }
+
+  function endGame(){
+    $('cd-screen-game').classList.add('hidden');
+    $('cd-screen-review').classList.remove('hidden');
+    var accuracy = state.answered>0 ? Math.round((state.correctCount/state.answered)*100) : 0;
+    var medal = accuracy>=90 ? '\ud83e\udd47' : accuracy>=70 ? '\ud83e\udd48' : accuracy>=50 ? '\ud83e\udd49' : '\ud83d\udcdd';
+    var rating = accuracy>=90 ? 'Decathlon Gold \u2014 Senior Verification Expert' : accuracy>=70 ? 'Decathlon Silver \u2014 Strong Operational Grasp' : accuracy>=50 ? 'Decathlon Bronze \u2014 Review the Misses' : 'Retraining Required Before Next Shift';
+    $('cd-review-medal').textContent = medal;
+    $('cd-review-rating').textContent = rating;
+    $('cd-review-score').textContent = state.score;
+    $('cd-review-accuracy').textContent = accuracy+'%';
+    $('cd-review-correct').textContent = state.correctCount+'/'+state.answered;
+    $('cd-review-highwager').textContent = state.highWagerWins;
+  }
+
+  function shuffle(arr){
+    var a = arr.slice();
+    for(var i=a.length-1;i>0;i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var t=a[i]; a[i]=a[j]; a[j]=t;
+    }
+    return a;
+  }
+
+  $('cd-start-btn').addEventListener('click', initGame);
+  $('cd-restart-btn').addEventListener('click', initGame);
+  $('cd-explain-continue').addEventListener('click', dismissExplain);
+
+})();
+
+</script>
+<script>
+
+(function(){
+  "use strict";
+
+  var SCENARIOS = {
+    A: { label:"UBO with NZ Address — Verified via NZ Driver Licence (NZDL)", need:["bank","tax"] },
+    B: { label:"UBO with NZ Address — Verified via Passport", need:["bank","tax","stdpoa"] },
+    C: { label:"UBO Living Outside New Zealand", need:["globalpoa"] },
+    D: { label:"Multiple UBOs on the Profile", need:["individual"] }
+  };
+
+  var CARDS = [
+    { id:"bank", name:"NZ Registered Bank Statement", validFor:["A","B"],
+      wrong:{ C:"This is a New Zealand bank statement — it can't verify someone living outside New Zealand. An overseas UBO needs a standard globally accepted POA issued in their own country of residence.",
+              D:"A bank statement verifies one individual's address. Every UBO on a multi-UBO profile needs their own separate address document — this doesn't satisfy that on its own." } },
+    { id:"tax", name:"IRD Tax Return", validFor:["A","B"],
+      wrong:{ C:"An IRD tax return is New Zealand-specific — it can't verify a UBO who lives outside New Zealand.",
+              D:"A tax return verifies one individual. Every UBO on a multi-UBO profile needs their own separate address document, not one shared document." } },
+    { id:"stdpoa", name:"Standard Valid POA (NZ-issued)", validFor:["B"],
+      wrong:{ A:"When the UBO's NZ address was verified via NZ Driver Licence, only a NZ registered bank statement or IRD tax return is accepted — a standard POA isn't on the accepted list for this specific verification path.",
+              C:"This POA needs to be issued in the UBO's actual country of residence — an overseas UBO needs a POA issued where they actually live, not a generic NZ-standard POA.",
+              D:"A POA verifies one individual. Every UBO on a multi-UBO profile needs their own separate address document." } },
+    { id:"globalpoa", name:"Globally Accepted POA (Country of Residence)", validFor:["C"],
+      wrong:{ A:"This UBO's address was verified via NZ Driver Licence — the accepted documents for that path are a NZ registered bank statement or IRD tax return, not an overseas POA.",
+              B:"This scenario needs a NZ registered bank statement, tax return, or a standard NZ POA — not a POA issued in another country. This card is for a UBO who actually lives overseas.",
+              D:"This verifies one individual's address abroad. It doesn't satisfy the separate-document-per-UBO requirement for a multi-UBO profile." } },
+    { id:"individual", name:"Individual Address Document Per UBO", validFor:["D"],
+      wrong:{ A:"This scenario is about which single document type is accepted for an NZDL-verified UBO, not about the multiple-UBO filing process.",
+              B:"This scenario is about which single document type is accepted for a passport-verified UBO, not about the multiple-UBO filing process.",
+              C:"This scenario is about an overseas UBO's own POA, not about the multiple-UBO filing process." } },
+    { id:"companyreg", name:"Company Registration / Incorporation Document", validFor:[],
+      wrong:{ A:"A company registration or incorporation document can never verify a UBO's personal address — a separate, dedicated document is always required.",
+              B:"A company registration or incorporation document can never verify a UBO's personal address — a separate, dedicated document is always required.",
+              C:"A company registration or incorporation document can never verify a UBO's personal address — a separate, dedicated document is always required.",
+              D:"A company registration or incorporation document can never verify a UBO's personal address — a separate, dedicated document is always required, for every UBO." } },
+    { id:"shareddoc", name:"One Shared Bank Statement Covering All UBOs", validFor:[],
+      wrong:{ A:"This scenario needs an individually acceptable document for one specific UBO, not a shared document covering multiple people.",
+              B:"This scenario needs an individually acceptable document for one specific UBO, not a shared document covering multiple people.",
+              C:"This scenario needs an individually acceptable document for one specific UBO, not a shared document covering multiple people.",
+              D:"Every UBO needs their OWN separate address document — a single shared document covering multiple UBOs doesn't meet the requirement, even if it's otherwise an acceptable document type." } },
+    { id:"senioronly", name:"Only the Senior/Primary UBO's Document", validFor:[],
+      wrong:{ A:"This scenario needs an actual acceptable document type for this specific UBO, not a statement about which UBOs to skip.",
+              B:"This scenario needs an actual acceptable document type for this specific UBO, not a statement about which UBOs to skip.",
+              C:"This scenario needs an actual acceptable document type for this specific UBO, not a statement about which UBOs to skip.",
+              D:"Every UBO needs their own address document — verifying only the senior or primary UBO and skipping the others doesn't meet the requirement." } }
+  ];
+
+  var QUAD_ANGLE = { A:0, B:90, C:180, D:270 };
+  var CORE_MAX = 60;
+  var MAX_MULT = 5;
+
+  var state = {};
+  function $(id){ return document.getElementById(id); }
+  function byId(cardId){ return CARDS.filter(function(c){ return c.id===cardId; })[0]; }
+
+  function initGame(){
+    clearCoreTimer();
+    state = {
+      active: null,
+      progress: { A:new Set(), B:new Set(), C:new Set(), D:new Set() },
+      solved: { A:false, B:false, C:false, D:false },
+      score: 0, multiplier: 1, bestCombo: 1,
+      correctCount: 0, wrongCount: 0,
+      core: CORE_MAX,
+      selectedCard: null,
+      dragCardId: null,
+      timerId: null,
+      ended: false
+    };
+    $('dr-screen-start').classList.add('dr-hidden');
+    $('dr-screen-review').classList.add('dr-hidden');
+    $('dr-screen-meltdown').classList.add('dr-hidden');
+    $('dr-screen-game').classList.remove('dr-hidden');
+    renderCards();
+    updateHud();
+    startCoreTimer();
+  }
+
+  function renderCards(){
+    var wrap = $('dr-cards');
+    wrap.innerHTML = CARDS.map(function(c){
+      return '<div class="dr-card" draggable="true" data-card="'+c.id+'">'+c.name+'</div>';
+    }).join('');
+    document.querySelectorAll('#dr-cards .dr-card').forEach(function(el){
+      el.addEventListener('click', function(){
+        document.querySelectorAll('#dr-cards .dr-card').forEach(function(x){ x.classList.remove('dr-selected'); });
+        if(state.selectedCard === el.dataset.card){ state.selectedCard = null; return; }
+        state.selectedCard = el.dataset.card;
+        el.classList.add('dr-selected');
+      });
+      el.addEventListener('dragstart', function(){ state.dragCardId = el.dataset.card; el.classList.add('dr-dragging'); });
+      el.addEventListener('dragend', function(){ el.classList.remove('dr-dragging'); });
+    });
+  }
+
+  function updateHud(){
+    $('dr-hud-score').textContent = state.score;
+    var solvedCount = Object.keys(state.solved).filter(function(k){ return state.solved[k]; }).length;
+    $('dr-hud-solved').textContent = solvedCount;
+    var badge = $('dr-combo-badge');
+    badge.textContent = state.multiplier+'x';
+    badge.classList.toggle('dr-overdrive', state.multiplier>=3);
+  }
+
+  function clearCoreTimer(){ if(state.timerId){ clearInterval(state.timerId); state.timerId=null; } }
+  function startCoreTimer(){
+    updateCoreUI();
+    state.timerId = setInterval(function(){
+      state.core -= 1;
+      updateCoreUI();
+      if(state.core<=0){ clearCoreTimer(); meltdown(); }
+    }, 1000);
+  }
+  function updateCoreUI(){
+    var pct = Math.max(0,(state.core/CORE_MAX)*100);
+    $('dr-core-fill').style.width = pct+'%';
+    $('dr-core-track').classList.toggle('dr-critical', state.core<=12);
+  }
+  function refillCore(amount){
+    state.core = Math.min(CORE_MAX, state.core+amount);
+    updateCoreUI();
+  }
+
+  function selectQuadrant(scn){
+    if(state.ended) return;
+    if(state.solved[scn]) return;
+    state.active = scn;
+    var angle = QUAD_ANGLE[scn];
+    $('dr-wheel').style.transform = 'rotate('+(-angle)+'deg)';
+    document.querySelectorAll('.dr-quad').forEach(function(q){ q.classList.toggle('dr-active', q.dataset.scn===scn); });
+    $('dr-wheel-center').innerHTML = 'ACTIVE:<br>'+scn;
+    renderTargetZone();
+  }
+
+  function renderTargetZone(){
+    var scn = state.active;
+    if(!scn){ $('dr-target-scenario').textContent = 'Click a quadrant to begin'; $('dr-target-need').textContent=''; return; }
+    var s = SCENARIOS[scn];
+    var have = state.progress[scn].size;
+    var total = s.need.length;
+    $('dr-target-scenario').textContent = 'Scenario '+scn+': '+s.label;
+    $('dr-target-need').innerHTML = 'Documents matched: <b>'+have+' / '+total+'</b>';
+  }
+
+  function placeCard(cardId){
+    if(state.ended || !state.active) return;
+    var scn = state.active;
+    if(state.solved[scn]) return;
+    var card = byId(cardId);
+    if(!card) return;
+    var correct = card.validFor.indexOf(scn) !== -1;
+    if(correct){
+      state.correctCount++;
+      state.progress[scn].add(cardId);
+      var basePoints = 100;
+      var points = basePoints * state.multiplier;
+      state.score += points;
+      state.multiplier = Math.min(MAX_MULT, state.multiplier+1);
+      state.bestCombo = Math.max(state.bestCombo, state.multiplier);
+      refillCore(8);
+      showToast('\u2713 Document Accepted — +'+points+' pts');
+      if(state.progress[scn].size >= SCENARIOS[scn].need.length){
+        state.solved[scn] = true;
+        document.querySelector('.dr-quad[data-scn="'+scn+'"]').classList.add('dr-solved');
+        state.active = null;
+        $('dr-wheel-center').innerHTML = 'SELECT<br>QUADRANT';
+      }
+      renderTargetZone();
+      updateHud();
+      var solvedCount = Object.keys(state.solved).filter(function(k){ return state.solved[k]; }).length;
+      if(solvedCount>=4){ endGame(); }
+    } else {
+      state.wrongCount++;
+      state.multiplier = 1;
+      updateHud();
+      var reason = (card.wrong && card.wrong[scn]) ? card.wrong[scn] : (card.name+' is not an accepted document for this scenario.');
+      showAudit(reason);
+    }
+  }
+
+  function showToast(msg){
+    var t = $('dr-toast');
+    t.textContent = msg;
+    t.classList.add('dr-visible');
+    setTimeout(function(){ t.classList.remove('dr-visible'); }, 550);
+  }
+
+  function showAudit(text){
+    $('dr-audit-explain').textContent = text;
+    var overlay = $('dr-audit-overlay');
+    overlay.classList.remove('dr-hidden');
+    overlay.classList.add('dr-flashing');
+    setTimeout(function(){ overlay.classList.remove('dr-flashing'); }, 1200);
+  }
+  function dismissAudit(){ $('dr-audit-overlay').classList.add('dr-hidden'); }
+
+  function endGame(){
+    if(state.ended) return;
+    state.ended = true;
+    clearCoreTimer();
+    $('dr-screen-game').classList.add('dr-hidden');
+    $('dr-screen-review').classList.remove('dr-hidden');
+    var total = state.correctCount+state.wrongCount;
+    var accuracy = total>0 ? Math.round((state.correctCount/total)*100) : 0;
+    var rating = accuracy>=90 ? 'Reactor Overdrive — Documentation Master' : accuracy>=70 ? 'Stable Core — Strong Grasp' : 'Core Stabilised — Review the Rejections';
+    $('dr-review-rating').textContent = rating;
+    $('dr-review-score').textContent = state.score;
+    $('dr-review-accuracy').textContent = accuracy+'%';
+    $('dr-review-combo').textContent = state.bestCombo+'x';
+    $('dr-review-time').textContent = state.core+'s';
+  }
+
+  function meltdown(){
+    if(state.ended) return;
+    state.ended = true;
+    $('dr-screen-game').classList.add('dr-hidden');
+    $('dr-screen-meltdown').classList.remove('dr-hidden');
+    $('dr-meltdown-score').textContent = state.score;
+  }
+
+  document.querySelectorAll('.dr-quad').forEach(function(q){
+    q.addEventListener('click', function(){ selectQuadrant(q.dataset.scn); });
+  });
+
+  var targetZone = $('dr-target-zone');
+  targetZone.addEventListener('click', function(){
+    if(state.selectedCard){
+      placeCard(state.selectedCard);
+      document.querySelectorAll('#dr-cards .dr-card').forEach(function(x){ x.classList.remove('dr-selected'); });
+      state.selectedCard = null;
+    }
+  });
+  targetZone.addEventListener('dragover', function(e){ e.preventDefault(); targetZone.classList.add('dr-dragover'); });
+  targetZone.addEventListener('dragleave', function(){ targetZone.classList.remove('dr-dragover'); });
+  targetZone.addEventListener('drop', function(e){
+    e.preventDefault();
+    targetZone.classList.remove('dr-dragover');
+    if(state.dragCardId){ placeCard(state.dragCardId); state.dragCardId=null; }
+  });
+
+  $('dr-start-btn').addEventListener('click', initGame);
+  $('dr-restart-btn').addEventListener('click', initGame);
+  $('dr-restart-btn-2').addEventListener('click', initGame);
+  $('dr-audit-continue').addEventListener('click', dismissAudit);
+
+})();
+
+</script>
+</body>
+</html>
